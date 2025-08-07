@@ -1,23 +1,18 @@
 class Page {
 	HOME = '/';
-
-	MY_CHANNEL = '/my-channel';
-	SUBSCRIPTIONS = '/subscriptions';
-	HISTORY = '/history';
-	LINKED_VIDEOS = '/linked-videos';
-
-	FEEDBACK = '/feedback';
-
-	// VIDEO(path: string) {
-	// 	return `/v/${path}`;
-	// }
-
-	// CHANNEL(path: string) {
-	// 	return `/c/${path}`;
-	// }
-
-	// SEARCH(searchTerm: string) {
-	// 	return `/s?term=${searchTerm}`;
-	// }
+	ABOUT = '/about';
+	SERVICES = '/services';
+	SERVICE(path: string) {
+		return `${this.SERVICES}/${path}`;
+	}
+	OBJECTS = '/objects';
+	OBJECT(path: string) {
+		return `${this.OBJECTS}/${path}`;
+	}
+	ARTICLES = '/articles';
+	ARTICLE(path: string) {
+		return `${this.ARTICLES}/${path}`;
+	}
+	CONTACTS = '/contacts';
 }
 export const PAGE = new Page();
