@@ -10,9 +10,10 @@ export function ObjectsList() {
 		queryKey: ['objects'],
 		queryFn: () => objectService.getAll()
 	});
+	console.log(data);
 	return (
 		<div>
-			{isLoading ? (
+			{/* {isLoading ? (
 				<div>Loading</div>
 			) : data?.data.objects.length ? (
 				data.data.objects.map(object => (
@@ -39,7 +40,7 @@ export function ObjectsList() {
 				))
 			) : (
 				<p>Explore are temporarily unavailable</p>
-			)}
+			)} */}
 		</div>
 	);
 }
