@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 
-import { objectService } from '@/services/object.service';
+import { ObjectsList } from '@/components/layout/objects/ObjectsList';
+
+// import Image from 'next/image';
+
+// import { objectService } from '@/services/object.service';
 
 export const metadata: Metadata = {
 	title: 'Объекты ПКК',
@@ -9,14 +12,14 @@ export const metadata: Metadata = {
 };
 
 export default async function ObjectsPage() {
-	const { data } = await objectService.getAll();
-	const objects = data.data;
+	// const { data } = await objectService.getAll();
+	// const objects = data.data;
 
 	return (
 		<div>
 			<h1>Объекты ПКК</h1>
 			<div>
-				{objects.map(object => (
+				{/* {objects.map(object => (
 					<div key={object.id}>
 						<h2>{object.title}</h2>
 						<p>{object.time}</p>
@@ -37,7 +40,8 @@ export default async function ObjectsPage() {
 							)}
 						</div>
 					</div>
-				))}
+				))} */}
+				<ObjectsList />
 			</div>
 		</div>
 	);

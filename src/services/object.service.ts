@@ -7,7 +7,7 @@ import { axiosClassic } from '@/api/axios';
 import type { IObject } from '@/types/object.types';
 
 interface IObjectResponse {
-	data: IObject[];
+	objects: IObject[];
 }
 
 class ObjectService {
