@@ -2,7 +2,15 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
-	poweredByHeader: false
+	poweredByHeader: false,
+	async rewrites() {
+		return [
+			{
+				source: '/uploads/:path*',
+				destination: `${process.env.API_URL?.replace('/api', '')}/uploads/:path*`
+			}
+		];
+	}
 };
 
 export default nextConfig;
