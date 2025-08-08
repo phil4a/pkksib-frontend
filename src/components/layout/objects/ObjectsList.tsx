@@ -6,31 +6,35 @@ import Image from 'next/image';
 import { objectService } from '@/services/object.service';
 
 export function ObjectsList() {
-	const { data, isLoading } = useQuery({
+	const { data, isLoading, error } = useQuery({
 		queryKey: ['objects'],
 		queryFn: () => objectService.getAll()
 	});
-	console.log(data);
+
+	const objects = data?.data?.data;
+	console.log(objects);
+
+	if (error) {
+		return <div>Ошибка получения объектов</div>;
+	}
+
 	return (
 		<div>
-			{/* {isLoading ? (
+			{isLoading ? (
 				<div>Loading</div>
-			) : data?.data.objects.length ? (
-				data.data.objects.map(object => (
+			) : objects?.length ? (
+				objects?.map(object => (
 					<div key={object.id}>
 						<h2>{object.title}</h2>
-						<p>{object.time}</p>
-						<p>{object.area}</p>
-						<p>{object.location}</p>
 						<div>
 							{object.photos.map(
 								photo =>
-									photo.formats.small && (
+									photo.formats.large && (
 										<Image
-											width={600}
-											height={200}
 											key={photo.id}
-											src={photo.formats.large?.url || ''}
+											width={900}
+											height={500}
+											src={photo.formats.large?.url}
 											alt={photo.alternativeText || ''}
 										/>
 									)
@@ -39,8 +43,8 @@ export function ObjectsList() {
 					</div>
 				))
 			) : (
-				<p>Explore are temporarily unavailable</p>
-			)} */}
+				<p>Объекты не найдены</p>
+			)}
 		</div>
 	);
 }

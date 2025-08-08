@@ -13,12 +13,12 @@ export default async function ServicesPage() {
 	return (
 		<div>
 			<h1>Услуги</h1>
-			{data.data.map(service => (
+			{/* {data.data.map(service => (
 				<div key={service.id}>
 					<h2>{service.title}</h2>
 					<p>{service.description}</p>
 				</div>
-			))}
+			))} */}
 		</div>
 	);
 }

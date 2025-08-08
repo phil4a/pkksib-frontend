@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: '/uploads/:path*',
-				destination: `${process.env.API_URL?.replace('/api', '')}/uploads/:path*`
+				destination: `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '')}/uploads/:path*`
 			}
 		];
 	}
