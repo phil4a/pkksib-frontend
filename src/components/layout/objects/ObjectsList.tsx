@@ -12,7 +12,6 @@ export function ObjectsList() {
 	});
 
 	const objects = data?.data?.data;
-	console.log(objects);
 
 	if (error) {
 		return <div>Ошибка получения объектов</div>;
@@ -31,6 +30,7 @@ export function ObjectsList() {
 								photo =>
 									photo.formats.large && (
 										<Image
+											priority
 											key={photo.id}
 											width={900}
 											height={500}

@@ -3,6 +3,16 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
 	poweredByHeader: false,
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'befbb7a338eb-pkk-media.s3.ru1.storage.beget.cloud',
+				port: '',
+				pathname: '/**'
+			}
+		]
+	},
 	async rewrites() {
 		return [
 			{
