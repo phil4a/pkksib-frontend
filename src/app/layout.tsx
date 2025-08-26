@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
+
+import { Header } from '@/components/layout/content/header/Header';
 
 import { Providers } from '@/providers/Providers';
 
@@ -8,12 +11,18 @@ import './globals.css';
 
 export const metadata: Metadata = {
 	title: {
-		absolute: 'Video platform',
-		template: `%s | Video platform`
+		absolute: 'Кровельные работы в Новосибирске'
+		// template: `%s | Video platform`
 	},
-	description: 'App for video watching',
+	description:
+		'В «Первой Кровельной Компании» помимо товаров для кровли европейского качества предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные работы в Новосибирске и области.',
 	metadataBase: new URL(SITE_URL)
 };
+
+const roboto = Roboto({
+	subsets: ['cyrillic'],
+	display: 'swap'
+});
 
 export default function RootLayout({
 	children
@@ -21,9 +30,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html
+			lang='ru'
+			className={`${roboto.className} antialiased`}
+		>
 			<body>
-				<Providers>{children}</Providers>
+				<Providers>
+					<Header />
+					{children}
+				</Providers>
 			</body>
 		</html>
 	);

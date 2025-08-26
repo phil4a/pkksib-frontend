@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+:root {
+	/* Colors */
+	--primary: #21282b;
+	--light-gray: #f3f3f3;
+	--dark-gray: #868686;
+	--accent: #fcd200;
+
+	/* Width */
+	--container-width: 1300px;
+
+	/* Borders */
+	--border-radius-sm: 4px;
+	--border-radius-md: 12px;
+
+	/* Paddings and margins */
+	--padding-layout: 20px;
+}
+
+@theme {
+	--color-primary: var(--primary);
+	--color-light-gray: var(--light-gray);
+	--color-dark-gray: var(--dark-gray);
+	--color-accent: var(--accent);
+
+	--padding-layout: var(--padding-layout);
+	--container-width: var(--container-width);
+	--border-radius-sm: var(--border-radius-sm);
+	--border-radius-md: var(--border-radius-md);
+
+	--default-transition-duration: 250ms;
+	--default-transition-timing-function: ease-in-out;
+}
+
+@layer components {
+	.layout-container {
+		max-width: var(--container-width);
+		margin: 0 auto;
+		padding: 0 var(--padding-layout);
+	}
+}
+
+@theme inline {
+	/* --font-noto-sans: var(--font-noto-sans); */
+}
+
+body {
+}
