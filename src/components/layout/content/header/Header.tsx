@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import { TelegramIcon } from '@/ui/icons/TelegramIcon';
+import { WhatsAppIcon } from '@/ui/icons/WhatsAppIcon';
 
 import { HeaderLink } from './HeaderLink';
 
@@ -12,18 +13,18 @@ export function Header() {
 							<HeaderLink
 								href='/'
 								secondary
-								iconLink='/assets/icons/telegram.svg'
 								className='text-sm font-semibold leading-normal'
 							>
+								<TelegramIcon />
 								Телеграм
 							</HeaderLink>
 
 							<HeaderLink
 								href='/'
 								secondary
-								iconLink='/assets/icons/whatsapp.svg'
 								className='text-sm font-semibold leading-normal'
 							>
+								<WhatsAppIcon />
 								WhatsApp
 							</HeaderLink>
 						</div>
