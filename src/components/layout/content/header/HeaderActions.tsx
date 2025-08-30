@@ -21,7 +21,7 @@ export function HeaderActions() {
 					{SITE_CONFIG.email}
 				</HeaderLink>
 			</div>
-			<Button>Связаться c нами</Button>
+			<Button type='accent'>Связаться c нами</Button>
 		</div>
 	);
 }

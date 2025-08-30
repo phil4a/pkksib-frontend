@@ -12,6 +12,7 @@ export function Logo() {
 				alt={'logo'}
 				width={270}
 				height={65}
+				priority
 			></Image>
 		</Link>
 	);
