@@ -2,7 +2,7 @@ import qs from 'qs';
 
 import { PAGE } from '@/config/pages';
 
-import { axiosClassic } from '@/api/axios';
+import { axiosInternal } from '@/api/axios';
 
 import type { IServiceResponse } from '@/types/service.types';
 
@@ -13,7 +13,7 @@ class ServiceService {
 		const servicesQuery = qs.stringify({
 			populate: '*'
 		});
-		return axiosClassic.get<IServiceResponse>(`${this._services}?${servicesQuery}`);
+		return axiosInternal.get<IServiceResponse>(`${this._services}?${servicesQuery}`);
 	}
 }
 
