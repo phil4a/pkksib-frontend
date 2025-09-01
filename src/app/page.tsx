@@ -1,13 +1,17 @@
 import Image from 'next/image';
 
+import { HeroBullet } from '@/components/layout/hero/HeroBullet';
+
 import { Button } from '@/ui/button/Button';
+
+import { COMPANY_FIGURES } from '@/config/site.config';
 
 import mainBgImage from '@/assets/home-page/hero/main-bg.jpg';
 import roofImage from '@/assets/home-page/hero/roof.png';
 
 export default function HomePage() {
 	return (
-		<section>
+		<section className='mb-25'>
 			<div className='layout-container'>
 				<div className='flex gap-5 h-[500px] mb-4'>
 					<div className='flex-1/2 flex flex-col justify-between items-start bg-accent rounded-xl pt-16 pb-12 px-12 relative'>
@@ -56,13 +60,13 @@ export default function HomePage() {
 						></Image>
 					</div>
 				</div>
-				<div className='flex gap-5 items-end bg-light-gray rounded-xl'>
-					<div className='flex-5/12'>
+				<div className='flex gap-5 items-end bg-light-gray rounded-xl mb-4 overflow-hidden'>
+					<div className='flex-5/12 '>
 						<Image
 							src={roofImage}
 							alt='кровля дома'
 							priority={true}
-							className='object-cover'
+							className='object-cover '
 							draggable={false}
 						></Image>
 					</div>
@@ -86,6 +90,17 @@ export default function HomePage() {
 							Узнать больше
 						</Button>
 					</div>
+				</div>
+				<div className='grid gap-5 grid-cols-4'>
+					{COMPANY_FIGURES.map(figure => (
+						<HeroBullet
+							key={figure.title}
+							title={figure.title}
+							number={figure.number}
+							units={figure.units}
+							icon={figure.icon}
+						/>
+					))}
 				</div>
 			</div>
 		</section>
