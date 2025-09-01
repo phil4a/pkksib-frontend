@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 @plugin "tailwind-clamp";
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
 	/* Colors */
