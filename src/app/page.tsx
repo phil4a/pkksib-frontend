@@ -11,7 +11,7 @@ import { COMPANY_FIGURES, SITE_CONFIG } from '@/config/site.config';
 import mainBgImage from '@/assets/home-page/hero/main-bg.jpg';
 import roofImage from '@/assets/home-page/hero/roof.png';
 
-export const revalidate = SITE_CONFIG.revalidatePeriod;
+export const revalidate = 100;
 export const dynamic = 'force-static';
 
 export default function HomePage() {
