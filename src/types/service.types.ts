@@ -26,6 +26,7 @@ export interface IServiceCategory {
 	title: string;
 	slug: string;
 	description: string;
+	shortDescription: string;
 	services: IService[];
 	image: IPhoto;
 	createdAt: string;

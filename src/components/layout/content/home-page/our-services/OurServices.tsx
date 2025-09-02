@@ -29,7 +29,7 @@ export function OurServices() {
 	);
 }
 
-function ServiceItem({ title, image, slug, description }: IServiceCategory) {
+function ServiceItem({ title, image, slug, shortDescription }: IServiceCategory) {
 	return (
 		<div className='bg-light-gray rounded-xl relative overflow-hidden group h-[480px]'>
 			<Link
@@ -38,7 +38,7 @@ function ServiceItem({ title, image, slug, description }: IServiceCategory) {
 			>
 				<p className='text-[22px] font-semibold px-4 pt-7'>{title}</p>
 				<div className='px-4 pt-4 pb-7 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all'>
-					<p className='text-dark-gray line-clamp-7'>{description}</p>
+					<p className='text-dark-gray line-clamp-7'>{shortDescription}</p>
 				</div>
 			</Link>
 			<div className='absolute bottom-0 left-0 right-0'>
