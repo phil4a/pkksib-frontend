@@ -3,7 +3,8 @@ export const SITE_CONFIG = {
 	description:
 		'В «Первой Кровельной Компании» помимо товаров для кровли европейского качества предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные работы в Новосибирске и области.',
 	phoneNumber: '+7 (383) 286-64-44',
-	email: 'info@pkksib.ru'
+	email: 'info@pkksib.ru',
+	revalidatePeriod: 300
 };
 
 export const COMPANY_FIGURES = [

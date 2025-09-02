@@ -1,14 +1,18 @@
 import Image from 'next/image';
 
-import { HeroBullet } from '@/components/layout/content/hero/HeroBullet';
-import { HowWeWork } from '@/components/layout/content/how-we-work/HowWeWork';
+import { HeroBullet } from '@/components/layout/content/home-page/hero/HeroBullet';
+import { HowWeWork } from '@/components/layout/content/home-page/how-we-work/HowWeWork';
+import { OurServices } from '@/components/layout/content/home-page/our-services/OurServices';
 
 import { Button } from '@/ui/button/Button';
 
-import { COMPANY_FIGURES } from '@/config/site.config';
+import { COMPANY_FIGURES, SITE_CONFIG } from '@/config/site.config';
 
 import mainBgImage from '@/assets/home-page/hero/main-bg.jpg';
 import roofImage from '@/assets/home-page/hero/roof.png';
+
+export const revalidate = SITE_CONFIG.revalidatePeriod;
+export const dynamic = 'force-static';
 
 export default function HomePage() {
 	return (
@@ -107,6 +111,7 @@ export default function HomePage() {
 				</div>
 			</section>
 			<HowWeWork />
+			<OurServices />
 		</>
 	);
 }

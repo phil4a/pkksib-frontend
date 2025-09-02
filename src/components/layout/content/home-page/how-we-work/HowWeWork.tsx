@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { Title } from '@/ui/title/Title';
+
 import { SITE_CONFIG } from '@/config/site.config';
 
 const stages = [
@@ -27,7 +29,7 @@ export function HowWeWork() {
 		<section className='bg-light-gray'>
 			<div className='layout-container py-25'>
 				<div className='mb-8'>
-					<h2 className='text-4xl font-semibold mb-3'>Как мы работаем</h2>
+					<Title type='h2'>Как мы работаем</Title>
 					<p className='text-dark-gray'>
 						Основные этапы выполнения работ в «Первой Кровельной Компании»
 					</p>

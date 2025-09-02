@@ -1,0 +1,4 @@
+export const API_PATHS = {
+	SERVICES: '/services',
+	SERVICE_CATEGORIES: '/service-categories'
+};
