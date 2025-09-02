@@ -3,12 +3,11 @@ import Link from 'next/link';
 
 import { Title } from '@/ui/title/Title';
 
-import { serviceService } from '@/services/service.service';
+import { getCachedServiceCategories } from '@/services/service.service';
 import type { IServiceCategory } from '@/types/service.types';
 
-const { data } = await serviceService.getCategories();
-
-export function OurServices() {
+export async function OurServices() {
+	const serviceCategories = await getCachedServiceCategories();
 	return (
 		<section>
 			<div className='layout-container py-25'>
@@ -17,7 +16,7 @@ export function OurServices() {
 					Выполняем любые кровельные и фасадные работы по всей Сибири.
 				</p>
 				<div className='grid gap-5 grid-cols-4 mt-8'>
-					{data.data.map(item => (
+					{serviceCategories.data.map(item => (
 						<ServiceItem
 							key={item.id}
 							{...item}

@@ -6,6 +6,30 @@ import { axiosClassic } from '@/api/axios';
 
 import type { IServiceCategoryResponse, IServiceResponse } from '@/types/service.types';
 
+// Кешированные функции
+export async function getCachedServices() {
+	'use cache';
+	const servicesQuery = qs.stringify({
+		populate: '*'
+	});
+	const response = await axiosClassic.get<IServiceResponse>(
+		`${API_PATHS.SERVICES}?${servicesQuery}`
+	);
+	return response.data;
+}
+
+export async function getCachedServiceCategories() {
+	'use cache';
+	const serviceCategoriesQuery = qs.stringify({
+		populate: '*'
+	});
+	const response = await axiosClassic.get<IServiceCategoryResponse>(
+		`${API_PATHS.SERVICE_CATEGORIES}?${serviceCategoriesQuery}`
+	);
+	return response.data;
+}
+
+// Оригинальный класс для некешированных запросов
 class ServiceService {
 	constructor() {}
 	private _services = API_PATHS.SERVICES;

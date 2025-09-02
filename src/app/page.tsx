@@ -6,7 +6,7 @@ import { OurServices } from '@/components/layout/content/home-page/our-services/
 
 import { Button } from '@/ui/button/Button';
 
-import { COMPANY_FIGURES, SITE_CONFIG } from '@/config/site.config';
+import { COMPANY_FIGURES } from '@/config/site.config';
 
 import mainBgImage from '@/assets/home-page/hero/main-bg.jpg';
 import roofImage from '@/assets/home-page/hero/roof.png';
