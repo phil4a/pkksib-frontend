@@ -74,11 +74,11 @@ export default function HomePage() {
 						</div>
 						<div className='flex-7/12 flex flex-col py-15 items-start justify-center'>
 							<div className='clamp-[pr,5,20]'>
-								<h4 className='mb-4 text-[22px] font-semibold leading-[1.25]'>
+								<p className='mb-4 text-[22px] font-semibold leading-[1.25]'>
 									В «Первой Кровельной Компании» помимо товаров для кровли европейского качества
 									предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные
 									работы в Новосибирске и области.
-								</h4>
+								</p>
 								<p className='mb-6'>
 									Высокая квалификация и большой опыт работы позволяет выполнять установку
 									кровельных и фасадных материалов быстро и качественно. При этом соблюдаются все
