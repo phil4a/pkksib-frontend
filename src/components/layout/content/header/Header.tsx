@@ -8,7 +8,7 @@ export function Header() {
 	return (
 		<>
 			<HeaderTop />
-			<div className='layout-container flex gap-6 items-center py-2'>
+			<div className='layout-container flex gap-6 justify-between items-center py-2'>
 				<Logo />
 				<Menu />
 				<HeaderActions />

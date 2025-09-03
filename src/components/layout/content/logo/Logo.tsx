@@ -5,14 +5,12 @@ export function Logo() {
 	return (
 		<Link
 			href='/'
-			className='grow-0 shrink-0'
+			className='grow-0 shrink-0 h-12 w-12 relative'
 		>
 			<Image
-				src={'/logo.png'}
+				src={'/logo.svg'}
 				alt={'logo'}
-				width={270}
-				height={65}
-				priority
+				fill
 			></Image>
 		</Link>
 	);

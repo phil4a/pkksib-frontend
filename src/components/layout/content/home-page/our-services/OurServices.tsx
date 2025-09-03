@@ -1,13 +1,27 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 import { Title } from '@/ui/title/Title';
 
-import { getCachedServiceCategories } from '@/services/service.service';
+import { serviceService } from '@/services/service.service';
 import type { IServiceCategory } from '@/types/service.types';
 
-export async function OurServices() {
-	const serviceCategories = await getCachedServiceCategories();
+export function OurServices() {
+	const { data, isLoading, error } = useQuery({
+		queryKey: ['serviceCategories'],
+		queryFn: () => serviceService.getCategories()
+	});
+
+	const categories = data?.data?.data;
+
+	if (error) {
+		return <div>Ошибка получения объектов</div>;
+	}
+
 	return (
 		<section>
 			<div className='layout-container py-25'>
@@ -16,12 +30,19 @@ export async function OurServices() {
 					Выполняем любые кровельные и фасадные работы по всей Сибири.
 				</p>
 				<div className='grid gap-5 grid-cols-4 mt-8'>
-					{serviceCategories.data.map(item => (
-						<ServiceItem
-							key={item.id}
-							{...item}
+					{isLoading ? (
+						<SkeletonLoader
+							count={4}
+							className='bg-light-gray rounded-xl relative overflow-hidden group h-[480px]'
 						/>
-					))}
+					) : categories?.length ? (
+						categories?.map(item => (
+							<ServiceItem
+								key={item.id}
+								{...item}
+							/>
+						))
+					) : null}
 				</div>
 			</div>
 		</section>
