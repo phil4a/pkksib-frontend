@@ -5,10 +5,11 @@ interface Props {
 	children: React.ReactNode;
 	type: 'accent' | 'black';
 	className?: string;
+	isLoading?: boolean;
 }
 
-export function Button({ children, className, type, href }: Props) {
-	const styles = `inline-flex items-center bg-accent hover:brightness-95 font-semibold h-12 px-6 rounded-lg cursor-pointer transition ${
+export function Button({ children, className, type, href, isLoading, ...props }: Props) {
+	const styles = `inline-flex items-center bg-accent hover:brightness-95 font-semibold h-12 px-6 rounded-lg cursor-pointer disabled:bg-gray-300 transition ${
 		type === 'black' ? 'bg-primary text-white' : ''
 	} ${className}`;
 
@@ -23,5 +24,13 @@ export function Button({ children, className, type, href }: Props) {
 		);
 	}
 
-	return <button className={styles}>{children}</button>;
+	return (
+		<button
+			className={styles}
+			disabled={isLoading}
+			{...props}
+		>
+			{isLoading ? 'Отправка...' : children}
+		</button>
+	);
 }

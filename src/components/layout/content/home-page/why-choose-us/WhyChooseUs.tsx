@@ -1,3 +1,5 @@
+import { OrderForm } from '@/components/layout/form/order/OrderForm';
+
 import { Title } from '@/ui/title/Title';
 
 const ADVANTAGES = {
@@ -26,8 +28,8 @@ const FLAWS = {
 
 export function WhyChooseUs() {
 	return (
-		<section className='bg-light-gray'>
-			<div className='layout-container pt-25 pb-20'>
+		<section className='bg-light-gray pb-20'>
+			<div className='layout-container pt-25 '>
 				<Title
 					type='h2'
 					position='center'
@@ -37,7 +39,7 @@ export function WhyChooseUs() {
 				<p className='text-dark-gray text-center'>
 					Преимущества сотрудничества с “Первой кровельной компанией”
 				</p>
-				<div className='flex gap-5 mt-8'>
+				<div className='flex gap-5 mt-8 pb-20'>
 					<div className='flex-1/2'>
 						<div className='flex gap-3 items-center p-3 bg-accent rounded-xl'>
 							<svg
@@ -97,7 +99,7 @@ export function WhyChooseUs() {
 							<h2 className='font-semibold text-[22px] text-white'>Как работают частные бригады</h2>
 						</div>
 						<div className='flex flex-col gap-2 mt-2'>
-							{ADVANTAGES.list.map(item => (
+							{FLAWS.list.map(item => (
 								<ListComponent
 									key={item}
 									item={item}
@@ -107,6 +109,7 @@ export function WhyChooseUs() {
 						</div>
 					</div>
 				</div>
+				<OrderForm />
 			</div>
 		</section>
 	);
