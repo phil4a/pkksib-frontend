@@ -16,6 +16,7 @@ export function HeroBullet({ title, number, units, icon }: Props) {
 					height={17}
 					src={icon}
 					alt={title}
+					style={{ width: 'auto', height: 'auto' }}
 				/>
 			</div>
 			<div>

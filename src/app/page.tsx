@@ -61,6 +61,7 @@ export default function HomePage() {
 								priority={true}
 								draggable={false}
 								fill={true}
+								sizes='(max-width: 768px) 100vw, 50vw'
 							></Image>
 						</div>
 					</div>
