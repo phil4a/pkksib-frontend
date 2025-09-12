@@ -1,5 +1,3 @@
-import qs from 'qs';
-
 import { axiosClassic } from '@/api/axios';
 
 import type { IOrderForm } from '@/types/form.types';
