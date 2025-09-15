@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { HeroBullet } from '@/components/layout/content/home-page/hero/HeroBullet';
 import { HowWeWork } from '@/components/layout/content/home-page/how-we-work/HowWeWork';
+import { ObjectsMap } from '@/components/layout/content/home-page/objects-map/ObjectsMap';
 import { OurServices } from '@/components/layout/content/home-page/our-services/OurServices';
 import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
 
@@ -112,6 +113,7 @@ export default function HomePage() {
 			<HowWeWork />
 			<OurServices />
 			<WhyChooseUs />
+			<ObjectsMap />
 		</>
 	);
 }
