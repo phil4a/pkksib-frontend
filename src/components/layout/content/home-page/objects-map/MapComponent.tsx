@@ -194,7 +194,7 @@ export default function MapComponent() {
 							{selectedMarker.slug && (
 								<Link
 									href={`/objects/${selectedMarker.slug}`}
-									className='text-base mt-2 underline'
+									className='text-base mt-2 underline outline-0'
 								>
 									К проекту
 								</Link>
