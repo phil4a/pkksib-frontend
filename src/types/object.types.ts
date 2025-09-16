@@ -1,5 +1,32 @@
 import type { IPhoto } from './photo.types';
 
+export interface IObjectCategory {
+	id: number;
+	documentId: string;
+	title: string;
+	slug: string;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+}
+
+export interface IObjectLocation {
+	id: number;
+	location: string;
+	coordinates: string;
+	isCommercial: boolean;
+}
+
+export interface IObjectService {
+	id: number;
+	documentId: string;
+	title: string;
+	slug: string;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+}
+
 export interface IObject {
 	id: number;
 	documentId: string;
@@ -7,10 +34,25 @@ export interface IObject {
 	slug: string;
 	time: string;
 	area: number;
-	location: string;
 	description: string;
 	createdAt: string;
 	updatedAt: string;
 	publishedAt: string;
 	photos: IPhoto[];
+	object_categories: IObjectCategory[];
+	services: IObjectService[];
+	location: IObjectLocation;
+}
+
+export interface IObjectMarker {
+	id: number;
+	title: string;
+	coordinates: {
+		lat: number;
+		lng: number;
+	};
+	isCommercial: boolean;
+	area?: number;
+	description?: string;
+	firstPhoto?: IPhoto;
 }

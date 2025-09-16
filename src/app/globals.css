@@ -56,3 +56,7 @@ body {
 	background-color: var(--primary);
 	color: white;
 }
+
+.gm-style-iw-chr {
+	height: 7px !important;
+}
