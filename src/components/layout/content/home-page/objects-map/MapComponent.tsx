@@ -2,6 +2,7 @@
 
 import { GoogleMap, InfoWindow, OverlayView, useLoadScript } from '@react-google-maps/api';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
@@ -147,7 +148,7 @@ export default function MapComponent() {
 					}}
 					onCloseClick={onInfoWindowClose}
 				>
-					<div className='flex gap-4 p-2 min-w-[300px] max-w-[322px] '>
+					<div className='flex gap-4 p-2 min-w-[300px] max-w-[400px] '>
 						<div className='flex-shrink-0 w-20 h-20'>
 							{selectedMarker.firstPhoto?.formats?.thumbnail ? (
 								<Image
@@ -165,23 +166,38 @@ export default function MapComponent() {
 						</div>
 
 						{/* Правая часть - информация */}
-						<div className='flex-1 flex flex-col gap-1'>
-							<h3 className='font-semibold text-sm text-gray-800 pr-8 leading-tight'>
+						<div className='flex-1 flex flex-col gap-2'>
+							<h3 className='font-semibold text-base text-gray-800 pr-8 leading-tight'>
 								{selectedMarker.title}
 							</h3>
 
-							{selectedMarker.area && (
-								<p className='text-xs text-gray-700'>
-									<span className='font-medium'>Площадь:</span> {selectedMarker.area} м²
-								</p>
-							)}
+							<div className='flex gap-4 text-base'>
+								{selectedMarker.time && (
+									<p>
+										<span className='text-dark-gray'>Срок:</span> {selectedMarker.time}
+									</p>
+								)}
+								{selectedMarker.area && (
+									<p>
+										<span className='text-dark-gray'>Площадь:</span> {selectedMarker.area} м²
+									</p>
+								)}
+							</div>
 
 							{selectedMarker.description && (
-								<p className='text-xs text-gray-600 leading-relaxed'>
+								<p className='text-sm leading-snug'>
 									{selectedMarker.description.length > 120
 										? `${selectedMarker.description.substring(0, 120)}...`
 										: selectedMarker.description}
 								</p>
+							)}
+							{selectedMarker.slug && (
+								<Link
+									href={`/objects/${selectedMarker.slug}`}
+									className='text-base mt-2 underline'
+								>
+									К проекту
+								</Link>
 							)}
 						</div>
 					</div>

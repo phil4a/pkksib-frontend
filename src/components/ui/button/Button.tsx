@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { cn } from '@/lib/utils';
+
 interface Props {
 	href?: string;
 	children: React.ReactNode;
@@ -9,9 +11,11 @@ interface Props {
 }
 
 export function Button({ children, className, type, href, isLoading, ...props }: Props) {
-	const styles = `inline-flex items-center bg-accent hover:brightness-95 font-semibold h-12 px-6 rounded-lg cursor-pointer disabled:bg-gray-300 transition ${
-		type === 'black' ? 'bg-primary text-white' : ''
-	} ${className}`;
+	const styles = cn(
+		'inline-flex items-center bg-accent hover:brightness-95 font-semibold h-12 px-6 rounded-lg cursor-pointer disabled:bg-gray-300 transition',
+		type === 'black' && 'bg-primary text-white',
+		className
+	);
 
 	if (href) {
 		return (

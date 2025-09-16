@@ -46,6 +46,7 @@ export interface IObject {
 
 export interface IObjectMarker {
 	id: number;
+	slug: string;
 	title: string;
 	coordinates: {
 		lat: number;
@@ -53,6 +54,7 @@ export interface IObjectMarker {
 	};
 	isCommercial: boolean;
 	area?: number;
+	time?: string;
 	description?: string;
 	firstPhoto?: IPhoto;
 }

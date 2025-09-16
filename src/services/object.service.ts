@@ -17,7 +17,7 @@ interface IObjectMarkersResponse {
 class ObjectService {
 	constructor() {}
 	private _objects = PAGE.OBJECTS;
-	
+
 	getAll() {
 		const objectsQuery = qs.stringify({
 			populate: {
@@ -36,21 +36,25 @@ class ObjectService {
 				location: true,
 				photos: true
 			},
-			fields: ['id', 'title', 'area', 'description']
+			fields: ['id', 'slug', 'title', 'area', 'time', 'description']
 		});
-		
+
 		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
-		
+
 		return response.data.data
 			.filter(obj => obj.location && obj.location.coordinates)
 			.map(obj => {
-				const [lat, lng] = obj.location.coordinates.split(',').map(coord => parseFloat(coord.trim()));
+				const [lat, lng] = obj.location.coordinates
+					.split(',')
+					.map(coord => parseFloat(coord.trim()));
 				return {
 					id: obj.id,
 					title: obj.title,
+					slug: obj.slug,
 					coordinates: { lat, lng },
 					isCommercial: obj.location.isCommercial,
 					area: obj.area,
+					time: obj.time,
 					description: obj.description,
 					firstPhoto: obj.photos && obj.photos.length > 0 ? obj.photos[0] : undefined
 				};
