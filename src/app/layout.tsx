@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 
+import { Footer } from '@/components/layout/content/footer/Footer';
 import { Header } from '@/components/layout/content/header/Header';
 
 import { Providers } from '@/providers/Providers';
@@ -38,6 +39,7 @@ export default function RootLayout({
 				<Providers>
 					<Header />
 					{children}
+					<Footer />
 				</Providers>
 			</body>
 		</html>
