@@ -12,6 +12,7 @@ export interface IService {
 	createdAt: string;
 	updatedAt: string;
 	publishedAt: string;
+	isShowedInFooter?: boolean;
 	objects: IObject[];
 }
 

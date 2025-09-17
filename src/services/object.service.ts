@@ -10,10 +10,6 @@ interface IObjectResponse {
 	data: IObject[];
 }
 
-interface IObjectMarkersResponse {
-	data: IObjectMarker[];
-}
-
 class ObjectService {
 	constructor() {}
 	private _objects = PAGE.OBJECTS;

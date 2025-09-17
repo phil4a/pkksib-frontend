@@ -1,17 +1,23 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { MAIN_MENU } from '@/config/navigation';
+import { SITE_CONFIG } from '@/config/site.config';
 
+import { FooterCopyright } from './FooterCopyright';
 import { serviceService } from '@/services/service.service';
 
 const data = await serviceService.getCategories();
 const categories = data?.data?.data;
 
+const footerServicesData = await serviceService.getFooterServices();
+const footerServices = footerServicesData?.data?.data;
+
 export function Footer() {
 	return (
 		<div className='bg-light-gray'>
 			<div className='layout-container pt-16 pb-10'>
-				<div className='flex gap-5'>
+				<div className='flex gap-5 mb-10'>
 					<div className='flex-2/12'>
 						<p className='font-semibold mb-4'>Навигация</p>
 						<nav className='flex flex-col gap-2'>
@@ -41,14 +47,62 @@ export function Footer() {
 								))}
 						</div>
 					</div>
-					<div className='flex-4/12 mb-4'>
-						<p className='font-semibold'>Монтаж</p>
+					<div className='flex-4/12'>
+						<p className='font-semibold mb-4'>Монтаж</p>
+						<div className='flex flex-col gap-2'>
+							{footerServices &&
+								footerServices.map(service => (
+									<Link
+										key={service.id}
+										href={`/services/${service.slug}`}
+										className='text-base text-dark-gray'
+									>
+										{service.title}
+									</Link>
+								))}
+						</div>
 					</div>
-					<div className='flex-3/12 mb-4'>
-						<p className='font-semibold'>Контакты</p>
+					<meta
+						itemProp='name'
+						content='Первая кровельная компания'
+					/>
+					<div className='flex-3/12'>
+						<Link
+							href={`tel:${SITE_CONFIG.phoneNumber}`}
+							className='font-semibold text-[22px]'
+						>
+							{`${SITE_CONFIG.phoneNumber}`}
+						</Link>
+						<p
+							className='text-dark-gray mt-3 mb-6'
+							itemProp='address'
+							itemType='http://schema.org/PostalAddress'
+						>
+							<span itemProp='postalCode'>630047</span>,{' '}
+							<span itemProp='addressLocality'>г. Новосибирск</span>,{' '}
+							<span>ул. Красный проспект 218/1 офис 1</span>
+						</p>
+						<p className='text-dark-gray'>Пн—Сб: 10:00–18:00</p>
+						<p className='text-dark-gray'>Вс: Выходной</p>
 					</div>
 				</div>
-				<div>копирайт</div>
+				<div>
+					<div className='p-3 border-y border-black/10 flex gap-10 items-center'>
+						<div className='relative h-[65px] w-[65px] shrink-0'>
+							<Image
+								src='/logo.svg'
+								fill
+								alt='logo'
+							/>
+						</div>
+						<p className='font-light text-sm text-dark-gray max-w-[700px]'>
+							«Первая Кровельная Компания» уже более 12 лет осуществляет кровельные и фасадные
+							работы в Новосибирске и области. Наши мастера - это опытные специалисты с высокой
+							квалификацией.
+						</p>
+					</div>
+					<FooterCopyright />
+				</div>
 			</div>
 		</div>
 	);

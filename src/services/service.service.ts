@@ -26,6 +26,18 @@ class ServiceService {
 			`${this._serviceCategories}?${serviceCategoriesQuery}`
 		);
 	}
+
+	getFooterServices() {
+		const servicesQuery = qs.stringify({
+			fields: ['id', 'slug', 'title'],
+			filters: {
+				isShowedInFooter: {
+					$eq: true
+				}
+			}
+		});
+		return axiosClassic.get<IServiceResponse>(`${this._services}?${servicesQuery}`);
+	}
 }
 
 export const serviceService = new ServiceService();

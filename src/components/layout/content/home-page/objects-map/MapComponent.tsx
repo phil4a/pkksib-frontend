@@ -46,7 +46,6 @@ const calculateOptimalZoom = (markers: IObjectMarker[]) => {
 	const latRange = Math.max(...lats) - Math.min(...lats);
 	const lngRange = Math.max(...lngs) - Math.min(...lngs);
 	const maxRange = Math.max(latRange, lngRange);
-	console.log(maxRange);
 
 	// Определяем зум на основе максимального разброса координат
 	if (maxRange > 10) return 5;
