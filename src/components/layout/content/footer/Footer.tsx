@@ -15,7 +15,7 @@ const footerServices = footerServicesData?.data?.data;
 
 export function Footer() {
 	return (
-		<div className='bg-light-gray'>
+		<div className='bg-primary text-white'>
 			<div className='layout-container pt-16 pb-10'>
 				<div className='flex gap-5 mb-10'>
 					<div className='flex-2/12'>

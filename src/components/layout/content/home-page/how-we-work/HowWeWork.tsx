@@ -26,11 +26,16 @@ const stages = [
 
 export function HowWeWork() {
 	return (
-		<section className='bg-light-gray'>
+		<section className='bg-primary'>
 			<div className='layout-container py-25'>
 				<div className='mb-8'>
-					<Title type='h2'>Как мы работаем</Title>
-					<p className='text-dark-gray'>
+					<Title
+						type='h2'
+						className='text-white'
+					>
+						Как мы работаем
+					</Title>
+					<p className='text-white'>
 						Основные этапы выполнения работ в «Первой Кровельной Компании»
 					</p>
 				</div>
@@ -57,12 +62,18 @@ interface WorkStageProps {
 
 function WorkStage({ index, title, content, link }: WorkStageProps) {
 	return (
-		<div className={`${index === 0 ? 'bg-accent' : 'bg-white'} rounded-xl p-6 relative`}>
+		<div
+			className={`${index === 0 ? 'bg-accent' : 'bg-light-gray'} rounded-xl p-6 relative border border-accent`}
+		>
 			<span className='inline-flex bg-primary text-white py-2 px-4 rounded-[30px] mb-8'>
 				Этап {index + 1}
 			</span>
-			<h3 className='text-[22px] font-semibold mb-4'>{title}</h3>
-			<p className={`${index === 0 ? 'text-primary' : 'text-dark-gray'}`}>{content}</p>
+			<h3
+				className={`text-[22px] font-semibold mb-4 ${index === 0 ? 'text-primary' : 'text-primary'}`}
+			>
+				{title}
+			</h3>
+			<p className={`${index === 0 ? 'text-primary' : 'text-primary'}`}>{content}</p>
 			{link && (
 				<Link
 					href={link}
