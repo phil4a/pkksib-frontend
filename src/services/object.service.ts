@@ -10,6 +10,10 @@ interface IObjectResponse {
 	data: IObject[];
 }
 
+interface ISingleObjectResponse {
+	data: IObject;
+}
+
 class ObjectService {
 	constructor() {}
 	private _objects = PAGE.OBJECTS;
@@ -24,6 +28,28 @@ class ObjectService {
 			}
 		});
 		return axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
+	}
+
+	async getBySlug(slug: string): Promise<ISingleObjectResponse> {
+		const objectQuery = qs.stringify({
+			populate: {
+				photos: true,
+				object_categories: true,
+				services: true,
+				location: true
+			},
+			filters: {
+				slug: {
+					$eq: slug
+				}
+			}
+		});
+
+		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectQuery}`);
+
+		return {
+			data: response.data.data[0]
+		};
 	}
 
 	async getObjectMarkers(): Promise<IObjectMarker[]> {
