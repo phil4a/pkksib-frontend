@@ -21,6 +21,7 @@ export function Hero({ object }: HeroProps) {
 								src={object.photos?.[0]?.url || ''}
 								alt={object.title || ''}
 								fill
+								priority={true}
 								className='object-cover'
 							/>
 						</div>
