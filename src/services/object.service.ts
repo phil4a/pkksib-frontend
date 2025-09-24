@@ -46,11 +46,20 @@ class ObjectService {
 			}
 		});
 
-		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectQuery}`);
+		try {
+			const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectQuery}`);
 
-		return {
-			data: response.data.data[0]
-		};
+			if (!response.data.data || response.data.data.length === 0) {
+				throw new Error(`Object with slug "${slug}" not found`);
+			}
+
+			return {
+				data: response.data.data[0]
+			};
+		} catch (error) {
+			console.error(`Error fetching object with slug "${slug}":`, error);
+			throw error;
+		}
 	}
 
 	async getObjectMarkers(): Promise<IObjectMarker[]> {
