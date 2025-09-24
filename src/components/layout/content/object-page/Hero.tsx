@@ -6,10 +6,19 @@ import { Title } from '@/ui/title/Title';
 import type { IObject } from '@/types/object.types';
 
 interface HeroProps {
-	object: IObject;
+	object: IObject | null;
 }
 
 export function Hero({ object }: HeroProps) {
+	if (!object) {
+		return (
+			<section className='bg-white'>
+				<div className='layout-container pt-8 pb-20'>
+					<div>Объект не найден</div>
+				</div>
+			</section>
+		);
+	}
 	return (
 		<section>
 			<div className='layout-container pt-8 pb-20'>
@@ -18,8 +27,8 @@ export function Hero({ object }: HeroProps) {
 					<div className='flex gap-5'>
 						<div className='flex-1/2  relative aspect-[4/3] rounded-xl overflow-hidden'>
 							<Image
-								src={object.photos?.[0]?.url || ''}
-								alt={object.title || ''}
+								src={object?.photos?.[0]?.url || ''}
+								alt={object?.title || ''}
 								fill
 								priority={true}
 								className='object-cover'
@@ -28,12 +37,12 @@ export function Hero({ object }: HeroProps) {
 						<div className='p-12 flex-1/2 flex flex-col justify-between gap-25 bg-light-gray rounded-xl'>
 							<div>
 								<Title
-									type='h2'
+									type='h1'
 									className='text-4xl font-semibold mb-6'
 								>
-									{object.title}
+									{object?.title}
 								</Title>
-								<p className='text-dark-gray mb-7'>{object.description}</p>
+								<p className='text-dark-gray mb-7'>{object?.description}</p>
 								<Button type='accent'>Оставить заявку</Button>
 							</div>
 							<div className='grid grid-cols-2 gap-5'>
@@ -85,7 +94,7 @@ export function Hero({ object }: HeroProps) {
 
 									<div>
 										<p className='text-dark-gray'>Срок</p>
-										<p>{object.time}</p>
+										<p>{object?.time}</p>
 									</div>
 								</div>
 								<div className='flex gap-3 items-center'>
@@ -115,7 +124,7 @@ export function Hero({ object }: HeroProps) {
 
 									<div>
 										<p className='text-dark-gray'>Объем</p>
-										<p>{object.area} м²</p>
+										<p>{object?.area} м²</p>
 									</div>
 								</div>
 								<div className='flex gap-3 items-center'>
@@ -141,7 +150,7 @@ export function Hero({ object }: HeroProps) {
 
 									<div>
 										<p className='text-dark-gray'>Локация</p>
-										<p>{object.location.location}</p>
+										<p>{object?.location?.location}</p>
 									</div>
 								</div>
 							</div>

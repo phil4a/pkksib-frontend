@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
 import { Hero } from '@/components/layout/content/object-page/Hero';
+import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGallery';
+import { PageContent } from '@/components/layout/content/object-page/PageContent';
 
 import { objectService } from '@/services/object.service';
 import type { TPageSlugProp } from '@/types/page.types';
@@ -18,16 +20,16 @@ export async function generateMetadata({ params }: TPageSlugProp): Promise<Metad
 		return html.replace(/<[^>]*>/g, '').trim();
 	};
 
-	const cleanDescription = object.description ? stripHtml(object.description.slice(0, 200)) : '';
+	const cleanDescription = object?.description ? stripHtml(object.description.slice(0, 200)) : '';
 
 	return {
-		title: object.title,
+		title: object?.seo?.seoTitle || object?.title || 'Объект ПКК',
 		openGraph: {
-			title: object.title || '',
+			title: object?.seo?.seoTitle || object?.title || 'Объект ПКК',
 			type: 'article',
-			images: [object.photos?.[0]?.url || '']
+			images: [object?.photos?.[0]?.url || '']
 		},
-		description: cleanDescription
+		description: object?.seo?.seoDescription || cleanDescription || 'Описание объекта ПКК'
 	};
 }
 
@@ -44,5 +46,11 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 	const { slug } = await params;
 	const data = await objectService.getBySlug(slug);
 	const object = data?.data;
-	return <Hero object={object} />;
+	return (
+		<>
+			<Hero object={object} />
+			<PageContent />
+			<ObjectGallery photos={object?.photos || []} />
+		</>
+	);
 }

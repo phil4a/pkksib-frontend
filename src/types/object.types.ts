@@ -1,4 +1,5 @@
 import type { IPhoto } from './photo.types';
+import type { ISeoMetatags } from './seo.types';
 
 export interface IObjectCategory {
 	id: number;
@@ -42,6 +43,7 @@ export interface IObject {
 	object_categories: IObjectCategory[];
 	services: IObjectService[];
 	location: IObjectLocation;
+	seo: ISeoMetatags | null;
 }
 
 export interface IObjectMarker {

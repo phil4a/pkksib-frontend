@@ -36,7 +36,8 @@ class ObjectService {
 				photos: true,
 				object_categories: true,
 				services: true,
-				location: true
+				location: true,
+				seo: true
 			},
 			filters: {
 				slug: {
