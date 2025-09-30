@@ -49,8 +49,8 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 	return (
 		<>
 			<Hero object={object} />
-			<PageContent />
-			<ObjectGallery photos={object?.photos || []} />
+			{object?.description && <PageContent description={object?.description} />}
+			{object?.photos && <ObjectGallery photos={object?.photos || []} />}
 		</>
 	);
 }

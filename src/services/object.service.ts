@@ -59,7 +59,7 @@ class ObjectService {
 				location: true,
 				photos: true
 			},
-			fields: ['id', 'slug', 'title', 'area', 'time', 'description']
+			fields: ['id', 'slug', 'title', 'area', 'time', 'short_description']
 		});
 
 		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
@@ -78,7 +78,7 @@ class ObjectService {
 					isCommercial: obj.location.isCommercial,
 					area: obj.area,
 					time: obj.time,
-					description: obj.description,
+					short_description: obj.short_description,
 					firstPhoto: obj.photos && obj.photos.length > 0 ? obj.photos[0] : undefined
 				};
 			});

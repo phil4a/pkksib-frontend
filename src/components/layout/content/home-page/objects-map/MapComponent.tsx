@@ -183,11 +183,11 @@ export default function MapComponent() {
 								)}
 							</div>
 
-							{selectedMarker.description && (
+							{selectedMarker.short_description && (
 								<p className='text-sm leading-snug'>
-									{selectedMarker.description.length > 120
-										? `${selectedMarker.description.substring(0, 120)}...`
-										: selectedMarker.description}
+									{selectedMarker.short_description.length > 120
+										? `${selectedMarker.short_description.substring(0, 120)}...`
+										: selectedMarker.short_description}
 								</p>
 							)}
 							{selectedMarker.slug && (

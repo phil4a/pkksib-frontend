@@ -35,6 +35,7 @@ export interface IObject {
 	slug: string;
 	time: string;
 	area: number;
+	short_description: string;
 	description: string;
 	createdAt: string;
 	updatedAt: string;
@@ -57,6 +58,6 @@ export interface IObjectMarker {
 	isCommercial: boolean;
 	area?: number;
 	time?: string;
-	description?: string;
+	short_description?: string;
 	firstPhoto?: IPhoto;
 }

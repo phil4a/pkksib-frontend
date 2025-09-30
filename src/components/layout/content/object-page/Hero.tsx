@@ -43,7 +43,7 @@ export function Hero({ object }: HeroProps) {
 								>
 									{object?.title}
 								</Title>
-								<p className='text-dark-gray mb-7'>{object?.description}</p>
+								<p className='text-dark-gray mb-7'>{object?.short_description}</p>
 								<Button type='accent'>Оставить заявку</Button>
 							</div>
 							<div className='grid grid-cols-2 gap-5'>

@@ -54,7 +54,7 @@ export function ObjectGallery({ photos }: ObjectGalleryProps) {
 							data-src={photo.url}
 							data-sub-html={`<h4>Фото проекта ${index + 1}</h4>`}
 						>
-							<div className='relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]'>
+							<div className='relative overflow-hidden rounded-lg shadow-md transition-all duration-300 '>
 								<Image
 									src={photo.url}
 									alt={`Фото проекта ${index + 1}`}
@@ -64,7 +64,7 @@ export function ObjectGallery({ photos }: ObjectGalleryProps) {
 									style={{ aspectRatio: 'auto' }}
 									blurDataURL='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PC9zdmc+'
 								/>
-								<div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center'>
+								<div className='absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center'>
 									<div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
 										<svg
 											className='w-8 h-8 text-white'
