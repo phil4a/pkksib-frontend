@@ -109,7 +109,12 @@ export function WhyChooseUs() {
 						</div>
 					</div>
 				</div>
-				<OrderForm />
+				<OrderForm
+					title={[
+						{ text: 'Оставьте заявку', accent: true },
+						{ text: ' — мы свяжемся и рассчитаем смету' }
+					]}
+				/>
 			</div>
 		</section>
 	);

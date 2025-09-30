@@ -10,7 +10,31 @@ import { Title } from '@/ui/title/Title';
 import { useOrderForm } from './useOrderForm';
 import type { IOrderForm } from '@/types/form.types';
 
-export function OrderForm() {
+interface TitlePart {
+	text: string;
+	accent?: boolean;
+}
+
+interface OrderFormProps {
+	title: TitlePart[] | string;
+}
+
+const renderTitle = (title: TitlePart[] | string) => {
+	if (typeof title === 'string') {
+		return title;
+	}
+
+	return title.map((part, index) => (
+		<span
+			key={index}
+			className={part.accent ? 'text-accent' : ''}
+		>
+			{part.text}
+		</span>
+	));
+};
+
+export function OrderForm({ title }: OrderFormProps) {
 	const {
 		register,
 		handleSubmit,
@@ -27,7 +51,7 @@ export function OrderForm() {
 					type='h2'
 					className='m-0 max-w-[566px] text-white leading-[1.15]'
 				>
-					<span className='text-accent'>Оставьте заявку</span> — мы свяжемся и рассчитаем смету
+					{renderTitle(title)}
 				</Title>
 				<svg
 					width='145'

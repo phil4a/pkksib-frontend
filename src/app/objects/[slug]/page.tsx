@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Hero } from '@/components/layout/content/object-page/Hero';
 import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGallery';
 import { PageContent } from '@/components/layout/content/object-page/PageContent';
+import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 import { objectService } from '@/services/object.service';
 import type { TPageSlugProp } from '@/types/page.types';
@@ -51,6 +52,9 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 			<Hero object={object} />
 			{object?.description && <PageContent description={object?.description} />}
 			{object?.photos && <ObjectGallery photos={object?.photos || []} />}
+			<div className='layout-container pt-8 pb-25'>
+				<OrderForm title='Оставьте заявку на выполнение такого же проекта' />
+			</div>
 		</>
 	);
 }
