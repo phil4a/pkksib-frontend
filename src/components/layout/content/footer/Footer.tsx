@@ -6,12 +6,23 @@ import { SITE_CONFIG } from '@/config/site.config';
 
 import { FooterCopyright } from './FooterCopyright';
 import { serviceService } from '@/services/service.service';
+import type { IService, IServiceCategory } from '@/types/service.types';
 
-const data = await serviceService.getCategories();
-const categories = data?.data?.data;
+let categories: IServiceCategory[] = [];
+try {
+	const data = await serviceService.getCategories();
+	categories = data?.data?.data ?? [];
+} catch (error) {
+	categories = [];
+}
 
-const footerServicesData = await serviceService.getFooterServices();
-const footerServices = footerServicesData?.data?.data;
+let footerServices: IService[] = [];
+try {
+	const footerServicesData = await serviceService.getFooterServices();
+	footerServices = footerServicesData?.data?.data ?? [];
+} catch (error) {
+	footerServices = [];
+}
 
 export function Footer() {
 	return (
@@ -32,11 +43,11 @@ export function Footer() {
 							))}
 						</nav>
 					</div>
-					<div className='flex-3/12 '>
-						<p className='font-semibold mb-4'>Наши услуги</p>
-						<div className='flex flex-col gap-2'>
-							{categories &&
-								categories.map(category => (
+					{categories.length > 0 && (
+						<div className='flex-3/12 '>
+							<p className='font-semibold mb-4'>Наши услуги</p>
+							<div className='flex flex-col gap-2'>
+								{categories.map(category => (
 									<Link
 										key={category.id}
 										href={`/services/${category.slug}`}
@@ -45,8 +56,9 @@ export function Footer() {
 										{category.title}
 									</Link>
 								))}
+							</div>
 						</div>
-					</div>
+					)}
 					<div className='flex-4/12'>
 						<p className='font-semibold mb-4'>Монтаж</p>
 						<div className='flex flex-col gap-2'>
