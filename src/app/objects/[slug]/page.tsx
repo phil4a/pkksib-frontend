@@ -3,11 +3,8 @@ import type { Metadata } from 'next';
 import { Hero } from '@/components/layout/content/object-page/Hero';
 import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGallery';
 import { PageContent } from '@/components/layout/content/object-page/PageContent';
+import { RelatedObjects } from '@/components/layout/content/object-page/RelatedObjects';
 import { OrderForm } from '@/components/layout/form/order/OrderForm';
-
-import { Breadcrumbs } from '@/ui/Breadcrumbs';
-
-import { buildStaticCrumbs } from '@/utils/breadcrumbs';
 
 import { objectService } from '@/services/object.service';
 import type { TPageSlugProp } from '@/types/page.types';
@@ -51,11 +48,25 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 	const { slug } = await params;
 	const data = await objectService.getBySlug(slug);
 	const object = data?.data;
+
+	const categorySlug = object?.object_categories?.[0]?.slug;
+
+	const relatedRes = await objectService.getRelated({
+		categorySlug,
+		excludeSlug: slug,
+		limit: 6
+	});
+	const relatedObjects = relatedRes?.data?.data || [];
+
 	return (
 		<>
 			<Hero object={object} />
 			{object?.description && <PageContent description={object?.description} />}
 			{object?.photos && <ObjectGallery photos={object?.photos || []} />}
+			<RelatedObjects
+				objects={relatedObjects}
+				className='py-12'
+			/>
 			<div className='layout-container pt-8 pb-25'>
 				<OrderForm title='Оставьте заявку на выполнение такого же проекта' />
 			</div>

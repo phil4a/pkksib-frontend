@@ -83,6 +83,27 @@ class ObjectService {
 				};
 			});
 	}
+
+	async getRelated(params: { categorySlug?: string; excludeSlug: string; limit?: number }) {
+		const { categorySlug, excludeSlug, limit = 6 } = params;
+
+		const query = qs.stringify(
+			{
+				populate: ['photos', 'object_categories'],
+				filters: {
+					...(categorySlug
+						? { object_categories: { slug: { $eq: categorySlug } } }
+						: {}),
+					slug: { $ne: excludeSlug }
+				},
+				sort: ['createdAt:desc'],
+				pagination: { page: 1, pageSize: limit }
+			},
+			{ encodeValuesOnly: true }
+		);
+
+		return axiosClassic.get(`${this._objects}?${query}`);
+	}
 }
 
 export const objectService = new ObjectService();
