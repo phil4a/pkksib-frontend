@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ObjectCategoryIcon } from '@/ui/icons/object-category/ObjectCategoryIcon';
+
 import type { IObject } from '@/types/object.types';
 
 interface Props {
@@ -24,18 +26,7 @@ export function Object({ item }: Props) {
 					blurDataURL='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCc+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0nI2VlZWUnLz48L3N2Zz4='
 				/>
 				<div className='absolute top-4 right-4 w-8 h-8 bg-accent rounded-lg flex items-center justify-center'>
-					<svg
-						width='18'
-						height='16'
-						viewBox='0 0 18 16'
-						fill='none'
-						xmlns='http://www.w3.org/2000/svg'
-					>
-						<path
-							d='M2.7 16H15.3V7.11111H18L9 0L0 7.11111H2.7V16Z'
-							fill='#21282B'
-						/>
-					</svg>
+					<ObjectCategoryIcon slug={item.object_categories?.[0]?.slug} />
 				</div>
 			</div>
 			<div className='px-2 pt-3'>
