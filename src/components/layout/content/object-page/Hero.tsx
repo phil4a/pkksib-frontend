@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { Breadcrumbs } from '@/ui/Breadcrumbs';
 import { Button } from '@/ui/button/Button';
 import { Title } from '@/ui/title/Title';
 
@@ -22,7 +23,13 @@ export function Hero({ object }: HeroProps) {
 	return (
 		<section>
 			<div className='layout-container pt-8 pb-20'>
-				<div>Breadcrumbs</div>
+				<Breadcrumbs
+					items={[
+						{ label: 'Главная', href: '/' },
+						{ label: 'Объекты', href: '/objects' },
+						{ label: object?.title || '', isCurrent: true }
+					]}
+				/>
 				<div className='mt-8'>
 					<div className='flex gap-5'>
 						<div className='flex-1/2  relative aspect-[4/3] rounded-xl overflow-hidden'>

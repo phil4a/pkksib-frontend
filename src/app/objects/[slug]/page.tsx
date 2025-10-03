@@ -5,6 +5,10 @@ import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGal
 import { PageContent } from '@/components/layout/content/object-page/PageContent';
 import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
+import { Breadcrumbs } from '@/ui/Breadcrumbs';
+
+import { buildStaticCrumbs } from '@/utils/breadcrumbs';
+
 import { objectService } from '@/services/object.service';
 import type { TPageSlugProp } from '@/types/page.types';
 
