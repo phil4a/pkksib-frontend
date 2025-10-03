@@ -15,7 +15,7 @@ export function RelatedObjects({ objects, className, title = 'Похожие п�
 		<section className={className}>
 			<div className='layout-container'>
 				<h2 className='text-2xl font-semibold mb-6'>{title}</h2>
-				<div className='grid md:grid-cols-3 gap-6'>
+				<div className='grid md:grid-cols-4 gap-6'>
 					{objects.map(item => (
 						<Object
 							key={item.slug}
