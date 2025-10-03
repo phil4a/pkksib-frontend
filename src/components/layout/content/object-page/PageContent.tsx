@@ -6,7 +6,7 @@ interface Props {
 
 export function PageContent({ description }: Props) {
 	return (
-		<section className='bg-light-gray py-20'>
+		<section className='bg-light-gray py-20 mt-20'>
 			<div className='layout-container'>
 				{description && (
 					<div className='prose prose-lg max-w-none'>

@@ -63,13 +63,14 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 			<Hero object={object} />
 			{object?.description && <PageContent description={object?.description} />}
 			{object?.photos && <ObjectGallery photos={object?.photos || []} />}
-			<RelatedObjects
-				objects={relatedObjects}
-				className='py-12'
-			/>
+
 			<div className='layout-container pt-8 pb-25'>
 				<OrderForm title='Оставьте заявку на выполнение такого же проекта' />
 			</div>
+			<RelatedObjects
+				objects={relatedObjects}
+				className='mb-25'
+			/>
 		</>
 	);
 }

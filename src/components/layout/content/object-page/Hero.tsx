@@ -22,7 +22,7 @@ export function Hero({ object }: HeroProps) {
 	}
 	return (
 		<section>
-			<div className='layout-container pt-8 pb-20'>
+			<div className='layout-container pt-8'>
 				<Breadcrumbs
 					items={[
 						{ label: 'Главная', href: '/' },
