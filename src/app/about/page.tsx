@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Hero } from '@/components/layout/content/about/Hero';
+import { WhyChooseUs } from '@/components/layout/content/about/WhyChooseUs';
 
 export const metadata: Metadata = {
 	title: 'Первая Кровельная Компания - Кровельные работы в Новосибирске',
@@ -12,6 +13,7 @@ export default function AboutPage() {
 	return (
 		<>
 			<Hero />
+			<WhyChooseUs />
 		</>
 	);
 }
