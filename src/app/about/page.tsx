@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Hero } from '@/components/layout/content/about/Hero';
+import { Team } from '@/components/layout/content/about/Team';
 import { WhyChooseUs } from '@/components/layout/content/about/WhyChooseUs';
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function AboutPage() {
 		<>
 			<Hero />
 			<WhyChooseUs />
+			<Team />
 		</>
 	);
 }
