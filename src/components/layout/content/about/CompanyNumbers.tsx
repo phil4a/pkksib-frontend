@@ -1,9 +1,20 @@
+import Image from 'next/image';
+
 import { Title } from '@/ui/title/Title';
+
+import aboutNumbersBg from '@/assets/about-page/numbers-bg.jpg';
 
 export function CompanyNumbers() {
 	return (
-		<section className='bg-dark-gray pt-20 pb-10'>
-			<div className='layout-container text-white'>
+		<section className='relative pt-20 pb-10'>
+			<div className='absolute top-0 right-0 w-full h-full bg-black/50'>
+				<Image
+					src={aboutNumbersBg}
+					alt='Company numbers background'
+					className='-z-1 absolute top-0 right-0 w-full h-full object-cover'
+				/>
+			</div>
+			<div className='layout-container relative text-white'>
 				<div className='mb-16'>
 					<Title
 						type='h2'
