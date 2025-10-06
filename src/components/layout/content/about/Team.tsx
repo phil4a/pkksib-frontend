@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper/types';
 
+import { OurValues } from './OurValues';
 import { TeamHeading } from './TeamHeading';
 import { TeamSlider } from './TeamSlider';
 
@@ -30,17 +31,14 @@ export function Team() {
 	return (
 		<section>
 			<div className='layout-container'>
-				<div className='flex justify-between items-center'>
-					<TeamHeading
-						onPrev={() => swiper?.slidePrev()}
-						onNext={() => swiper?.slideNext()}
-						canPrev={swiper ? canPrev : false}
-						canNext={swiper ? canNext : false}
-					/>
-				</div>
-				<div>
-					<TeamSlider onSwiperReady={setSwiper} />
-				</div>
+				<TeamHeading
+					onPrev={() => swiper?.slidePrev()}
+					onNext={() => swiper?.slideNext()}
+					canPrev={swiper ? canPrev : false}
+					canNext={swiper ? canNext : false}
+				/>
+				<TeamSlider onSwiperReady={setSwiper} />
+				<OurValues />
 			</div>
 		</section>
 	);

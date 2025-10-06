@@ -12,10 +12,10 @@ interface Props {
 
 export function TeamHeading({ onPrev, onNext, canPrev = true, canNext = true }: Props) {
 	return (
-		<>
+		<div className='mb-8 flex gap-5 items-center justify-between'>
 			<Title
 				type='h2'
-				className='mb-8'
+				className='mb-0'
 			>
 				Наша команда
 			</Title>
@@ -61,6 +61,6 @@ export function TeamHeading({ onPrev, onNext, canPrev = true, canNext = true }: 
 					</svg>
 				</Button>
 			</div>
-		</>
+		</div>
 	);
 }

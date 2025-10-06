@@ -1,5 +1,7 @@
 'use client';
 
+import type { StaticImageData } from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper/types';
@@ -15,48 +17,55 @@ interface Props {
 }
 
 export function TeamSlider({ onSwiperReady }: Props) {
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	type Member = { name: string; position: string; image: StaticImageData };
+	const members: Member[] = useMemo(
+		() => [
+			{ name: 'Фамилия Имя', position: 'Должность в Первой Кровельной Компании', image: team1 },
+			{ name: 'Фамилия Имя', position: 'Должность в Первой Кровельной Компани', image: team2 },
+			{ name: 'Фамилия Имя', position: 'Должность в Первой Кровельной Компании', image: team3 },
+			{ name: 'Фамилия Имя', position: 'Должность в Первой Кровельной Компании', image: team4 },
+			{ name: 'Фамилия Имя', position: 'Должность в Первой Кровельной Компании', image: team1 }
+		],
+		[]
+	);
+
+	if (!mounted) {
+		return (
+			<div className='grid grid-cols-4 gap-5'>
+				{members.slice(0, 4).map((m, idx) => (
+					<TeamSlide
+						key={`member-fallback-${idx}`}
+						name={m.name}
+						position={m.position}
+						image={m.image}
+						renderImage={false}
+					/>
+				))}
+			</div>
+		);
+	}
+
 	return (
 		<Swiper
-			spaceBetween={20}
 			slidesPerView={4}
-			className='grid grid-cols-4 gap-5'
+			spaceBetween={20}
 			onSwiper={onSwiperReady}
 		>
-			<SwiperSlide>
-				<TeamSlide
-					name='Фамилия Имя'
-					position='Должность в Первой Кровельной Компании'
-					image={team1}
-				/>
-			</SwiperSlide>
-			<SwiperSlide>
-				<TeamSlide
-					name='Фамилия Имя'
-					position='Должность в Первой Кровельной Компании1232131 sdfdsafasf sadfdas asdfa sfasdf '
-					image={team2}
-				/>
-			</SwiperSlide>
-			<SwiperSlide>
-				<TeamSlide
-					name='Фамилия Имя'
-					position='Должность в Первой Кровельной Компании'
-					image={team3}
-				/>
-			</SwiperSlide>
-			<SwiperSlide>
-				<TeamSlide
-					name='Фамилия Имя'
-					position='Должность в Первой Кровельной Компании'
-					image={team4}
-				/>
-			</SwiperSlide>
-			<SwiperSlide>
-				<TeamSlide
-					name='Фамилия Имя'
-					position='Должность в Первой Кровельной Компании'
-					image={team1}
-				/>
-			</SwiperSlide>
+			{members.map((m, idx) => (
+				<SwiperSlide key={`member-${idx}`}>
+					<TeamSlide
+						name={m.name}
+						position={m.position}
+						image={m.image}
+					/>
+				</SwiperSlide>
+			))}
 		</Swiper>
 	);
 }
