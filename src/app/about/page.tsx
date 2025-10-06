@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 
+import { AboutCertificates } from '@/components/layout/content/about/AboutCertificates';
 import { CompanyNumbers } from '@/components/layout/content/about/CompanyNumbers';
 import { Hero } from '@/components/layout/content/about/Hero';
 import { Team } from '@/components/layout/content/about/Team';
 import { WhyChooseUs } from '@/components/layout/content/about/WhyChooseUs';
+import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 export const metadata: Metadata = {
 	title: 'Первая Кровельная Компания - Кровельные работы в Новосибирске',
@@ -18,6 +20,15 @@ export default function AboutPage() {
 			<WhyChooseUs />
 			<Team />
 			<CompanyNumbers />
+			<AboutCertificates />
+			<div className='layout-container mb-25'>
+				<OrderForm
+					title={[
+						{ text: 'Оставьте заявку', accent: true },
+						{ text: ' — мы свяжемся и рассчитаем смету' }
+					]}
+				/>
+			</div>
 		</>
 	);
 }
