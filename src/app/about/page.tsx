@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { CompanyNumbers } from '@/components/layout/content/about/CompanyNumbers';
 import { Hero } from '@/components/layout/content/about/Hero';
 import { Team } from '@/components/layout/content/about/Team';
 import { WhyChooseUs } from '@/components/layout/content/about/WhyChooseUs';
@@ -16,6 +17,7 @@ export default function AboutPage() {
 			<Hero />
 			<WhyChooseUs />
 			<Team />
+			<CompanyNumbers />
 		</>
 	);
 }
