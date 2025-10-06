@@ -84,7 +84,17 @@ export function OrderForm({ title }: OrderFormProps) {
 				/>
 				<Field
 					type='tel'
-					registration={register('phone', { required: 'Телефон обязателен' })}
+					registration={register('phone', {
+						required: 'Телефон обязателен',
+						pattern: {
+							value: /^[+()\-\s\d]+$/,
+							message: 'Допустимы только цифры, пробелы, «+», «-», «()»'
+						},
+						validate: value => {
+							const digits = String(value || '').replace(/\D/g, '');
+							return (digits.length >= 10 && digits.length <= 15) || 'Введите корректный номер';
+						}
+					})}
 					error={errors.phone?.message}
 					placeholder='Телефон'
 				/>
