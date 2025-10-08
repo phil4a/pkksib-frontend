@@ -7,6 +7,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 
+import { calculateMarkersCenter, calculateOptimalZoom, defaultCenter } from '@/utils/map';
+
 import { CustomMarker } from './CustomMarker';
 import { objectService } from '@/services/object.service';
 import type { IObjectMarker } from '@/types/object.types';
@@ -15,47 +17,6 @@ const containerStyle = {
 	width: '100%',
 	height: '600px',
 	borderRadius: '12px'
-};
-
-const defaultCenter = {
-	lat: 55.0415,
-	lng: 82.9346
-};
-
-// Функция для расчета центральной точки всех маркеров
-const calculateMarkersCenter = (markers: IObjectMarker[]) => {
-	if (markers.length === 0) return defaultCenter;
-
-	const totalLat = markers.reduce((sum, marker) => sum + marker.coordinates.lat, 0);
-	const totalLng = markers.reduce((sum, marker) => sum + marker.coordinates.lng, 0);
-
-	return {
-		lat: totalLat / markers.length,
-		lng: totalLng / markers.length
-	};
-};
-
-// Функция для расчета оптимального зума на основе разброса маркеров
-const calculateOptimalZoom = (markers: IObjectMarker[]) => {
-	if (markers.length === 0) return 8;
-	if (markers.length === 1) return 12;
-
-	const lats = markers.map(marker => marker.coordinates.lat);
-	const lngs = markers.map(marker => marker.coordinates.lng);
-
-	const latRange = Math.max(...lats) - Math.min(...lats);
-	const lngRange = Math.max(...lngs) - Math.min(...lngs);
-	const maxRange = Math.max(latRange, lngRange);
-
-	// Определяем зум на основе максимального разброса координат
-	if (maxRange > 10) return 5;
-	if (maxRange > 5) return 6;
-	if (maxRange > 2) return 7;
-	if (maxRange > 1) return 8;
-	if (maxRange > 0.5) return 9;
-	if (maxRange > 0.2) return 10;
-	if (maxRange > 0.1) return 11;
-	return 12;
 };
 
 export default function MapComponent() {
