@@ -20,7 +20,13 @@ const containerStyle = {
 	borderRadius: '12px'
 };
 
-export default function ContactsMap({ selectedMarkerId }: { selectedMarkerId?: number }) {
+export default function ContactsMap({
+	selectedMarkerId,
+	onMarkerSelect
+}: {
+	selectedMarkerId?: number;
+	onMarkerSelect?: (id: number) => void;
+}) {
 	const [markers, setMarkers] = useState<IContactMarker[]>([]);
 	const [selectedMarker, setSelectedMarker] = useState<IContactMarker | null>(null);
 	const [isLoadingMarkers, setIsLoadingMarkers] = useState(true);
@@ -69,9 +75,13 @@ export default function ContactsMap({ selectedMarkerId }: { selectedMarkerId?: n
 		}
 	}, [selectedMarkerId, markers]);
 
-	const onMarkerClick = useCallback((marker: IContactMarker) => {
-		setSelectedMarker(marker);
-	}, []);
+	const onMarkerClick = useCallback(
+		(marker: IContactMarker) => {
+			setSelectedMarker(marker);
+			onMarkerSelect?.(marker.id);
+		},
+		[onMarkerSelect]
+	);
 
 	const onInfoWindowClose = useCallback(() => {
 		setSelectedMarker(null);
