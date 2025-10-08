@@ -1,8 +1,6 @@
 'use client';
 
 import { GoogleMap, InfoWindow, OverlayView, useLoadScript } from '@react-google-maps/api';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { CustomMarker } from '@/components/layout/content/home-page/objects-map/CustomMarker';
