@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 import { Contacts } from '@/components/layout/content/contacts/Contacts';
+import { Details } from '@/components/layout/content/contacts/Details';
 import { Heading } from '@/components/layout/content/contacts/Heading';
+import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 export const metadata: Metadata = {
 	title: 'Кровельные работы в Новосибирске',
@@ -14,6 +16,15 @@ export default function ContactsPage() {
 		<div className='layout-container mt-8'>
 			<Heading />
 			<Contacts />
+			<Details />
+			<div className='container-layout my-25'>
+				<OrderForm
+					title={[
+						{ text: 'Оставьте заявку –' },
+						{ text: 'получите бесплатный расчет', accent: true }
+					]}
+				/>
+			</div>
 		</div>
 	);
 }
