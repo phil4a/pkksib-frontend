@@ -20,8 +20,6 @@ const containerStyle = {
 	borderRadius: '12px'
 };
 
-// Map utils moved to '@/utils/map'.
-
 export default function ContactsMap({ selectedMarkerId }: { selectedMarkerId?: number }) {
 	const [markers, setMarkers] = useState<IContactMarker[]>([]);
 	const [selectedMarker, setSelectedMarker] = useState<IContactMarker | null>(null);
@@ -94,7 +92,7 @@ export default function ContactsMap({ selectedMarkerId }: { selectedMarkerId?: n
 			zoom={mapZoom}
 			onLoad={onMapLoad}
 			options={{
-				mapId: 'ac105ed86c9bd12f614f546f',
+				// mapId: 'ac105ed86c9bd12f614f546f',
 				disableDefaultUI: true,
 				streetViewControl: false,
 				mapTypeControl: false,
