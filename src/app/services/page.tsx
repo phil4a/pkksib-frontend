@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Heading } from '@/components/layout/content/services/Heading';
+import { ServiceRelated } from '@/components/layout/content/services/ServiceRelated';
 import { ServiceText } from '@/components/layout/content/services/ServiceText';
 import { ServicesList } from '@/components/layout/content/services/ServicesList';
 
@@ -17,12 +18,14 @@ export const dynamic = 'force-static';
 
 export default async function ServicesPage() {
 	const { data } = await serviceService.getCategories();
+	const categories = data.data;
 
 	return (
 		<>
 			<Heading />
-			<ServicesList categories={data.data} />
+			<ServicesList categories={categories} />
 			<ServiceText />
+			<ServiceRelated />
 		</>
 	);
 }

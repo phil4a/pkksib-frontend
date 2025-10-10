@@ -4,7 +4,9 @@ import { PAGE } from '@/config/pages';
 
 import { axiosClassic } from '@/api/axios';
 
+import { serviceService } from './service.service';
 import type { IObject, IObjectMarker } from '@/types/object.types';
+import type { IService, IServiceCategory } from '@/types/service.types';
 
 interface IObjectResponse {
 	data: IObject[];
@@ -18,16 +20,56 @@ class ObjectService {
 	constructor() {}
 	private _objects = PAGE.OBJECTS;
 
-	getAll() {
-		const objectsQuery = qs.stringify({
+	getAll(limit?: number) {
+		const query: Record<string, unknown> = {
 			populate: {
 				photos: true,
 				object_categories: true,
 				services: true,
 				location: true
 			}
-		});
+		};
+
+		if (typeof limit === 'number' && limit > 0) {
+			query.sort = ['updatedAt:desc'];
+			query.pagination = { page: 1, pageSize: limit };
+		}
+
+		const objectsQuery = qs.stringify(query);
 		return axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
+	}
+
+	async getByServiceCategorySlug(slug: string, limit: number = 10) {
+		const categoriesRes = await serviceService.getCategories();
+		const categories = categoriesRes?.data?.data || [];
+
+		const category = categories.find((c: IServiceCategory) => c.slug === slug);
+		const serviceSlugs: string[] = category?.services?.map((s: IService) => s.slug) || [];
+
+		if (!serviceSlugs.length) {
+			return axiosClassic.get<IObjectResponse>(
+				`${this._objects}?${qs.stringify({
+					populate: ['photos', 'object_categories', 'services'],
+					pagination: { page: 1, pageSize: 0 }
+				})}`
+			);
+		}
+
+		const query = qs.stringify(
+			{
+				populate: ['photos', 'object_categories', 'services'],
+				filters: {
+					services: {
+						slug: { $in: serviceSlugs }
+					}
+				},
+				sort: ['createdAt:desc'],
+				pagination: { page: 1, pageSize: limit }
+			},
+			{ encodeValuesOnly: true }
+		);
+
+		return axiosClassic.get<IObjectResponse>(`${this._objects}?${query}`);
 	}
 
 	async getBySlug(slug: string): Promise<ISingleObjectResponse> {
@@ -91,9 +133,7 @@ class ObjectService {
 			{
 				populate: ['photos', 'object_categories'],
 				filters: {
-					...(categorySlug
-						? { object_categories: { slug: { $eq: categorySlug } } }
-						: {}),
+					...(categorySlug ? { object_categories: { slug: { $eq: categorySlug } } } : {}),
 					slug: { $ne: excludeSlug }
 				},
 				sort: ['createdAt:desc'],
