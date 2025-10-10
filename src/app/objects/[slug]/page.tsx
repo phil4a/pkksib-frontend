@@ -22,7 +22,9 @@ export async function generateMetadata({ params }: TPageSlugProp): Promise<Metad
 		return html.replace(/<[^>]*>/g, '').trim();
 	};
 
-	const cleanDescription = object?.description ? stripHtml(object.description.slice(0, 200)) : '';
+	const cleanDescription = object?.short_description
+		? stripHtml(object.short_description.slice(0, 200))
+		: '';
 
 	return {
 		title: object?.seo?.seoTitle || object?.title || 'Объект ПКК',

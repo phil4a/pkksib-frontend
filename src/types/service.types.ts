@@ -28,6 +28,7 @@ export interface IServiceCategory {
 	slug: string;
 	description: string;
 	shortDescription: string;
+	price?: number;
 	services: IService[];
 	image: IPhoto;
 	createdAt: string;

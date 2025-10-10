@@ -1,24 +1,28 @@
 import type { Metadata } from 'next';
 
+import { Heading } from '@/components/layout/content/services/Heading';
+import { ServiceText } from '@/components/layout/content/services/ServiceText';
+import { ServicesList } from '@/components/layout/content/services/ServicesList';
+
 import { serviceService } from '@/services/service.service';
 
 export const metadata: Metadata = {
-	title: 'Услуги',
-	description: 'Услуги ПКК'
+	title: 'Кровельные и фасадные работы в Новосибирске',
+	description:
+		'В «Первой Кровельной Компании» помимо товаров для кровли европейского качества предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные работы в Новосибирске и области.'
 };
 
+export const revalidate = 300;
+export const dynamic = 'force-static';
+
 export default async function ServicesPage() {
-	const { data } = await serviceService.getAll();
+	const { data } = await serviceService.getCategories();
 
 	return (
-		<div>
-			<h1>Услуги</h1>
-			{data.data.map(service => (
-				<div key={service.id}>
-					<h2>{service.title}</h2>
-					<p>{service.description}</p>
-				</div>
-			))}
-		</div>
+		<>
+			<Heading />
+			<ServicesList categories={data.data} />
+			<ServiceText />
+		</>
 	);
 }

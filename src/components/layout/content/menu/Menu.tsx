@@ -25,6 +25,18 @@ export function Menu() {
 								<NavigationMenuTrigger>{menuItem.label}</NavigationMenuTrigger>
 								<NavigationMenuContent>
 									<ul className='grid w-[300px] gap-2 p-4'>
+										{menuItem.href && (
+											<li key={`${menuItem.label}-all`}>
+												<NavigationMenuLink asChild>
+													<Link
+														href={menuItem.href}
+														className='block select-none space-y-1 rounded-md p-3 no-underline outline-none transition-colors bg-white/60 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+													>
+														<div className='font-medium'>Все услуги</div>
+													</Link>
+												</NavigationMenuLink>
+											</li>
+										)}
 										{menuItem.submenu.map(subItem => (
 											<li key={subItem.label}>
 												<NavigationMenuLink asChild>
