@@ -18,7 +18,7 @@ export function Object({ item }: Props) {
 		>
 			<div className='relative aspect-[1/1] rounded-xl overflow-hidden'>
 				<Image
-					src={item.photos?.[0]?.url || '/logo.png'}
+					src={item.photos?.[0]?.url}
 					alt={item.title || 'Объект'}
 					fill
 					className='object-cover'

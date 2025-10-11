@@ -7,7 +7,7 @@ interface Props {
 	text?: string;
 }
 
-export function ServiceText({ text }: Props) {
+export function ServicesText({ text }: Props) {
 	return (
 		<section className='bg-light-gray'>
 			<div className='layout-container py-25'>

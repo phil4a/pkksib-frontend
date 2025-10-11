@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { ServiceContent } from '@/components/layout/content/service/ServiceContent';
 import { ServiceHeading } from '@/components/layout/content/service/ServiceHeading';
 import { ServiceHero } from '@/components/layout/content/service/ServiceHero';
+import { ServiceObjects } from '@/components/layout/content/service/ServiceObjects';
 import { Heading } from '@/components/layout/content/services/Heading';
 import { ServiceRelated } from '@/components/layout/content/services/ServiceRelated';
-import { ServiceText } from '@/components/layout/content/services/ServiceText';
 import { ServicesList } from '@/components/layout/content/services/ServicesList';
+import { ServicesText } from '@/components/layout/content/services/ServicesText';
 
 import { serviceService } from '@/services/service.service';
 import type { TPageSlugProp } from '@/types/page.types';
@@ -81,7 +83,7 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 			<>
 				<Heading title={category.title} />
 				<ServicesList items={services} />
-				{category.description && <ServiceText text={category.description} />}
+				{category.description && <ServicesText text={category.description} />}
 				<ServiceRelated category={category} />
 			</>
 		);
@@ -96,6 +98,8 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 			<>
 				<ServiceHeading service={service} />
 				<ServiceHero service={service} />
+				<ServiceContent content={service.description} />
+				<ServiceObjects objects={service.objects} />
 			</>
 		);
 	}

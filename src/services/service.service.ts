@@ -20,13 +20,21 @@ class ServiceService {
 
 	async getBySlug(slug: string) {
 		const serviceQuery = qs.stringify({
-			populate: '*',
+			populate: {
+				image: true,
+				service_category: true,
+				objects: {
+					populate: ['photos']
+				},
+				seo: true
+			},
 			filters: {
 				slug: {
 					$eq: slug
 				}
 			}
 		});
+		console.log(serviceQuery);
 		return axiosClassic.get<IServiceResponse>(`${this._services}?${serviceQuery}`);
 	}
 

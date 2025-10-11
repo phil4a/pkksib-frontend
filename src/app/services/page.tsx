@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 
 import { Heading } from '@/components/layout/content/services/Heading';
 import { ServiceRelated } from '@/components/layout/content/services/ServiceRelated';
-import { ServiceText } from '@/components/layout/content/services/ServiceText';
 import { ServicesList } from '@/components/layout/content/services/ServicesList';
+import { ServicesText } from '@/components/layout/content/services/ServicesText';
 
 import { serviceService } from '@/services/service.service';
 
@@ -24,7 +24,7 @@ export default async function ServicesPage() {
 		<>
 			<Heading />
 			<ServicesList items={categories} />
-			<ServiceText />
+			<ServicesText />
 			<ServiceRelated />
 		</>
 	);
