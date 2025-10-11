@@ -4,9 +4,7 @@ import { PAGE } from '@/config/pages';
 
 import { axiosClassic } from '@/api/axios';
 
-import { serviceService } from './service.service';
 import type { IObject, IObjectMarker } from '@/types/object.types';
-import type { IService, IServiceCategory } from '@/types/service.types';
 
 interface IObjectResponse {
 	data: IObject[];

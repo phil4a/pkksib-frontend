@@ -6,7 +6,7 @@ interface Props {
 }
 
 // Базовая иконка (дом) как fallback
-function DefaultIcon(props: React.SVGProps<SVGSVGElement>) {
+function DefaultIcon(_props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			width='18'
@@ -23,7 +23,7 @@ function DefaultIcon(props: React.SVGProps<SVGSVGElement>) {
 	);
 }
 
-function AdministrativeIcon(props: React.SVGProps<SVGSVGElement>) {
+function AdministrativeIcon(_props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			width='18'
@@ -91,7 +91,7 @@ function AdministrativeIcon(props: React.SVGProps<SVGSVGElement>) {
 	);
 }
 
-function ProductionIcon(props: React.SVGProps<SVGSVGElement>) {
+function ProductionIcon(_props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			width='16'
@@ -120,7 +120,7 @@ function ProductionIcon(props: React.SVGProps<SVGSVGElement>) {
 	);
 }
 
-function TurnkeyHouseIcon(props: React.SVGProps<SVGSVGElement>) {
+function TurnkeyHouseIcon(_props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			width='18'
@@ -141,7 +141,7 @@ function TurnkeyHouseIcon(props: React.SVGProps<SVGSVGElement>) {
 	);
 }
 
-function CottageIcon(props: React.SVGProps<SVGSVGElement>) {
+function CottageIcon(_props: React.SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			width='18'

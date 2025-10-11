@@ -12,7 +12,7 @@ let categories: IServiceCategory[] = [];
 try {
 	const data = await serviceService.getCategories();
 	categories = data?.data?.data ?? [];
-} catch (error) {
+} catch {
 	categories = [];
 }
 
@@ -20,7 +20,7 @@ let footerServices: IService[] = [];
 try {
 	const footerServicesData = await serviceService.getFooterServices();
 	footerServices = footerServicesData?.data?.data ?? [];
-} catch (error) {
+} catch {
 	footerServices = [];
 }
 

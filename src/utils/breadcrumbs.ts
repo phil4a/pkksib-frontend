@@ -2,7 +2,7 @@ import { PAGE } from '@/config/pages';
 
 import type { CrumbItem } from '@/types/breadcrumbs';
 
-export async function buildServiceCrumbs(slug: string): Promise<CrumbItem[]> {
+export async function buildServiceCrumbs(_slug: string): Promise<CrumbItem[]> {
 	// Пример: получаем услугу и её категорию
 	// const service = await serviceService.getBySlug(slug);
 	// const category = service.category;
