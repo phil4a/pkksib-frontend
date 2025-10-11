@@ -13,8 +13,9 @@ import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 import { Title } from '@/ui/title/Title';
 
 import { objectService } from '@/services/object.service';
+import type { IServiceCategory } from '@/types/service.types';
 
-export function ServiceRelated() {
+export function ServiceRelated({ category }: { category?: IServiceCategory }) {
 	const [swiper, setSwiper] = useState<SwiperType | null>(null);
 	const [canPrev, setCanPrev] = useState(false);
 	const [canNext, setCanNext] = useState(false);
@@ -36,8 +37,11 @@ export function ServiceRelated() {
 	}, [swiper]);
 
 	const { data, isLoading, error } = useQuery({
-		queryKey: ['objects_related'],
-		queryFn: () => objectService.getAll(10)
+		queryKey: ['objects_related', category?.slug ?? 'all'],
+		queryFn: () =>
+			category?.slug
+				? objectService.getByServiceCategorySlug(category.slug, 10)
+				: objectService.getAll(10)
 	});
 
 	const objects = data?.data?.data;

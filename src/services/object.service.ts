@@ -40,27 +40,12 @@ class ObjectService {
 	}
 
 	async getByServiceCategorySlug(slug: string, limit: number = 10) {
-		const categoriesRes = await serviceService.getCategories();
-		const categories = categoriesRes?.data?.data || [];
-
-		const category = categories.find((c: IServiceCategory) => c.slug === slug);
-		const serviceSlugs: string[] = category?.services?.map((s: IService) => s.slug) || [];
-
-		if (!serviceSlugs.length) {
-			return axiosClassic.get<IObjectResponse>(
-				`${this._objects}?${qs.stringify({
-					populate: ['photos', 'object_categories', 'services'],
-					pagination: { page: 1, pageSize: 0 }
-				})}`
-			);
-		}
-
 		const query = qs.stringify(
 			{
-				populate: ['photos', 'object_categories', 'services'],
+				populate: ['photos', 'object_categories', 'services', 'service_categories'],
 				filters: {
-					services: {
-						slug: { $in: serviceSlugs }
+					service_categories: {
+						slug: { $eq: slug }
 					}
 				},
 				sort: ['createdAt:desc'],

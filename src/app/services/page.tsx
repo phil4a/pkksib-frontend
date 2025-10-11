@@ -23,7 +23,7 @@ export default async function ServicesPage() {
 	return (
 		<>
 			<Heading />
-			<ServicesList categories={categories} />
+			<ServicesList items={categories} />
 			<ServiceText />
 			<ServiceRelated />
 		</>

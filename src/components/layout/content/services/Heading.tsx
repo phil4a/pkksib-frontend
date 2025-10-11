@@ -3,13 +3,18 @@ import { Title } from '@/ui/title/Title';
 
 import { PAGE_INFO } from '@/config/pages';
 
-export function Heading() {
+interface Props {
+	title?: string;
+}
+
+export function Heading({ title }: Props) {
 	return (
 		<div className='layout-container py-8'>
 			<Breadcrumbs
 				items={[
 					{ label: PAGE_INFO.HOME.title, href: PAGE_INFO.HOME.href },
-					{ label: PAGE_INFO.SERVICES.title, href: PAGE_INFO.SERVICES.href, isCurrent: true }
+					{ label: PAGE_INFO.SERVICES.title, href: PAGE_INFO.SERVICES.href, isCurrent: !title },
+					...(title ? [{ label: title, isCurrent: true }] : [])
 				]}
 				className='mb-3'
 			></Breadcrumbs>
@@ -17,7 +22,7 @@ export function Heading() {
 				type='h1'
 				className='mb-0'
 			>
-				{PAGE_INFO.SERVICES.title}
+				{title ? title : PAGE_INFO.SERVICES.title}
 			</Title>
 		</div>
 	);

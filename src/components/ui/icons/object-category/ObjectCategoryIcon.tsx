@@ -168,7 +168,6 @@ const ICONS: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
 };
 
 export function ObjectCategoryIcon({ slug, className }: Props) {
-	console.log(slug);
 	const Icon = (slug && ICONS[slug]) || DefaultIcon;
 	return <Icon className={className} />;
 }
