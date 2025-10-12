@@ -74,7 +74,7 @@ export function OrderForm({ title }: OrderFormProps) {
 			</div>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='flex gap-4 p-6 bg-white/10 rounded-xl'
+				className='flex gap-4 p-6 pb-0 bg-white/10 rounded-xl'
 			>
 				<Field
 					type='text'

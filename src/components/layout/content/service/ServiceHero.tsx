@@ -13,7 +13,7 @@ interface Props {
 
 export function ServiceHero({ service }: Props) {
 	return (
-		<section>
+		<section className='mb-20'>
 			<div className='layout-container flex gap-5'>
 				<div className='relative shrink-0 grow-0 flex-1/3 aspect-square rounded-xl overflow-hidden bg-light-gray'>
 					{service.image?.url ? (

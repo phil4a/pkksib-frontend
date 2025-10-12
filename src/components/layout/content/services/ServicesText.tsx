@@ -24,7 +24,9 @@ export function ServicesText({ text }: Props) {
 							h3: ({ children }) => (
 								<h3 className='text-xl font-semibold mb-3 text-primary'>{children}</h3>
 							),
-							p: ({ children }) => <p className='text-base mb-4 leading-relaxed'>{children}</p>,
+							p: ({ children }) => (
+								<p className='text-base space-y-4 leading-relaxed'>{children}</p>
+							),
 							ul: ({ children }) => (
 								<ul className='list-disc pl-6 mb-4 space-y-2 marker:text-accent'>{children}</ul>
 							),

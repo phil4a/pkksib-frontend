@@ -9,6 +9,7 @@ import { Heading } from '@/components/layout/content/services/Heading';
 import { ServiceRelated } from '@/components/layout/content/services/ServiceRelated';
 import { ServicesList } from '@/components/layout/content/services/ServicesList';
 import { ServicesText } from '@/components/layout/content/services/ServicesText';
+import { EstimateForm } from '@/components/layout/form/estimate/EstimateForm';
 
 import { serviceService } from '@/services/service.service';
 import type { TPageSlugProp } from '@/types/page.types';
@@ -98,8 +99,9 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 			<>
 				<ServiceHeading service={service} />
 				<ServiceHero service={service} />
-				<ServiceContent content={service.description} />
-				<ServiceObjects objects={service.objects} />
+				{service.description && <ServicesText text={service.description} />}
+				{!!service.objects?.length && <ServiceObjects objects={service.objects} />}
+				<EstimateForm />
 			</>
 		);
 	}
