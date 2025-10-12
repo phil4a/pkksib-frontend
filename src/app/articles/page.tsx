@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
 
+import { ArticlesHeading } from '@/components/layout/content/articles/ArticlesHeading';
+
 export const metadata: Metadata = {
-	title: 'Статьи ПКК',
-	description: 'Статьи ПКК'
+	title: 'Интересные статьи о кровельных и фасадных работах',
+	description:
+		'В «Первой Кровельной Компании» помимо товаров для кровли европейского качества предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные работы в Новосибирске и области.'
 };
 
 export default function ArticlesPage() {
 	return (
-		<div>
-			<h1>Статьи ПКК</h1>
-		</div>
+		<section className='layout-container py-8'>
+			<ArticlesHeading />
+		</section>
 	);
 }

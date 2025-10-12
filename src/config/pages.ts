@@ -27,6 +27,6 @@ export const PAGE_INFO = {
 	ABOUT: { href: PAGE.ABOUT, title: 'О нас' },
 	SERVICES: { href: PAGE.SERVICES, title: 'Услуги' },
 	OBJECTS: { href: PAGE.OBJECTS, title: 'Объекты' },
-	ARTICLES: { href: PAGE.ARTICLES, title: 'Статьи' },
+	ARTICLES: { href: PAGE.ARTICLES, title: 'Полезное' },
 	CONTACTS: { href: PAGE.CONTACTS, title: 'Контакты' }
 } as const;
