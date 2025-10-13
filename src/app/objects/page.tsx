@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { ObjectsHeading } from '@/components/layout/content/objects-page/ObjectsHeading';
 import { ObjectsWrapper } from '@/components/layout/content/objects-page/ObjectsWrapper';
@@ -13,7 +14,9 @@ export default async function ObjectsPage() {
 	return (
 		<div className='layout-container'>
 			<ObjectsHeading />
-			<ObjectsWrapper />
+			<Suspense fallback={<div>Загрузка объектов...</div>}>
+				<ObjectsWrapper />
+			</Suspense>
 		</div>
 	);
 }

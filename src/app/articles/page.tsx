@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { ArticlesHeading } from '@/components/layout/content/articles/ArticlesHeading';
 import { ArticlesWrapper } from '@/components/layout/content/articles/ArticlesWrapper';
@@ -13,7 +14,9 @@ export default function ArticlesPage() {
 	return (
 		<section className='layout-container'>
 			<ArticlesHeading />
-			<ArticlesWrapper />
+			<Suspense fallback={<div>Загрузка статей...</div>}>
+				<ArticlesWrapper />
+			</Suspense>
 		</section>
 	);
 }
