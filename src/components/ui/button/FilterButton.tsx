@@ -1,21 +1,18 @@
-import Link from 'next/link';
 import type { ButtonHTMLAttributes } from 'react';
 
 import { cn } from '@/lib/utils';
 
 interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
-	href?: string;
 	children: React.ReactNode;
-	type: 'accent' | 'black';
+	type: 'checked' | 'unchecked';
 	className?: string;
 	isLoading?: boolean;
 }
 
-export function Button({
+export function FilterButton({
 	children,
 	className,
 	type,
-	href,
 	isLoading,
 	disabled: disabledProp,
 	...props
@@ -23,23 +20,12 @@ export function Button({
 	const isDisabled = !!isLoading || !!disabledProp;
 
 	const styles = cn(
-		'inline-flex items-center font-semibold h-12 px-6 rounded-lg transition',
-		type === 'black' ? 'bg-primary text-white' : 'bg-accent',
+		'inline-flex items-center h-10.5 px-6 rounded-[30px] border-1 border-light-gray cursor-pointer transition ',
+		type === 'checked' ? 'bg-primary text-white' : 'bg-transparent text-primary',
 		isDisabled ? 'cursor-not-allowed' : 'cursor-pointer hover:brightness-95',
 		'disabled:bg-gray-300',
 		className
 	);
-
-	if (href) {
-		return (
-			<Link
-				href={href}
-				className={styles}
-			>
-				{children}
-			</Link>
-		);
-	}
 
 	return (
 		<button

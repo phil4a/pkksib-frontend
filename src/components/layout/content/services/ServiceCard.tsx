@@ -19,21 +19,21 @@ export function ServiceCard({ item }: Props) {
 			href={PAGE.SERVICE(item.slug)}
 			className='flex flex-col items-center p-3 border-1 border-light-gray rounded-xl h-full'
 		>
-            <div className='relative w-full aspect-square mb-3 bg-light-gray rounded-lg'>
-                {item.image?.url ? (
-                    <Image
-                        src={item.image.url}
-                        alt={item.title}
-                        fill
-                        sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw'
-                        className='object-cover rounded-lg'
-                    />
-                ) : (
-                    <div className='w-full h-full flex items-center justify-center text-dark-gray'>
-                        Нет изображения
-                    </div>
-                )}
-            </div>
+			<div className='relative w-full aspect-square mb-3 bg-light-gray rounded-lg'>
+				{item.image?.url ? (
+					<Image
+						src={item.image.url}
+						alt={item.title}
+						fill
+						sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw'
+						className='object-cover rounded-lg'
+					/>
+				) : (
+					<div className='w-full h-full flex items-center justify-center text-dark-gray'>
+						Нет изображения
+					</div>
+				)}
+			</div>
 			<div className='p-3 flex gap-4 flex-col h-full'>
 				<p className='text-[20px] font-semibold'>{item.title}</p>
 				<p className='text-dark-gray line-clamp-2 '>{item.shortDescription}</p>

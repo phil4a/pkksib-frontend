@@ -34,7 +34,7 @@ class ServiceService {
 				}
 			}
 		});
-		console.log(serviceQuery);
+
 		return axiosClassic.get<IServiceResponse>(`${this._services}?${serviceQuery}`);
 	}
 

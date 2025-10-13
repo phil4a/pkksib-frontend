@@ -9,7 +9,7 @@ interface Props {
 
 export function ArticlesHeading({ title }: Props) {
 	return (
-		<div className='layout-container py-8'>
+		<div className='pt-8'>
 			<Breadcrumbs
 				items={[
 					{ label: PAGE_INFO.HOME.title, href: PAGE_INFO.HOME.href },
@@ -20,7 +20,7 @@ export function ArticlesHeading({ title }: Props) {
 			></Breadcrumbs>
 			<Title
 				type='h1'
-				className='mb-0'
+				className='mb-4'
 			>
 				{title ? title : PAGE_INFO.ARTICLES.title}
 			</Title>

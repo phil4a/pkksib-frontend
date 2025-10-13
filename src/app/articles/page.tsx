@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { ArticlesContent } from '@/components/layout/content/articles/ArticlesContent';
 import { ArticlesHeading } from '@/components/layout/content/articles/ArticlesHeading';
 
 export const metadata: Metadata = {
@@ -10,8 +11,9 @@ export const metadata: Metadata = {
 
 export default function ArticlesPage() {
 	return (
-		<section className='layout-container py-8'>
+		<section className='layout-container'>
 			<ArticlesHeading />
+			<ArticlesContent />
 		</section>
 	);
 }
