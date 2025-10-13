@@ -23,10 +23,11 @@ export function ArticlesList({ articlesLoading, articles }: Props) {
 			)}
 			{!articlesLoading && (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
-					{articles.map(item => (
+					{articles.map((item, idx) => (
 						<ArticleCard
 							key={item.id}
 							item={item}
+							priority={idx < 3}
 						/>
 					))}
 				</div>

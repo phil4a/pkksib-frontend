@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import { ArticlesContent } from '@/components/layout/content/articles/ArticlesContent';
 import { ArticlesHeading } from '@/components/layout/content/articles/ArticlesHeading';
+import { ArticlesWrapper } from '@/components/layout/content/articles/ArticlesWrapper';
 
 export const metadata: Metadata = {
 	title: 'Интересные статьи о кровельных и фасадных работах',
@@ -13,7 +13,7 @@ export default function ArticlesPage() {
 	return (
 		<section className='layout-container'>
 			<ArticlesHeading />
-			<ArticlesContent />
+			<ArticlesWrapper />
 		</section>
 	);
 }

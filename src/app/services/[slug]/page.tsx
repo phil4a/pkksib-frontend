@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ServiceContent } from '@/components/layout/content/service/ServiceContent';
 import { ServiceHeading } from '@/components/layout/content/service/ServiceHeading';
 import { ServiceHero } from '@/components/layout/content/service/ServiceHero';
 import { ServiceObjects } from '@/components/layout/content/service/ServiceObjects';

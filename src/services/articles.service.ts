@@ -31,6 +31,28 @@ class ArticlesService {
 		return axiosClassic.get<IArticleResponse>(`${this._articles}?${query}`);
 	}
 
+	async getBySlug(slug: string) {
+		const articleQuery = qs.stringify({
+			populate: {
+				image: true,
+				services: true,
+				tags: true,
+				seo: true
+			},
+			filters: {
+				slug: {
+					$eq: slug
+				}
+			}
+		});
+
+		const response = await axiosClassic.get<IArticleResponse>(`${this._articles}?${articleQuery}`);
+
+		return {
+			data: response.data.data[0]
+		};
+	}
+
 	async getUniqueTags(): Promise<IArticleTag[]> {
 		const res = await this.getAll();
 		const map = new Map<number, IArticleTag>();

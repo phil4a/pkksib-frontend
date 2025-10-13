@@ -9,9 +9,10 @@ import type { IArticle } from '@/types/article.types';
 
 interface Props {
 	item: IArticle;
+	priority?: boolean;
 }
 
-export function ArticleCard({ item }: Props) {
+export function ArticleCard({ item, priority }: Props) {
 	return (
 		<Link
 			key={item.id}
@@ -26,6 +27,7 @@ export function ArticleCard({ item }: Props) {
 						fill
 						sizes='(max-width: 768px) 100vw, 50vw'
 						className='w-full h-full object-cover'
+						priority={priority}
 					/>
 				) : (
 					<span className='text-sm text-gray-500'>Нет изображения</span>

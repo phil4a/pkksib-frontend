@@ -10,7 +10,7 @@ import { ArticlesList } from './ArticlesList';
 import { articlesService } from '@/services/articles.service';
 import type { IArticle, IArticleTag } from '@/types/article.types';
 
-export function ArticlesContent() {
+export function ArticlesWrapper() {
 	const [selectedTag, setSelectedTag] = useState<number | undefined>(undefined);
 
 	const { data: tagsData, isLoading: tagsLoading } = useQuery<IArticleTag[]>({
