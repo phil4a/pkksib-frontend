@@ -63,6 +63,31 @@ class ArticlesService {
 		});
 		return Array.from(map.values());
 	}
+
+	async getRelated(tagId: number, excludeSlug: string, limit: number = 3) {
+		const query = qs.stringify({
+			populate: {
+				image: true,
+				tags: true
+			},
+			filters: {
+				tags: {
+					id: {
+						$eq: tagId
+					}
+				},
+				slug: {
+					$ne: excludeSlug
+				}
+			},
+			pagination: { page: 1, pageSize: limit }
+		});
+		return axiosClassic.get<IArticleResponse>(`${this._articles}?${query}`).then(res => {
+			const shuffled = [...res.data.data];
+			shuffled.sort(() => Math.random() - 0.5);
+			return { ...res, data: { ...res.data, data: shuffled } };
+		});
+	}
 }
 
 export const articlesService = new ArticlesService();
