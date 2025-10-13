@@ -71,18 +71,17 @@ export function useObjects() {
 	const categories: IObjectCategory[] = categoriesRes?.data?.data ?? [];
 
 	// Try dedicated locations endpoint first; if it fails (404 or network), fallback to unique locations derived from objects
-	const { data: locationsRes, isLoading: locationsLoading } = useQuery({
+	const { data: locationsRaw = [], isLoading: locationsLoading } = useQuery<IObjectLocation[]>({
 		queryKey: ['object-locations'],
 		queryFn: async () => {
 			try {
-				return await objectService.getLocations();
+				const res = await objectService.getLocations();
+				return res.data?.data ?? [];
 			} catch (_) {
-				const derived = await objectService.getUniqueLocations();
-				return { data: { data: derived } } as any;
+				return await objectService.getUniqueLocations();
 			}
 		}
 	});
-	const locationsRaw: IObjectLocation[] = locationsRes?.data?.data ?? [];
 	// Deduplicate locations by name to avoid repeated checkboxes when multiple objects share the same location
 	const locations: IObjectLocation[] = useMemo(() => {
 		const byName = new Map<string, IObjectLocation>();

@@ -1,26 +1,22 @@
-"use client";
+'use client';
 
 import { useMemo } from 'react';
 
 import { useObjects } from '@/hooks/objects/useObjects';
+
 import type { IObjectCategory, IObjectLocation } from '@/types/object.types';
 
 export function ObjectsFilters() {
-	const {
-		filters,
-		setFilters,
-		categories,
-		categoriesLoading,
-		locations,
-		locationsLoading
-	} = useObjects();
+	const { filters, setFilters, categories, categoriesLoading, locations, locationsLoading } =
+		useObjects();
 
 	const categoryMap = useMemo<Record<string, boolean>>(
 		() => Object.fromEntries(categories.map(c => [c.slug, filters.categorySlugs.includes(c.slug)])),
 		[categories, filters.categorySlugs]
 	);
 	const locationMap = useMemo<Record<string, boolean>>(
-		() => Object.fromEntries(locations.map(l => [l.location, filters.locations.includes(l.location)])),
+		() =>
+			Object.fromEntries(locations.map(l => [l.location, filters.locations.includes(l.location)])),
 		[locations, filters.locations]
 	);
 
@@ -40,7 +36,7 @@ export function ObjectsFilters() {
 	return (
 		<div className='space-y-6'>
 			<div>
-				<p className='font-semibold mb-3'>Категории объектов</p>
+				<p className='font-semibold mb-3'>Тип объектов</p>
 				{categoriesLoading ? (
 					<div className='space-y-2'>
 						<div className='bg-light-gray h-6 rounded-sm animate-pulse' />
@@ -64,7 +60,7 @@ export function ObjectsFilters() {
 				)}
 			</div>
 			<div>
-				<p className='font-semibold mb-3'>Локация</p>
+				<p className='font-semibold mb-3'>Регион</p>
 				{locationsLoading ? (
 					<div className='space-y-2'>
 						<div className='bg-light-gray h-6 rounded-sm animate-pulse' />

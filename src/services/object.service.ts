@@ -1,11 +1,34 @@
 import qs from 'qs';
 
-import { PAGE } from '@/config/pages';
 import { API_PATHS } from '@/config/api.config';
+import { PAGE } from '@/config/pages';
 
 import { axiosClassic } from '@/api/axios';
 
-import type { IObject, IObjectMarker, IObjectCategoryResponse, IObjectLocationResponse, IObjectResponse, IObjectLocation } from '@/types/object.types';
+import type {
+	IObject,
+	IObjectCategoryResponse,
+	IObjectLocation,
+	IObjectLocationResponse,
+	IObjectMarker,
+	IObjectResponse
+} from '@/types/object.types';
+
+// Typed filter helpers for Strapi queries
+interface SlugFilter {
+	$in?: string[];
+	$eq?: string;
+}
+interface NameFilter {
+	$in?: string[];
+	$eq?: string;
+}
+interface ObjectFilters {
+	object_categories?: { slug: SlugFilter };
+	location?: { location: NameFilter };
+	slug?: { $eq?: string; $ne?: string };
+	service_categories?: { slug: { $eq: string } };
+}
 
 class ObjectService {
 	constructor() {}
@@ -13,9 +36,22 @@ class ObjectService {
 	private _objectCategories = API_PATHS.OBJECT_CATEGORIES;
 	private _objectLocations = API_PATHS.OBJECT_LOCATIONS;
 
-	getAll(params?: { page?: number; pageSize?: number; categorySlugs?: string[]; locations?: string[] }) {
+	getAll(params?: {
+		page?: number;
+		pageSize?: number;
+		categorySlugs?: string[];
+		locations?: string[];
+	}) {
 		const { page = 1, pageSize = 10, categorySlugs, locations } = params || {};
-		const query: Record<string, unknown> = {
+		const filters: ObjectFilters = {};
+		if (categorySlugs?.length) {
+			filters.object_categories = { slug: { $in: categorySlugs } };
+		}
+		if (locations?.length) {
+			filters.location = { location: { $in: locations } };
+		}
+
+		const query = {
 			populate: {
 				photos: true,
 				object_categories: true,
@@ -24,17 +60,10 @@ class ObjectService {
 			},
 			sort: ['updatedAt:desc'],
 			pagination: { page, pageSize },
-			filters: {}
+			filters
 		};
 
-		if (categorySlugs?.length) {
-			(query.filters as any).object_categories = { slug: { $in: categorySlugs } };
-		}
-		if (locations?.length) {
-			(query.filters as any).location = { location: { $in: locations } };
-		}
-
-		const objectsQuery = qs.stringify(query, { encodeValuesOnly: true });
+		const objectsQuery = qs.stringify(query as Record<string, unknown>, { encodeValuesOnly: true });
 		return axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
 	}
 
@@ -76,14 +105,11 @@ class ObjectService {
 	}
 
 	async getByServiceCategorySlug(slug: string, limit: number = 10) {
+		const filters: ObjectFilters = { service_categories: { slug: { $eq: slug } } };
 		const query = qs.stringify(
 			{
 				populate: ['photos', 'object_categories', 'services', 'service_categories'],
-				filters: {
-					service_categories: {
-						slug: { $eq: slug }
-					}
-				},
+				filters,
 				sort: ['createdAt:desc'],
 				pagination: { page: 1, pageSize: limit }
 			},
@@ -94,6 +120,7 @@ class ObjectService {
 	}
 
 	async getBySlug(slug: string) {
+		const filters: ObjectFilters = { slug: { $eq: slug } };
 		const objectQuery = qs.stringify({
 			populate: {
 				photos: true,
@@ -102,7 +129,7 @@ class ObjectService {
 				location: true,
 				seo: true
 			},
-			filters: { slug: { $eq: slug } }
+			filters
 		});
 
 		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectQuery}`);
@@ -140,13 +167,16 @@ class ObjectService {
 	async getRelated(params: { categorySlug?: string; excludeSlug: string; limit?: number }) {
 		const { categorySlug, excludeSlug, limit = 6 } = params;
 
+		const filters: ObjectFilters = {};
+		if (categorySlug) {
+			filters.object_categories = { slug: { $eq: categorySlug } };
+		}
+		filters.slug = { $ne: excludeSlug };
+
 		const query = qs.stringify(
 			{
 				populate: ['photos', 'object_categories'],
-				filters: {
-					...(categorySlug ? { object_categories: { slug: { $eq: categorySlug } } } : {}),
-					slug: { $ne: excludeSlug }
-				},
+				filters,
 				sort: ['createdAt:desc'],
 				pagination: { page: 1, pageSize: limit }
 			},
