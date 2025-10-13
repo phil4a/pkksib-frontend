@@ -41,7 +41,7 @@ export function ServiceRelated({ category }: { category?: IServiceCategory }) {
 		queryFn: () =>
 			category?.slug
 				? objectService.getByServiceCategorySlug(category.slug, 10)
-				: objectService.getAll(10)
+				: objectService.getAll({ pageSize: 10 })
 	});
 
 	const objects = data?.data?.data;

@@ -1,40 +1,78 @@
 import qs from 'qs';
 
 import { PAGE } from '@/config/pages';
+import { API_PATHS } from '@/config/api.config';
 
 import { axiosClassic } from '@/api/axios';
 
-import type { IObject, IObjectMarker } from '@/types/object.types';
-
-interface IObjectResponse {
-	data: IObject[];
-}
-
-interface ISingleObjectResponse {
-	data: IObject;
-}
+import type { IObject, IObjectMarker, IObjectCategoryResponse, IObjectLocationResponse, IObjectResponse, IObjectLocation } from '@/types/object.types';
 
 class ObjectService {
 	constructor() {}
-	private _objects = PAGE.OBJECTS;
+	private _objects = API_PATHS.OBJECTS;
+	private _objectCategories = API_PATHS.OBJECT_CATEGORIES;
+	private _objectLocations = API_PATHS.OBJECT_LOCATIONS;
 
-	getAll(limit?: number) {
+	getAll(params?: { page?: number; pageSize?: number; categorySlugs?: string[]; locations?: string[] }) {
+		const { page = 1, pageSize = 10, categorySlugs, locations } = params || {};
 		const query: Record<string, unknown> = {
 			populate: {
 				photos: true,
 				object_categories: true,
 				services: true,
 				location: true
-			}
+			},
+			sort: ['updatedAt:desc'],
+			pagination: { page, pageSize },
+			filters: {}
 		};
 
-		if (typeof limit === 'number' && limit > 0) {
-			query.sort = ['updatedAt:desc'];
-			query.pagination = { page: 1, pageSize: limit };
+		if (categorySlugs?.length) {
+			(query.filters as any).object_categories = { slug: { $in: categorySlugs } };
+		}
+		if (locations?.length) {
+			(query.filters as any).location = { location: { $in: locations } };
 		}
 
-		const objectsQuery = qs.stringify(query);
+		const objectsQuery = qs.stringify(query, { encodeValuesOnly: true });
 		return axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
+	}
+
+	async getCategories() {
+		const q = qs.stringify({ populate: '*', sort: ['title:asc'] });
+		return axiosClassic.get<IObjectCategoryResponse>(`${this._objectCategories}?${q}`);
+	}
+
+	async getLocations() {
+		const q = qs.stringify({ populate: '*', sort: ['location:asc'] });
+		return axiosClassic.get<IObjectLocationResponse>(`${this._objectLocations}?${q}`);
+	}
+
+	// Fallback: derive unique locations from objects when dedicated endpoint is unavailable
+	async getUniqueLocations(): Promise<IObjectLocation[]> {
+		const unique = new Map<number, IObjectLocation>();
+		let page = 1;
+		const pageSize = 200;
+
+		while (true) {
+			const q = qs.stringify(
+				{
+					populate: { location: true },
+					fields: ['id'],
+					pagination: { page, pageSize }
+				},
+				{ encodeValuesOnly: true }
+			);
+			const res = await axiosClassic.get<IObjectResponse>(`${this._objects}?${q}`);
+			res.data.data.forEach(obj => {
+				if (obj.location) unique.set(obj.location.id, obj.location);
+			});
+			const pageCount = res.data.meta?.pagination?.pageCount ?? 1;
+			if (page >= pageCount) break;
+			page += 1;
+		}
+
+		return Array.from(unique.values());
 	}
 
 	async getByServiceCategorySlug(slug: string, limit: number = 10) {
@@ -55,7 +93,7 @@ class ObjectService {
 		return axiosClassic.get<IObjectResponse>(`${this._objects}?${query}`);
 	}
 
-	async getBySlug(slug: string): Promise<ISingleObjectResponse> {
+	async getBySlug(slug: string) {
 		const objectQuery = qs.stringify({
 			populate: {
 				photos: true,
@@ -64,26 +102,16 @@ class ObjectService {
 				location: true,
 				seo: true
 			},
-			filters: {
-				slug: {
-					$eq: slug
-				}
-			}
+			filters: { slug: { $eq: slug } }
 		});
 
 		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectQuery}`);
-
-		return {
-			data: response.data.data[0]
-		};
+		return { data: response.data.data[0] } as { data: IObject };
 	}
 
 	async getObjectMarkers(): Promise<IObjectMarker[]> {
 		const objectsQuery = qs.stringify({
-			populate: {
-				location: true,
-				photos: true
-			},
+			populate: { location: true, photos: true },
 			fields: ['id', 'slug', 'title', 'area', 'time', 'short_description']
 		});
 
@@ -125,7 +153,7 @@ class ObjectService {
 			{ encodeValuesOnly: true }
 		);
 
-		return axiosClassic.get(`${this._objects}?${query}`);
+		return axiosClassic.get<IObjectResponse>(`${this._objects}?${query}`);
 	}
 }
 

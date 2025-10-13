@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 
-import { ObjectsList } from '@/components/layout/objects/ObjectsList';
+import { ObjectsHeading } from '@/components/layout/content/objects-page/ObjectsHeading';
+import { ObjectsWrapper } from '@/components/layout/content/objects-page/ObjectsWrapper';
 
 export const metadata: Metadata = {
-	title: 'Объекты ПКК',
-	description: 'Объекты ПКК'
+	title: 'Выполненные объекты нашей компании',
+	description:
+		'В «Первой Кровельной Компании» помимо товаров для кровли европейского качества предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные работы в Новосибирске и области.'
 };
 
 export default async function ObjectsPage() {
 	return (
-		<div>
-			<h1>Объекты ПКК</h1>
-			<div>
-				<ObjectsList />
-			</div>
+		<div className='layout-container'>
+			<ObjectsHeading />
+			<ObjectsWrapper />
 		</div>
 	);
 }

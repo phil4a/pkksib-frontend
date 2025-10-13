@@ -1,5 +1,8 @@
 export const API_PATHS = {
 	SERVICES: '/services',
 	SERVICE_CATEGORIES: '/service-categories',
-	ARTICLES: '/articles'
+	ARTICLES: '/articles',
+	OBJECTS: '/objects',
+	OBJECT_CATEGORIES: '/object-categories',
+	OBJECT_LOCATIONS: '/object-locations'
 };
