@@ -1,30 +1,15 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-
 import { FilterButton } from '@/ui/button/FilterButton';
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 
+import { useArticlesFilter } from '@/hooks/articles/useArticlesFilter';
+
 import { ArticlesList } from './ArticlesList';
-import { articlesService } from '@/services/articles.service';
-import type { IArticle, IArticleTag } from '@/types/article.types';
 
 export function ArticlesWrapper() {
-	const [selectedTag, setSelectedTag] = useState<number | undefined>(undefined);
-
-	const { data: tagsData, isLoading: tagsLoading } = useQuery<IArticleTag[]>({
-		queryKey: ['article-tags'],
-		queryFn: () => articlesService.getUniqueTags()
-	});
-
-	const { data: articlesRes, isLoading: articlesLoading } = useQuery({
-		queryKey: ['articles', selectedTag],
-		queryFn: () => articlesService.getAll(selectedTag)
-	});
-
-	const articles: IArticle[] = articlesRes?.data?.data || [];
-	const tags: IArticleTag[] = tagsData || [];
+	const { selectedTag, setSelectedTag, tags, tagsLoading, articles, articlesLoading } =
+		useArticlesFilter();
 
 	return (
 		<>
@@ -47,8 +32,8 @@ export function ArticlesWrapper() {
 					tags.map(tag => (
 						<FilterButton
 							key={tag.id}
-							type={selectedTag === tag.id ? 'checked' : 'unchecked'}
-							onClick={() => setSelectedTag(tag.id)}
+							type={selectedTag === tag.name ? 'checked' : 'unchecked'}
+							onClick={() => setSelectedTag(tag.name)}
 						>
 							{tag.name}
 						</FilterButton>

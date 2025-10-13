@@ -56,10 +56,12 @@ export default async function ArticlePage({ params }: TPageSlugProp) {
 				/>
 			</div>
 			{article.full_description && <ArticleContent article={article} />}
-			<ArticleRelated
-				tagId={article?.tags?.[0]?.id || 0}
-				excludeSlug={slug}
-			/>
+			{article?.tags?.length && (
+				<ArticleRelated
+					tagId={article?.tags?.[0]?.id || 0}
+					excludeSlug={slug}
+				/>
+			)}
 		</div>
 	);
 }
