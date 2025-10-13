@@ -13,7 +13,7 @@ export function ObjectsList() {
 		return (
 			<div className='grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
 				<SkeletonLoader
-					count={6}
+					count={3}
 					className='rounded-xl h-[360px]'
 				/>
 			</div>
