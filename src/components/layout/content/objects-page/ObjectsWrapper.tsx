@@ -6,8 +6,8 @@ import { ObjectsPagination } from './ObjectsPagination';
 
 export function ObjectsWrapper() {
 	return (
-		<section>
-			<div className='flex'>
+		<section className='mb-25'>
+			<div className='flex gap-5'>
 				<div className='flex-1/4'>
 					<ObjectsFilters />
 				</div>

@@ -2,6 +2,8 @@
 
 import { useMemo } from 'react';
 
+import { Checkbox } from '@/components/ui/checkbox';
+
 import { useObjects } from '@/hooks/objects/useObjects';
 
 import type { IObjectCategory, IObjectLocation } from '@/types/object.types';
@@ -34,8 +36,8 @@ export function ObjectsFilters() {
 	};
 
 	return (
-		<div className='space-y-6'>
-			<div>
+		<div className='pr-6'>
+			<div className='mb-7'>
 				<p className='font-semibold mb-3'>Тип объектов</p>
 				{categoriesLoading ? (
 					<div className='space-y-2'>
@@ -46,11 +48,11 @@ export function ObjectsFilters() {
 					<ul className='space-y-2'>
 						{categories.map((c: IObjectCategory) => (
 							<li key={c.id}>
-								<label className='flex items-center gap-2 cursor-pointer'>
-									<input
-										type='checkbox'
+								<label className='flex items-center gap-2 lowercase cursor-pointer'>
+									<Checkbox
 										checked={!!categoryMap[c.slug]}
-										onChange={() => onToggleCategory(c.slug)}
+										onCheckedChange={() => onToggleCategory(c.slug)}
+										aria-label={c.title}
 									/>
 									<span>{c.title}</span>
 								</label>
@@ -71,10 +73,10 @@ export function ObjectsFilters() {
 						{locations.map((l: IObjectLocation) => (
 							<li key={l.id}>
 								<label className='flex items-center gap-2 cursor-pointer'>
-									<input
-										type='checkbox'
+									<Checkbox
 										checked={!!locationMap[l.location]}
-										onChange={() => onToggleLocation(l.location)}
+										onCheckedChange={() => onToggleLocation(l.location)}
+										aria-label={l.location}
 									/>
 									<span>{l.location}</span>
 								</label>

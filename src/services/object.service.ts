@@ -1,7 +1,6 @@
 import qs from 'qs';
 
 import { API_PATHS } from '@/config/api.config';
-import { PAGE } from '@/config/pages';
 
 import { axiosClassic } from '@/api/axios';
 
@@ -9,7 +8,6 @@ import type {
 	IObject,
 	IObjectCategoryResponse,
 	IObjectLocation,
-	IObjectLocationResponse,
 	IObjectMarker,
 	IObjectResponse
 } from '@/types/object.types';
@@ -34,7 +32,6 @@ class ObjectService {
 	constructor() {}
 	private _objects = API_PATHS.OBJECTS;
 	private _objectCategories = API_PATHS.OBJECT_CATEGORIES;
-	private _objectLocations = API_PATHS.OBJECT_LOCATIONS;
 
 	getAll(params?: {
 		page?: number;
@@ -68,16 +65,10 @@ class ObjectService {
 	}
 
 	async getCategories() {
-		const q = qs.stringify({ populate: '*', sort: ['title:asc'] });
+		const q = qs.stringify({ populate: '*', sort: ['updatedAt:asc'] });
 		return axiosClassic.get<IObjectCategoryResponse>(`${this._objectCategories}?${q}`);
 	}
 
-	async getLocations() {
-		const q = qs.stringify({ populate: '*', sort: ['location:asc'] });
-		return axiosClassic.get<IObjectLocationResponse>(`${this._objectLocations}?${q}`);
-	}
-
-	// Fallback: derive unique locations from objects when dedicated endpoint is unavailable
 	async getUniqueLocations(): Promise<IObjectLocation[]> {
 		const unique = new Map<number, IObjectLocation>();
 		let page = 1;

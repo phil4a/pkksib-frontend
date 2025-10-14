@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
 import { ObjectsHeading } from '@/components/layout/content/objects-page/ObjectsHeading';
+import { ObjectsText } from '@/components/layout/content/objects-page/ObjectsText';
 import { ObjectsWrapper } from '@/components/layout/content/objects-page/ObjectsWrapper';
+import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 export const metadata: Metadata = {
 	title: 'Выполненные объекты нашей компании',
@@ -17,6 +19,8 @@ export default async function ObjectsPage() {
 			<Suspense fallback={<div>Загрузка объектов...</div>}>
 				<ObjectsWrapper />
 			</Suspense>
+			<OrderForm title='Свяжитесь с нами по любому проекту' />
+			<ObjectsText />
 		</div>
 	);
 }

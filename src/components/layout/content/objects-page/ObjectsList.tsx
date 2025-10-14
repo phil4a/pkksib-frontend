@@ -11,7 +11,7 @@ export function ObjectsList() {
 
 	if (objectsLoading) {
 		return (
-			<div className='grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
+			<div className='mt-8 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
 				<SkeletonLoader
 					count={3}
 					className='rounded-xl h-[360px]'
@@ -25,7 +25,7 @@ export function ObjectsList() {
 	}
 
 	return (
-		<div className='grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
+		<div className='mt-8 grid gap-x-5 gap-y-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
 			{objects.map(item => (
 				<ObjectCard
 					key={item.id}
