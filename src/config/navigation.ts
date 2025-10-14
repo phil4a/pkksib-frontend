@@ -14,36 +14,14 @@ export const MAIN_MENU: IMenuItem[] = [
 	},
 	{
 		label: 'Услуги',
-		href: PAGE.SERVICES,
-		submenu: [
-			{
-				label: 'Деревянное домостроение',
-				href: '#' // временная ссылка
-			},
-			{
-				label: 'Плоская кровля',
-				href: '#' // временная ссылка
-			},
-			{
-				label: 'Скатная кровля',
-				href: '#' // временная ссылка
-			},
-			{
-				label: 'Фасадные работы под ключ в Новосибирске',
-				href: '#' // временная ссылка
-			},
-			{
-				label: 'Кровельные работы под ключ в Новосибирске',
-				href: '#' // временная ссылка
-			}
-		]
+		href: PAGE.SERVICES
 	},
 	{
 		label: 'Объекты',
 		href: PAGE.OBJECTS
 	},
 	{
-		label: 'Статьи',
+		label: 'Полезное',
 		href: PAGE.ARTICLES
 	},
 	{
