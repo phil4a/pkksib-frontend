@@ -21,6 +21,10 @@ export const MAIN_MENU: IMenuItem[] = [
 		href: PAGE.OBJECTS
 	},
 	{
+		label: 'Цены',
+		href: PAGE.PRICES
+	},
+	{
 		label: 'Полезное',
 		href: PAGE.ARTICLES
 	},

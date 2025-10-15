@@ -14,6 +14,7 @@ class Page {
 		return `${this.ARTICLES}/${path}`;
 	}
 	CONTACTS = '/contacts';
+	PRICES = '/prices';
 }
 export const PAGE = new Page();
 
@@ -28,5 +29,6 @@ export const PAGE_INFO = {
 	SERVICES: { href: PAGE.SERVICES, title: 'Услуги' },
 	OBJECTS: { href: PAGE.OBJECTS, title: 'Объекты' },
 	ARTICLES: { href: PAGE.ARTICLES, title: 'Полезное' },
-	CONTACTS: { href: PAGE.CONTACTS, title: 'Контакты' }
+	CONTACTS: { href: PAGE.CONTACTS, title: 'Контакты' },
+	PRICES: { href: PAGE.PRICES, title: 'Цены' }
 } as const;
