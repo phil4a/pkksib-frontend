@@ -53,7 +53,7 @@ export function PriceLists({ items }: PriceListsProps) {
 												className='bg-light-gray'
 											>
 												<td className='py-3 px-5 border-t-2 border-r-2 border-white'>
-													{item.title}
+													{service.title}
 												</td>
 												<td className='text-center py-4 px-4 border-t-2 border-r-2 border-white'>
 													{formatUnit(service.units)}
