@@ -2,8 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { MAIN_MENU } from '@/config/navigation';
+import { PAGE } from '@/config/pages';
 import { SITE_CONFIG } from '@/config/site.config';
 
+import { FooterCollapse } from './FooterCollapse';
 import { FooterCopyright } from './FooterCopyright';
 import { serviceService } from '@/services/service.service';
 import type { IService, IServiceCategory } from '@/types/service.types';
@@ -28,15 +30,15 @@ export function Footer() {
 	return (
 		<div className='bg-primary text-white'>
 			<div className='layout-container pt-16 pb-10'>
-				<div className='flex gap-5 mb-10'>
+				<div className='flex flex-col lg:flex-row gap-5 mb-10 '>
 					<div className='flex-2/12'>
 						<p className='font-semibold mb-4'>Навигация</p>
-						<nav className='flex flex-col gap-2'>
+						<nav className='flex flex-col gap-3'>
 							{MAIN_MENU.map(menuItem => (
 								<Link
 									key={menuItem.label}
 									href={menuItem.href}
-									className='text-base text-dark-gray'
+									className='text-base text-dark-gray hover:text-white transition-colors'
 								>
 									{menuItem.label}
 								</Link>
@@ -45,33 +47,66 @@ export function Footer() {
 					</div>
 					{categories.length > 0 && (
 						<div className='flex-3/12 '>
-							<p className='font-semibold mb-4'>Наши услуги</p>
-							<div className='flex flex-col gap-2'>
+							{/* Mobile: collapsible with JS height animation */}
+							<FooterCollapse title='Наши услуги'>
 								{categories.map(category => (
 									<Link
 										key={category.id}
-										href={`/services/${category.slug}`}
-										className='text-base text-dark-gray max-w-[220px]'
+										href={`${PAGE.SERVICE(category.slug)}`}
+										className='text-dark-gray max-w-[220px] hover:text-white transition-colors'
 									>
 										{category.title}
 									</Link>
 								))}
+							</FooterCollapse>
+
+							{/* Desktop: static list */}
+							<div className='hidden lg:block'>
+								<p className='font-semibold mb-4'>Наши услуги</p>
+								<div className='flex flex-col gap-2'>
+									{categories.map(category => (
+										<Link
+											key={category.id}
+											href={`${PAGE.SERVICE(category.slug)}`}
+											className='text-dark-gray max-w-[220px] hover:text-white transition-colors'
+										>
+											{category.title}
+										</Link>
+									))}
+								</div>
 							</div>
 						</div>
 					)}
 					<div className='flex-4/12'>
-						<p className='font-semibold mb-4'>Монтаж</p>
-						<div className='flex flex-col gap-2'>
+						{/* Mobile: collapsible with JS height animation */}
+						<FooterCollapse title='Монтаж'>
 							{footerServices &&
 								footerServices.map(service => (
 									<Link
 										key={service.id}
-										href={`/services/${service.slug}`}
-										className='text-base text-dark-gray'
+										href={`${PAGE.SERVICE(service.slug)}`}
+										className='text-base text-dark-gray hover:text-white transition-colors'
 									>
 										{service.title}
 									</Link>
 								))}
+						</FooterCollapse>
+
+						{/* Desktop: static list */}
+						<div className='hidden lg:block'>
+							<p className='font-semibold mb-4'>Монтаж</p>
+							<div className='flex flex-col gap-2'>
+								{footerServices &&
+									footerServices.map(service => (
+										<Link
+											key={service.id}
+											href={`${PAGE.SERVICE(service.slug)}`}
+											className='text-base text-dark-gray hover:text-white transition-colors'
+										>
+											{service.title}
+										</Link>
+									))}
+							</div>
 						</div>
 					</div>
 					<meta
@@ -99,7 +134,7 @@ export function Footer() {
 					</div>
 				</div>
 				<div>
-					<div className='p-3 border-y border-black/10 flex gap-10 items-center'>
+					<div className='p-3 border-y border-white/10 flex gap-10 items-center'>
 						<div className='relative h-[65px] w-[65px] shrink-0'>
 							<Image
 								src='/logo.svg'

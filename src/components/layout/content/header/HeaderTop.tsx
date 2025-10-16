@@ -5,7 +5,7 @@ import { HeaderLink } from './HeaderLink';
 
 export function HeaderTop() {
 	return (
-		<div className='bg-light-gray h-8'>
+		<div className='hidden lg:block bg-light-gray h-8'>
 			<div className='layout-container h-full flex items-center justify-end'>
 				<div className='flex gap-4'>
 					<HeaderLink

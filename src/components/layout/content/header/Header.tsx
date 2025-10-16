@@ -11,7 +11,9 @@ export function Header() {
 			<div className='layout-container flex gap-6 justify-between items-center py-2'>
 				<Logo />
 				<Menu />
-				<HeaderActions />
+				<div className='hidden lg:block'>
+					<HeaderActions />
+				</div>
 			</div>
 		</>
 	);

@@ -9,25 +9,25 @@ export const SITE_CONFIG = {
 
 export const COMPANY_FIGURES = [
 	{
-		title: 'Кровельных работ, из них по реконструкции более 5000 м²',
+		title: 'кровельных работ, из них по реконструкции более 5000 м²',
 		number: 10000,
 		units: 'м²',
 		icon: '/assets/icons/roof-icon.svg'
 	},
 	{
-		title: 'Смонтированных домов из клееного и профильного бруса',
+		title: 'смонтированных домов из клееного и профильного бруса',
 		number: 5000,
 		units: 'м³',
 		icon: '/assets/icons/house-icon.svg'
 	},
 	{
-		title: 'Выполненных различных фасадных работ',
+		title: 'выполненных различных фасадных работ',
 		number: 25000,
 		units: 'м²',
 		icon: '/assets/icons/bricks-icon.svg'
 	},
 	{
-		title: 'Выполненных строительных объектов',
+		title: 'выполненных строительных объектов',
 		number: 300,
 		units: '',
 		icon: '/assets/icons/building-icon.svg'

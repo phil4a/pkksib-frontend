@@ -16,10 +16,10 @@ import roofImage from '@/assets/home-page/hero/roof.png';
 export default function HomePage() {
 	return (
 		<>
-			<section className='mb-25'>
+			<section className='mb-16 lg:mb-25'>
 				<div className='layout-container'>
-					<div className='flex gap-5 h-[500px] mb-4'>
-						<div className='flex-1/2 flex flex-col justify-between items-start bg-accent rounded-xl pt-16 pb-12 px-12 relative'>
+					<div className='flex flex-wrap md:flex-nowrap gap-5 md:h-[500px] mb-4'>
+						<div className='md:flex-1/2 flex flex-col justify-between items-start bg-accent rounded-xl pt-16 pb-12 px-12 relative'>
 							<div>
 								<h1 className='text-4xl font-bold mb-6 leading-[1.15] max-w-[366px] z-1'>
 									Кровельные работы и материалы
@@ -54,7 +54,7 @@ export default function HomePage() {
 								/>
 							</svg>
 						</div>
-						<div className='flex-1/2 relative'>
+						<div className='relative w-full md:w-auto md:flex-1/2 h-82 md:h-full'>
 							<Image
 								src={mainBgImage}
 								alt={'Первая кровельная компания'}
@@ -66,8 +66,8 @@ export default function HomePage() {
 							></Image>
 						</div>
 					</div>
-					<div className='flex gap-5 items-end bg-light-gray rounded-xl mb-4 overflow-hidden'>
-						<div className='flex-5/12 '>
+					<div className='flex flex-col-reverse lg:flex-row gap-4 lg:items-end bg-light-gray rounded-xl mb-4 overflow-hidden'>
+						<div className='lg:flex-5/12'>
 							<Image
 								src={roofImage}
 								alt='кровля дома'
@@ -76,14 +76,14 @@ export default function HomePage() {
 								draggable={false}
 							></Image>
 						</div>
-						<div className='flex-7/12 flex flex-col py-15 items-start justify-center'>
-							<div className='clamp-[pr,5,20]'>
-								<p className='mb-4 text-[22px] font-semibold leading-[1.25]'>
+						<div className='lg:flex-7/12 flex flex-col pt-6 pb-o pl-6 lg:pr-0 lg:py-15  items-start justify-center'>
+							<div className='clamp-[pr,6,20]'>
+								<p className='mb-4 text-lg lg:text-[22px] font-semibold leading-normal lg:leading-[1.25]'>
 									В «Первой Кровельной Компании» помимо товаров для кровли европейского качества
 									предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные
 									работы в Новосибирске и области.
 								</p>
-								<p className='mb-6'>
+								<p className='mb-6 text-dark-gray'>
 									Высокая квалификация и большой опыт работы позволяет выполнять установку
 									кровельных и фасадных материалов быстро и качественно. При этом соблюдаются все
 									правила выполнения такого рода строительных работ.
@@ -97,14 +97,15 @@ export default function HomePage() {
 							</Button>
 						</div>
 					</div>
-					<div className='grid gap-5 grid-cols-4'>
-						{COMPANY_FIGURES.map(figure => (
+					<div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
+						{COMPANY_FIGURES.map((figure, i) => (
 							<HeroBullet
 								key={figure.title}
 								title={figure.title}
 								number={figure.number}
 								units={figure.units}
 								icon={figure.icon}
+								index={i}
 							/>
 						))}
 					</div>
