@@ -101,7 +101,7 @@ export default function HomePage() {
 							</Button>
 						</div>
 					</div>
-					<div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
+					<div className='grid gap-4 lg:gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
 						{COMPANY_FIGURES.map((figure, i) => (
 							<HeroBullet
 								key={figure.title}

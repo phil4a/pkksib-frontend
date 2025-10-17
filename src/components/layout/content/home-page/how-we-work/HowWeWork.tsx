@@ -1,5 +1,12 @@
-import Link from 'next/link';
+'use client';
 
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper/types';
+
+import { Button } from '@/ui/button/Button';
 import { Title } from '@/ui/title/Title';
 
 import { SITE_CONFIG } from '@/config/site.config';
@@ -25,29 +32,146 @@ const stages = [
 ];
 
 export function HowWeWork() {
+	const [mounted, setMounted] = useState(false);
+	const [swiper, setSwiper] = useState<SwiperType | null>(null);
+	const [canPrev, setCanPrev] = useState(false);
+	const [canNext, setCanNext] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	useEffect(() => {
+		if (!swiper) return;
+
+		const syncNav = () => {
+			setCanPrev(!swiper.isBeginning);
+			setCanNext(!swiper.isEnd);
+		};
+
+		syncNav();
+		swiper.on('slideChange', syncNav);
+		swiper.on('resize', syncNav);
+		swiper.on('breakpoint', syncNav);
+
+		return () => {
+			swiper.off('slideChange', syncNav);
+			swiper.off('resize', syncNav);
+			swiper.off('breakpoint', syncNav);
+		};
+	}, [swiper]);
+
 	return (
 		<section className='bg-primary'>
-			<div className='layout-container py-25'>
-				<div className='mb-8'>
-					<Title
-						type='h2'
-						className='text-white'
+			<div className='layout-container py-16 lg:py-25 '>
+				<div className='mb-6 lg:mb-8 flex flex-wrap gap-6 justify-between items-baseline'>
+					<div className='basis-82 lg:basis-auto'>
+						<Title
+							type='h2'
+							className='text-white'
+						>
+							Как мы работаем
+						</Title>
+						<p className='text-white'>
+							Основные этапы выполнения работ в «Первой Кровельной Компании»
+						</p>
+					</div>
+					<div className='flex gap-2'>
+						<Button
+							onClick={() => swiper?.slidePrev()}
+							type='accent'
+							disabled={!canPrev}
+							className={`flex items-center justify-center w-10 h-10 p-0`}
+						>
+							<svg
+								width='10'
+								height='16'
+								viewBox='0 0 10 16'
+								fill='none'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<path
+									d='M9 15L2 8L9 1'
+									stroke='#21282B'
+									strokeWidth='2'
+								/>
+							</svg>
+						</Button>
+						<Button
+							onClick={() => swiper?.slideNext()}
+							type='accent'
+							disabled={!canNext}
+							className='flex items-center justify-center w-10 h-10 p-0'
+						>
+							<svg
+								width='10'
+								height='16'
+								viewBox='0 0 10 16'
+								fill='none'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<path
+									d='M1 15L8 8L1 1'
+									stroke='#21282B'
+									strokeWidth='2'
+								/>
+							</svg>
+						</Button>
+					</div>
+				</div>
+
+				{mounted ? (
+					<Swiper
+						className='!overflow-visible'
+						slidesPerView={1.1}
+						spaceBetween={20}
+						onSwiper={s => {
+							setSwiper(s);
+							setCanPrev(!s.isBeginning);
+							setCanNext(!s.isEnd);
+						}}
+						breakpoints={{
+							320: {
+								slidesPerView: 1.1,
+								spaceBetween: 16
+							},
+							560: {
+								slidesPerView: 2.1,
+								spaceBetween: 16
+							},
+							768: {
+								slidesPerView: 3.5,
+								spaceBetween: 16
+							},
+							1024: {
+								slidesPerView: 4,
+								spaceBetween: 20
+							}
+						}}
 					>
-						Как мы работаем
-					</Title>
-					<p className='text-white'>
-						Основные этапы выполнения работ в «Первой Кровельной Компании»
-					</p>
-				</div>
-				<div className='grid gap-5 grid-cols-4'>
-					{stages.map((stage, index) => (
-						<WorkStage
-							key={stage.title}
-							index={index}
-							{...stage}
-						/>
-					))}
-				</div>
+						{stages.map((stage, index) => (
+							<SwiperSlide
+								key={stage.title}
+								className='!h-auto'
+							>
+								<WorkStage
+									index={index}
+									{...stage}
+								/>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				) : (
+					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5'>
+						{stages.map((stage, index) => (
+							<WorkStage
+								key={stage.title}
+								index={index}
+								{...stage}
+							/>
+						))}
+					</div>
+				)}
 			</div>
 		</section>
 	);
@@ -63,7 +187,7 @@ interface WorkStageProps {
 function WorkStage({ index, title, content, link }: WorkStageProps) {
 	return (
 		<div
-			className={`${index === 0 ? 'bg-accent' : 'bg-light-gray'} rounded-xl p-6 relative border border-accent`}
+			className={`${index === 0 ? 'bg-accent' : 'bg-light-gray'} rounded-xl p-6 border border-accent min-h-full`}
 		>
 			<span className='inline-flex bg-primary text-white py-2 px-4 rounded-[30px] mb-8'>
 				Этап {index + 1}
