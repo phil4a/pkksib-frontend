@@ -35,7 +35,7 @@ export function OurServices() {
 					{isLoading ? (
 						<SkeletonLoader
 							count={4}
-							className='bg-light-gray rounded-xl relative overflow-hidden group h-[480px]'
+							className='bg-light-gray rounded-xl relative overflow-hidden group aspect-square w-full h-auto md:h-[320px] md:h-[480px]'
 						/>
 					) : categories?.length ? (
 						categories?.map(item => (
@@ -54,7 +54,7 @@ export function OurServices() {
 function ServiceItem({ title, image, slug, shortDescription }: IServiceCategory) {
 	return (
 		<div className=''>
-			<div className='bg-light-gray rounded-xl relative overflow-hidden group aspect-square w-full h-auto md:h-[320px] md:h-[480px] '>
+			<div className='bg-light-gray rounded-xl relative overflow-hidden group aspect-square w-full h-auto md:h-[320px] md:h-[480px]'>
 				<Link
 					href={PAGE.SERVICE(slug)}
 					className='z-2 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[calc(100%-24px)] w-[calc(100%-24px)] rounded-lg group-hover:bg-white/60 group-hover:backdrop-blur-[20px] transition-all'

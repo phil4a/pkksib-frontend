@@ -64,3 +64,19 @@ body {
 .gm-style-iw-chr {
 	height: 7px !important;
 }
+
+/* Scoped Google Maps InfoWindow overrides to prevent mobile scrollbars */
+.map-infowindow .gm-style-iw-c {
+	max-width: min(280px, 450px) !important;
+	padding-bottom: 16px !important;
+	padding-right: 16px !important;
+	max-height: none !important;
+	height: none !important;
+
+	/* padding: 0 !important; */
+}
+.gm-style-iw-d {
+	overflow: visible !important;
+	max-height: none !important;
+	height: none !important;
+}
