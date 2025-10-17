@@ -7,6 +7,7 @@ import { OurServices } from '@/components/layout/content/home-page/our-services/
 import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
 
 import { Button } from '@/ui/button/Button';
+import { Title } from '@/ui/title/Title';
 
 import { COMPANY_FIGURES } from '@/config/site.config';
 
@@ -18,19 +19,22 @@ export default function HomePage() {
 		<>
 			<section className='mb-16 lg:mb-25'>
 				<div className='layout-container'>
-					<div className='flex flex-wrap md:flex-nowrap gap-5 md:h-[500px] mb-4'>
-						<div className='md:flex-1/2 flex flex-col justify-between items-start bg-accent rounded-xl pt-16 pb-12 px-12 relative'>
+					<div className='flex flex-wrap md:flex-nowrap gap-4 lg:flex-5 md:h-[500px] mb-4 lg:mb-5'>
+						<div className='md:flex-1/2 flex flex-col gap-7 justify-between items-start bg-accent rounded-xl pt-16 pb-12 px-12 relative'>
 							<div>
-								<h1 className='text-4xl font-bold mb-6 leading-[1.15] max-w-[366px] z-1'>
+								<Title
+									type='h1'
+									className='font-semiboldbold mb-4 lg:mb-6 leading-[1.15] max-w-[366px] z-2'
+								>
 									Кровельные работы и материалы
-								</h1>
-								<p className='text-lg z-1'>
+								</Title>
+								<p className='relative block text-lg z-2'>
 									Оптовые цены на кровлю и фасад, прозрачный расчёт — экономия до 20%
 								</p>
 							</div>
 							<Button
 								type='black'
-								className='z-1'
+								className='z-2'
 							>
 								Получить консультацию
 							</Button>
@@ -40,7 +44,7 @@ export default function HomePage() {
 								viewBox='0 0 340 212'
 								fill='none'
 								xmlns='http://www.w3.org/2000/svg'
-								className='absolute bottom-0 right-0'
+								className='absolute bottom-0 right-0 z-1'
 							>
 								<path
 									d='M296.119 27.4795C301.942 20.7868 312.124 20.7868 317.948 27.4795L526.235 266.863C534.685 276.575 527.987 292 515.32 292H98.7461C86.0791 292 79.3814 276.575 87.8316 266.863L296.119 27.4795Z'
@@ -76,7 +80,7 @@ export default function HomePage() {
 								draggable={false}
 							></Image>
 						</div>
-						<div className='lg:flex-7/12 flex flex-col pt-6 pb-o pl-6 lg:pr-0 lg:py-15  items-start justify-center'>
+						<div className='lg:flex-7/12 flex flex-col pt-6 pb-0 pl-6 lg:pr-0 lg:py-15 items-start justify-center'>
 							<div className='clamp-[pr,6,20]'>
 								<p className='mb-4 text-lg lg:text-[22px] font-semibold leading-normal lg:leading-[1.25]'>
 									В «Первой Кровельной Компании» помимо товаров для кровли европейского качества
