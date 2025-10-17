@@ -55,6 +55,11 @@
 
 body {
 	color: var(--primary);
+	.lock & {
+		overflow: hidden;
+		touch-action: none;
+		overscroll-behavior: none;
+	}
 }
 ::selection {
 	background-color: var(--primary);

@@ -4,6 +4,9 @@ import { ChevronDown, ChevronUp, Menu as MenuIcon, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { Button } from '@/components/ui/button/Button';
+import { TelegramIcon } from '@/components/ui/icons/TelegramIcon';
+import { WhatsAppIcon } from '@/components/ui/icons/WhatsAppIcon';
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -14,16 +17,15 @@ import {
 	navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 
-import { Button } from '@/ui/button/Button';
-import { TelegramIcon } from '@/ui/icons/TelegramIcon';
-import { WhatsAppIcon } from '@/ui/icons/WhatsAppIcon';
-
 import { MAIN_MENU } from '@/config/navigation';
 import { PAGE } from '@/config/pages';
 import { SITE_CONFIG } from '@/config/site.config';
 
 import { useActivePath } from '@/hooks/navigation/useActivePath';
+import { useCloseOnRouteChange } from '@/hooks/navigation/useCloseOnRouteChange';
 import { useServiceCategories } from '@/hooks/services/useServiceCategories';
+import { useHtmlScrollLock } from '@/hooks/ui/useHtmlScrollLock';
+import { useOnEscape } from '@/hooks/ui/useOnEscape';
 
 import { cn } from '@/lib/utils';
 
@@ -32,6 +34,14 @@ export function Menu() {
 	const { isActiveHref, isExact } = useActivePath();
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [servicesOpen, setServicesOpen] = useState(false);
+
+	// Externalized logic hooks
+	useHtmlScrollLock(mobileOpen);
+	useOnEscape(mobileOpen, () => setMobileOpen(false));
+	useCloseOnRouteChange(mobileOpen, () => {
+		setMobileOpen(false);
+		setServicesOpen(false);
+	});
 
 	return (
 		<>

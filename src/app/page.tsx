@@ -20,7 +20,7 @@ export default function HomePage() {
 			<section className='mb-16 lg:mb-25'>
 				<div className='layout-container'>
 					<div className='flex flex-wrap md:flex-nowrap gap-4 lg:flex-5 md:h-[500px] mb-4 lg:mb-5'>
-						<div className='md:flex-1/2 flex flex-col gap-7 justify-between items-start bg-accent rounded-xl pt-16 pb-12 px-12 relative'>
+						<div className='md:flex-1/2 flex flex-col gap-7 justify-between items-start bg-accent rounded-xl p-6 sm:pt-16 sm:pb-12 sm:px-12 relative'>
 							<div>
 								<Title
 									type='h1'

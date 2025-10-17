@@ -134,7 +134,7 @@ export function Footer() {
 					</div>
 				</div>
 				<div>
-					<div className='p-3 border-y border-white/10 flex gap-10 items-center'>
+					<div className='p-3 border-y border-white/10 flex flex-col sm:flex-row gap-3 sm:gap-10 items-start sm:items-center'>
 						<div className='relative h-[65px] w-[65px] shrink-0'>
 							<Image
 								src='/logo.svg'
