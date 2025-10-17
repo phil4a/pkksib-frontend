@@ -12,7 +12,7 @@ export function Title({ children, type, position = 'left', className }: Props) {
 	return (
 		<Tag
 			style={{ textAlign: position }}
-			className={cn('text-4xl font-semibold mb-3', className)}
+			className={cn('text-[26px] md:text-4xl font-semibold mb-3', className)}
 		>
 			{children}
 		</Tag>

@@ -28,8 +28,8 @@ const FLAWS = {
 
 export function WhyChooseUs() {
 	return (
-		<section className='bg-light-gray pb-20'>
-			<div className='layout-container pt-25 '>
+		<section className='bg-light-gray pb-16 md:pb-20'>
+			<div className='layout-container pt-16 md:pt-25 '>
 				<Title
 					type='h2'
 					position='center'
@@ -39,8 +39,8 @@ export function WhyChooseUs() {
 				<p className='text-dark-gray text-center'>
 					Преимущества сотрудничества с “Первой кровельной компанией”
 				</p>
-				<div className='flex gap-5 mt-8 pb-20'>
-					<div className='flex-1/2'>
+				<div className='flex flex-col md:flex-row md:gap-8 gap-5 mt-8 pb-16 md:pb-20'>
+					<div className='flex-auto md:flex-1/2'>
 						<div className='flex gap-3 items-center p-3 bg-accent rounded-xl'>
 							<svg
 								width='48'
@@ -66,7 +66,7 @@ export function WhyChooseUs() {
 									fill='#21282B'
 								/>
 							</svg>
-							<h2 className='font-semibold text-[22px]'>Как работает наша компания</h2>
+							<h2 className='font-semibold text-lg md:text-[22px]'>Как работает наша компания</h2>
 						</div>
 						<div className='flex flex-col gap-2 mt-2'>
 							{ADVANTAGES.list.map(item => (
@@ -78,7 +78,7 @@ export function WhyChooseUs() {
 							))}
 						</div>
 					</div>
-					<div className='flex-1/2'>
+					<div className='flex-auto md:flex-1/2'>
 						<div className='flex gap-3 items-center p-3 bg-dark-gray rounded-xl'>
 							<svg
 								width='48'
@@ -96,7 +96,9 @@ export function WhyChooseUs() {
 									fill='white'
 								/>
 							</svg>
-							<h2 className='font-semibold text-[22px] text-white'>Как работают частные бригады</h2>
+							<h2 className='font-semibold text-lg md:text-[22px] text-white'>
+								Как работают частные бригады
+							</h2>
 						</div>
 						<div className='flex flex-col gap-2 mt-2'>
 							{FLAWS.list.map(item => (
@@ -122,7 +124,7 @@ export function WhyChooseUs() {
 
 function ListComponent({ item, type }: { item: string; type: 'checked' | 'unchecked' }) {
 	return (
-		<div className='bg-white/40 px-4 py-4.5 rounded-lg border border-white/40 flex gap-4 items-center'>
+		<div className='bg-white/40 px-4 py-4 md:py-4.5 rounded-lg border border-white/40 flex gap-4 sm:items-center'>
 			<div
 				className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${type === 'checked' ? 'bg-accent' : 'bg-dark-gray'}`}
 			>

@@ -45,8 +45,8 @@ export function OrderForm({ title }: OrderFormProps) {
 	const { onSubmit, isLoading } = useOrderForm(reset);
 
 	return (
-		<div className='bg-primary p-12 rounded-xl'>
-			<div className='flex justify-between items-center mb-9'>
+		<div className='bg-primary p-3 sm:p-5 md:p-12 rounded-xl'>
+			<div className='flex justify-between items-center pt-3 px-3 sm:px-5 md:px-0 mb-8 md:mb-9'>
 				<Title
 					type='h2'
 					className='m-0 max-w-[566px] text-white leading-[1.15]'
@@ -59,7 +59,7 @@ export function OrderForm({ title }: OrderFormProps) {
 					viewBox='0 0 145 78'
 					fill='none'
 					xmlns='http://www.w3.org/2000/svg'
-					className='mr-3'
+					className='mr-3 hidden md:block'
 				>
 					<path
 						d='M81.014 7.34082C82.6072 5.55306 85.3928 5.55306 86.986 7.34083L143.97 71.2853C146.282 73.8795 144.449 78 140.984 78H27.0161C23.5506 78 21.7183 73.8795 24.0301 71.2853L81.014 7.34082Z'
@@ -74,7 +74,7 @@ export function OrderForm({ title }: OrderFormProps) {
 			</div>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='flex gap-4 p-6 pb-0 bg-white/10 rounded-xl'
+				className='flex flex-col sm:flex-row gap-4 p-3 sm:p-5 md:p-6 pb-3 md:pb-0 bg-white/10 rounded-xl'
 			>
 				<Field
 					type='text'
@@ -101,12 +101,13 @@ export function OrderForm({ title }: OrderFormProps) {
 				<Button
 					isLoading={isLoading}
 					type='accent'
+					className='w-50 justify-center'
 				>
 					Отправить
 				</Button>
 			</form>
 			<div>
-				<p className='mt-5 text-dark-gray'>
+				<p className='mt-5 px-3 sm:px-0 pb-3 sm:pb-5 md:pb-0 text-dark-gray'>
 					Нажимая на кнопку вы соглашаетесь с{' '}
 					<Link
 						href='/privacy-policy'
