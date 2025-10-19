@@ -8,8 +8,8 @@ import aboutHero from '@/assets/about-page/hero-bg.png';
 export function Hero() {
 	return (
 		<section className='bg-light-gray'>
-			<div className='layout-container pt-16 flex items-end'>
-				<div className='max-w-[50%]'>
+			<div className='layout-container pt-16 flex flex-col md:flex-row items-end'>
+				<div className='max-w-full md:max-w-[66%] lg:max-w-[50%]'>
 					<Breadcrumbs
 						items={[
 							{ label: 'Главная', href: '/' },
@@ -18,7 +18,7 @@ export function Hero() {
 					/>
 					<Title
 						type='h1'
-						className='text-5xl font-semibold leading-[1.15] mt-3 mb-6'
+						className='text-[32px] md:text-[44px] font-semibold leading-[1.15] mt-3 mb-6'
 					>
 						О Первой кровельной компании
 					</Title>
@@ -32,14 +32,14 @@ export function Hero() {
 						фасадных материалов быстро и качественно. При этом соблюдаются все правила выполнения
 						такого рода строительных работ.
 					</p>
-					<ul className='mt-10 mb-12 list-disc font-semibold pl-5 marker:text-accent marker:text-xl'>
+					<ul className='mt-8 md:mt-10 mb-2 md:mb-12 list-disc font-semibold pl-5 marker:text-accent marker:text-xl'>
 						<li>
 							Если вы еще думаете, где заказать монтажные работы в Новосибирске, то считайте, что
 							уже нашли решение!
 						</li>
 					</ul>
 				</div>
-				<div className='relative basis-[50%] aspect-[16/9]'>
+				<div className='relative md:basis-[50%] aspect-[16/9] w-full h-auto -mr-[16px]'>
 					<Image
 						priority={true}
 						src={aboutHero}
