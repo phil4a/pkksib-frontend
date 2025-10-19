@@ -21,7 +21,7 @@ export function TeamSlide({ name, position, image, renderImage = true }: Props) 
 				)}
 			</div>
 			<div className='pt-4 px-2'>
-				<p className='text-[22px] font-semibold pb-2'>{name}</p>
+				<p className='text-lg lg:text-[22px] font-semibold pb-2'>{name}</p>
 				<p className='text-dark-gray'>{position}</p>
 			</div>
 		</div>

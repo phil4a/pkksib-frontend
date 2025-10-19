@@ -12,10 +12,10 @@ interface Props {
 
 export function TeamHeading({ onPrev, onNext, canPrev = true, canNext = true }: Props) {
 	return (
-		<div className='mb-8 flex gap-5 items-center justify-between'>
+		<div className='mb-6 lg:mb-8 flex flex-wrap gap-6 justify-between items-baseline'>
 			<Title
 				type='h2'
-				className='mb-0'
+				className='mb-0 basis-82 lg:basis-auto'
 			>
 				Наша команда
 			</Title>
