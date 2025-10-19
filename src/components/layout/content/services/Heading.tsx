@@ -16,11 +16,11 @@ export function Heading({ title }: Props) {
 					{ label: PAGE_INFO.SERVICES.title, href: PAGE_INFO.SERVICES.href, isCurrent: !title },
 					...(title ? [{ label: title, isCurrent: true }] : [])
 				]}
-				className='mb-3'
+				className='pb-3'
 			></Breadcrumbs>
 			<Title
 				type='h1'
-				className='mb-0'
+				className='mb-0 text-[32px] md:text-[44px]'
 			>
 				{title ? title : PAGE_INFO.SERVICES.title}
 			</Title>

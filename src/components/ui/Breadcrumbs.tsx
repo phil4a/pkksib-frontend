@@ -24,13 +24,13 @@ export function Breadcrumbs({ items, className, showJsonLd = true }: Props) {
 	return (
 		<nav
 			aria-label='Хлебные крошки'
-			className={className}
+			className={`overflow-y-auto ${className}`}
 		>
-			<ol className='flex flex-wrap items-center gap-2 text-sm font-light text-dark-gray'>
+			<ol className='flex items-center gap-2 text-sm font-light text-dark-gray'>
 				{items.map((item, idx) => (
 					<li
 						key={idx}
-						className='flex items-center gap-2'
+						className='flex items-center gap-2 whitespace-nowrap'
 					>
 						{item.href && !item.isCurrent ? (
 							<Link

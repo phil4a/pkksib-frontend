@@ -10,13 +10,15 @@ interface Props {
 export function ServicesText({ text }: Props) {
 	return (
 		<section className='bg-light-gray'>
-			<div className='layout-container py-25'>
+			<div className='layout-container py-16 md:py-20 lg:py-25'>
 				{text ? (
 					<ReactMarkdown
 						remarkPlugins={[remarkGfm]}
 						components={{
 							h1: ({ children }) => (
-								<h1 className='text-3xl font-bold mb-6 text-primary'>{children}</h1>
+								<h1 className='text-[22px] lg:text-[28px] font-bold mb-6 text-primary'>
+									{children}
+								</h1>
 							),
 							h2: ({ children }) => (
 								<h2 className='text-2xl font-semibold mb-4 text-primary'>{children}</h2>
@@ -65,7 +67,7 @@ export function ServicesText({ text }: Props) {
 					<>
 						<Title
 							type='h2'
-							className='text-[28px] mb-6'
+							className='text-[22px] lg:text-[28px] mb-4 lg:mb-6'
 						>
 							Первая Кровельная Компания предоставляет следующие услуги
 						</Title>
@@ -94,11 +96,11 @@ export function ServicesText({ text }: Props) {
 
 						<Title
 							type='h2'
-							className='text-[28px] mb-6'
+							className='text-[22px] lg:text-[28px] mb-4 lg:mb-6'
 						>
 							Мы предлагаем нашим клиентам
 						</Title>
-						<div className='text-dark-gray mb-8'>
+						<div className='text-dark-gray'>
 							<p className='pb-2'>
 								Наши услуги по кровле и монтажу в Новосибирске и области, помимо указанных выше,
 								включают еще ряд полезных и востребованных направлений, которые вам могут предложить

@@ -51,12 +51,12 @@ export function ServiceRelated({ category }: { category?: IServiceCategory }) {
 	}
 
 	return (
-		<section className='py-20'>
+		<section className='py-16 md:py-20 lg:py-25'>
 			<div className='layout-container'>
-				<div className='mb-8 flex gap-5 items-center justify-between'>
+				<div className='mb-6 lg:mb-8 flex flex-wrap gap-6 justify-between items-baseline'>
 					<Title
 						type='h2'
-						className='mb-0'
+						className='mb-0 basis-82 lg:basis-auto'
 					>
 						Наши проекты
 					</Title>
@@ -104,7 +104,7 @@ export function ServiceRelated({ category }: { category?: IServiceCategory }) {
 					</div>
 				</div>
 				{isLoading ? (
-					<div className='grid gap-5 grid-cols-4'>
+					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5'>
 						<SkeletonLoader
 							count={4}
 							className='rounded-xl h-[360px]'
@@ -112,8 +112,27 @@ export function ServiceRelated({ category }: { category?: IServiceCategory }) {
 					</div>
 				) : objects?.length ? (
 					<Swiper
-						slidesPerView={4}
+						className='!overflow-visible'
+						slidesPerView={1.1}
 						spaceBetween={20}
+						breakpoints={{
+							320: {
+								slidesPerView: 1.1,
+								spaceBetween: 16
+							},
+							480: {
+								slidesPerView: 2.1,
+								spaceBetween: 16
+							},
+							768: {
+								slidesPerView: 3.2,
+								spaceBetween: 16
+							},
+							1024: {
+								slidesPerView: 4,
+								spaceBetween: 20
+							}
+						}}
 						onSwiper={s => {
 							setSwiper(s);
 							setCanPrev(!s.isBeginning);

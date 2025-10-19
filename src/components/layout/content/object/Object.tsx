@@ -31,7 +31,7 @@ export function Object({ item }: Props) {
 				</div>
 			</div>
 			<div className='px-2 pt-3'>
-				<p className='font-semibold text-[22px]'>{item.title}</p>
+				<p className='font-semibold text-[18px] lg:text-[22px]'>{item.title}</p>
 			</div>
 		</Link>
 	);

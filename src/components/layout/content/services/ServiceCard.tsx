@@ -34,12 +34,12 @@ export function ServiceCard({ item }: Props) {
 					</div>
 				)}
 			</div>
-			<div className='p-3 flex gap-4 flex-col h-full'>
-				<p className='text-[20px] font-semibold'>{item.title}</p>
+			<div className='p-3 flex gap-4 flex-col h-full w-full'>
+				<p className='text-lg lg:text-[22px] font-semibold'>{item.title}</p>
 				<p className='text-dark-gray line-clamp-2 '>{item.shortDescription}</p>
 				<div className='flex justify-between items-center gap-4 mt-auto'>
 					{item.price && (
-						<p className='text-[22px] font-semibold'>
+						<p className='text-lg lg:text-[22px] font-semibold'>
 							от {item.price} ₽/{formatUnit(item.units)}
 						</p>
 					)}
