@@ -7,10 +7,10 @@ import warrantyBg from '@/assets/about-page/c03.jpg';
 export function WhyChooseUs() {
 	return (
 		<section>
-			<div className='layout-container py-25'>
+			<div className='layout-container py-16 md:py-20 lg:py-25'>
 				<Title type='h2'>Почему выбирают нас</Title>
-				<ul className='mt-8 grid grid-cols-4 gap-5 h-100'>
-					<li className='flex flex-col justify-between p-6 pt-5 bg-light-gray rounded-xl'>
+				<ul className='mt-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-5'>
+					<li className='flex min-h-75 sm:min-h-100 flex-col justify-between p-6 pt-5 bg-light-gray rounded-xl'>
 						<div className='bg-white/40 pt-[16.7px] pl-[8.7px] border-white border-1 rounded-[6px] w-8 h-8'>
 							<svg
 								width='12'
@@ -28,7 +28,7 @@ export function WhyChooseUs() {
 						<div>
 							<Title
 								type='h3'
-								className='text-[22px]'
+								className='text-lg md:text-[22px]'
 							>
 								Опыт
 							</Title>
@@ -38,7 +38,7 @@ export function WhyChooseUs() {
 							</p>
 						</div>
 					</li>
-					<li className='flex flex-col justify-between p-6 pt-5 bg-accent rounded-xl'>
+					<li className='flex min-h-75 sm:min-h-100 flex-col justify-between p-6 pt-5 bg-accent rounded-xl'>
 						<div className='bg-primary flex items-center justify-center rounded-[6px] w-8 h-8'>
 							<svg
 								width='12'
@@ -60,7 +60,7 @@ export function WhyChooseUs() {
 						<div>
 							<Title
 								type='h3'
-								className='text-[22px]'
+								className='text-lg md:text-[22px]'
 							>
 								Качество
 							</Title>
@@ -70,7 +70,7 @@ export function WhyChooseUs() {
 							</p>
 						</div>
 					</li>
-					<li className='relative overflow-hidden flex flex-col justify-between p-6 pt-5 bg-tra rounded-xl'>
+					<li className='relative min-h-75 sm:min-h-100 overflow-hidden flex flex-col justify-between p-6 pt-5 bg-tra rounded-xl'>
 						<Image
 							src={warrantyBg}
 							alt='Гарантия'
@@ -101,7 +101,7 @@ export function WhyChooseUs() {
 						<div>
 							<Title
 								type='h3'
-								className='text-[22px] text-white'
+								className='text-lg md:text-[22px] text-white'
 							>
 								Гарантия
 							</Title>
@@ -111,7 +111,7 @@ export function WhyChooseUs() {
 							</p>
 						</div>
 					</li>
-					<li className='flex flex-col justify-between p-6 pt-5 bg-light-gray rounded-xl'>
+					<li className='flex min-h-75 sm:min-h-100 flex-col justify-between p-6 pt-5 bg-light-gray rounded-xl'>
 						<div className='bg-white/40 flex items-center justify-center border-white border-1 rounded-[6px] w-8 h-8'>
 							<svg
 								width='16'
@@ -141,7 +141,7 @@ export function WhyChooseUs() {
 						<div>
 							<Title
 								type='h3'
-								className='text-[22px]'
+								className='text-lg md:text-[22px]'
 							>
 								Своевременность
 							</Title>
