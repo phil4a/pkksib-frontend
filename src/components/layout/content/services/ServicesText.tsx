@@ -21,16 +21,18 @@ export function ServicesText({ text }: Props) {
 								</h1>
 							),
 							h2: ({ children }) => (
-								<h2 className='text-2xl font-semibold mb-4 text-primary'>{children}</h2>
+								<h2 className='text-2xl font-semibold mb-4 mt-6 text-primary'>{children}</h2>
 							),
 							h3: ({ children }) => (
-								<h3 className='text-xl font-semibold mb-3 text-primary'>{children}</h3>
+								<h3 className='text-xl font-semibold mb-3 mt-6 text-primary'>{children}</h3>
 							),
 							p: ({ children }) => (
 								<p className='text-base space-y-4 leading-relaxed'>{children}</p>
 							),
 							ul: ({ children }) => (
-								<ul className='list-disc pl-6 mb-4 space-y-2 marker:text-accent'>{children}</ul>
+								<ul className='list-disc pl-6 mb-4 mt-2 space-y-2 marker:text-accent'>
+									{children}
+								</ul>
 							),
 							ol: ({ children }) => (
 								<ol className='list-decimal pl-6 mb-4 space-y-2 marker:text-accent'>{children}</ol>
@@ -46,7 +48,12 @@ export function ServicesText({ text }: Props) {
 								</blockquote>
 							),
 							table: ({ children }) => (
-								<table className='w-full border-collapse text-base mb-6'>{children}</table>
+								<div
+									className='w-full overflow-x-auto'
+									style={{ WebkitOverflowScrolling: 'touch' }}
+								>
+									<table className='border-collapse text-base mb-6 mt-2'>{children}</table>
+								</div>
 							),
 							thead: ({ children }) => <thead className='bg-accent'>{children}</thead>,
 							tbody: ({ children }) => <tbody className='bg-white'>{children}</tbody>,
