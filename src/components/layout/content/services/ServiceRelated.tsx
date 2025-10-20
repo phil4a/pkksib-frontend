@@ -51,7 +51,7 @@ export function ServiceRelated({ category }: { category?: IServiceCategory }) {
 	}
 
 	return (
-		<section className='py-16 md:py-20 lg:py-25'>
+		<section className='py-16 md:py-20 lg:py-25 overflow-hidden'>
 			<div className='layout-container'>
 				<div className='mb-6 lg:mb-8 flex flex-wrap gap-6 justify-between items-baseline'>
 					<Title

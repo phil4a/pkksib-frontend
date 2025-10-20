@@ -21,7 +21,7 @@ export function ObjectsList() {
 	}
 
 	if (!objects.length) {
-		return <div>Нет объектов по выбранным фильтрам</div>;
+		return <div className='mt-8'>Нет объектов по выбранным фильтрам</div>;
 	}
 
 	return (

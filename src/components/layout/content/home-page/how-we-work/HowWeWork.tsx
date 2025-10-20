@@ -62,7 +62,7 @@ export function HowWeWork() {
 	}, [swiper]);
 
 	return (
-		<section className='bg-primary'>
+		<section className='bg-primary overflow-hidden'>
 			<div className='layout-container py-16 lg:py-25 '>
 				<div className='mb-6 lg:mb-8 flex flex-wrap gap-6 justify-between items-baseline'>
 					<div className='basis-82 lg:basis-auto'>

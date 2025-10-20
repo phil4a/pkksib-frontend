@@ -38,7 +38,7 @@ export default function RootLayout({
 			<body>
 				<Providers>
 					<Header />
-					<div className='overflow-hidden'>{children}</div>
+					<div>{children}</div>
 					<Footer />
 				</Providers>
 			</body>

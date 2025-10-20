@@ -29,7 +29,7 @@ export function Team() {
 	}, [swiper]);
 
 	return (
-		<section className='bg-light-gray pt-16  md:pt-20 lg:pt-25 pb-16 md:pb-20'>
+		<section className='bg-light-gray pt-16  md:pt-20 lg:pt-25 pb-16 md:pb-20 overflow-hidden'>
 			<div className='layout-container'>
 				<TeamHeading
 					onPrev={() => swiper?.slidePrev()}
