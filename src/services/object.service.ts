@@ -116,6 +116,7 @@ class ObjectService {
 			populate: {
 				photos: true,
 				object_categories: true,
+				service_categories: true,
 				services: true,
 				location: true,
 				seo: true

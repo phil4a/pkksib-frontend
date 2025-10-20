@@ -9,6 +9,7 @@ import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import LightGallery from 'lightgallery/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRef } from 'react';
 
 import { Title } from '@/ui/title/Title';
@@ -27,11 +28,11 @@ export function ObjectGallery({ photos }: ObjectGalleryProps) {
 	}
 
 	return (
-		<section className='py-25'>
+		<section className='py-16 lg:py-25'>
 			<div className='layout-container'>
 				<Title
 					type='h3'
-					className='text-[28px] font-semibold mb-8'
+					className='text-[28px] font-semibold mb-6 lg:mb-8'
 				>
 					Фото проекта
 				</Title>
@@ -44,17 +45,17 @@ export function ObjectGallery({ photos }: ObjectGalleryProps) {
 					}}
 					speed={500}
 					plugins={[lgThumbnail, lgZoom]}
-					elementClassNames='masonry-gallery columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-5 '
+					elementClassNames='masonry-gallery xs:columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 lg:gap-5 '
 				>
 					{photos.map((photo, index) => (
-						<a
+						<Link
 							key={photo.id}
 							href={photo.url}
-							className='block break-inside-avoid mb-4 group cursor-pointer'
+							className='block break-inside-avoid mb-4 lg:mb-5 group cursor-pointer'
 							data-src={photo.url}
 							data-sub-html={`<h4>Фото проекта ${index + 1}</h4>`}
 						>
-							<div className='relative overflow-hidden rounded-lg shadow-md transition-all duration-300 '>
+							<div className='relative overflow-hidden rounded-lg transition-all duration-300'>
 								<Image
 									src={photo.url}
 									alt={`Фото проекта ${index + 1}`}
@@ -82,7 +83,7 @@ export function ObjectGallery({ photos }: ObjectGalleryProps) {
 									</div>
 								</div>
 							</div>
-						</a>
+						</Link>
 					))}
 				</LightGallery>
 			</div>

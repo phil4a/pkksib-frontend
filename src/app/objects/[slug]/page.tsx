@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { Hero } from '@/components/layout/content/object-page/Hero';
 import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGallery';
@@ -16,6 +17,10 @@ export async function generateMetadata({ params }: TPageSlugProp): Promise<Metad
 	const { slug } = await params;
 	const { data } = await objectService.getBySlug(slug);
 	const object = data;
+
+	if (!object) {
+		notFound();
+	}
 
 	// Функция для очистки HTML тегов из строки
 	const stripHtml = (html: string) => {
@@ -51,6 +56,10 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 	const data = await objectService.getBySlug(slug);
 	const object = data?.data;
 
+	if (!object) {
+		notFound();
+	}
+
 	const categorySlug = object?.object_categories?.[0]?.slug;
 
 	const relatedRes = await objectService.getRelated({
@@ -66,12 +75,12 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 			{object?.description && <PageContent description={object?.description} />}
 			{object?.photos && <ObjectGallery photos={object?.photos || []} />}
 
-			<div className='layout-container pt-8 pb-25'>
+			<div className='layout-container pt-0 pb-16 lg:pt-8 lg:pb-25'>
 				<OrderForm title='Оставьте заявку на выполнение такого же проекта' />
 			</div>
 			<RelatedObjects
 				objects={relatedObjects}
-				className='mb-25'
+				className='mb-16 lg:mb-25'
 			/>
 		</>
 	);

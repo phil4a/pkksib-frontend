@@ -1,5 +1,6 @@
 import type { IPhoto } from './photo.types';
 import type { ISeoMetatags } from './seo.types';
+import type { IServiceCategory } from './service.types';
 import type { IMeta } from './strapi.types';
 
 export interface IObjectCategory {
@@ -43,6 +44,7 @@ export interface IObject {
 	publishedAt: string;
 	photos: IPhoto[];
 	object_categories: IObjectCategory[];
+	service_categories: IServiceCategory[];
 	services: IObjectService[];
 	location: IObjectLocation;
 	seo: ISeoMetatags | null;

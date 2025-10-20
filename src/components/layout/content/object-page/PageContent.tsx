@@ -6,17 +6,19 @@ interface Props {
 
 export function PageContent({ description }: Props) {
 	return (
-		<section className='bg-light-gray py-20 mt-20'>
+		<section className='bg-light-gray py-12 lg:py-20 mt-20'>
 			<div className='layout-container'>
 				{description && (
 					<div className='prose prose-lg max-w-none'>
 						<ReactMarkdown
 							components={{
 								h1: ({ children }) => (
-									<h1 className='text-3xl font-bold mb-6 text-primary max-w-[860px]'>{children}</h1>
+									<h1 className='text-3xl font-bold mt-8 mb-6 text-primary max-w-[860px]'>
+										{children}
+									</h1>
 								),
 								h2: ({ children }) => (
-									<h2 className='text-2xl font-semibold mb-4 text-primary max-w-[860px]'>
+									<h2 className='text-2xl font-semibold mt-6 mb-4 text-primary max-w-[860px]'>
 										{children}
 									</h2>
 								),

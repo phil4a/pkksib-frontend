@@ -11,15 +11,6 @@ interface HeroProps {
 }
 
 export function Hero({ object }: HeroProps) {
-	if (!object) {
-		return (
-			<section className='bg-white'>
-				<div className='layout-container pt-8 pb-20'>
-					<div>Объект не найден</div>
-				</div>
-			</section>
-		);
-	}
 	return (
 		<section>
 			<div className='layout-container pt-8'>
@@ -31,8 +22,8 @@ export function Hero({ object }: HeroProps) {
 					]}
 				/>
 				<div className='mt-8'>
-					<div className='flex gap-5'>
-						<div className='flex-1/2  relative aspect-[4/3] rounded-xl overflow-hidden'>
+					<div className='flex flex-col md:flex-row gap-4 lg:gap-5'>
+						<div className='flex-1/2 relative aspect-[4/3] rounded-xl overflow-hidden'>
 							<Image
 								src={object?.photos?.[0]?.url || ''}
 								alt={object?.title || ''}
@@ -42,18 +33,18 @@ export function Hero({ object }: HeroProps) {
 								className='object-cover'
 							/>
 						</div>
-						<div className='p-12 flex-1/2 flex flex-col justify-between gap-25 bg-light-gray rounded-xl'>
+						<div className='p-6 lg:p-12 flex-1/2 flex flex-col justify-between gap-8 lg:gap-25 bg-light-gray rounded-xl'>
 							<div>
 								<Title
 									type='h1'
-									className='text-4xl font-semibold mb-6'
+									className='text-[26px] lg:text-[44px] font-semibold mb-4 lg:mb-6'
 								>
 									{object?.title}
 								</Title>
-								<p className='text-dark-gray mb-7'>{object?.short_description}</p>
+								<p className='text-dark-gray mb-6 lg:mb-7'>{object?.short_description}</p>
 								<Button type='accent'>Оставить заявку</Button>
 							</div>
-							<div className='grid grid-cols-2 gap-5'>
+							<div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
 								<div className='flex gap-3 items-center'>
 									<svg
 										width='40'
@@ -76,7 +67,7 @@ export function Hero({ object }: HeroProps) {
 									</svg>
 									<div>
 										<p className='text-dark-gray'>Вид работ</p>
-										<p>замена кровли</p>
+										<p>{object?.service_categories[0]?.title}</p>
 									</div>
 								</div>
 								<div className='flex gap-3 items-center'>
