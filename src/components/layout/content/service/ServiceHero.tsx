@@ -13,9 +13,9 @@ interface Props {
 
 export function ServiceHero({ service }: Props) {
 	return (
-		<section className='mb-20'>
-			<div className='layout-container flex gap-5'>
-				<div className='relative shrink-0 grow-0 flex-1/3 aspect-square rounded-xl overflow-hidden bg-light-gray'>
+		<section className='mb-12 md:mb-20'>
+			<div className='layout-container flex flex-col md:flex-row gap-4 md:gap-5'>
+				<div className='relative grow-1 md:shrink-0 grow-0 md:flex-1/3 aspect-[4/3] lg:aspect-square rounded-xl overflow-hidden bg-light-gray'>
 					{service.image?.url ? (
 						<Image
 							className='object-cover'
@@ -30,19 +30,25 @@ export function ServiceHero({ service }: Props) {
 						</div>
 					)}
 				</div>
-				<div className='grow-1 bg-light-gray rounded-xl p-12'>
+				<div className='md:grow-1 bg-light-gray rounded-xl p-6 lg:p-12'>
 					<Title
 						type='h1'
-						className='mb-4'
+						className='mb-4 text-[26px]  font-semibold'
 					>
 						{service.title}
 					</Title>
-					<p className='block font-semibold text-[22px] text-dark-gray'>
+					<p className='block font-semibold text-lg md:text-[22px] text-dark-gray'>
 						от {service.price} ₽/{formatUnit(service.units)}
 					</p>
-
-					<p className='block text-dark-gray pt-6 pb-9'>{service.shortDescription}</p>
-					<Button type='accent'>Рассчитать стоимость</Button>
+					{service.shortDescription && (
+						<p className='block text-dark-gray pt-6 pb-3'>{service.shortDescription}</p>
+					)}
+					<Button
+						type='accent'
+						className='mt-6'
+					>
+						Рассчитать стоимость
+					</Button>
 				</div>
 			</div>
 		</section>

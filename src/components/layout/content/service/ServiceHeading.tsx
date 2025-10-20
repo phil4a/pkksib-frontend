@@ -11,7 +11,7 @@ interface Props {
 
 export function ServiceHeading({ service }: Props) {
 	return (
-		<div className='layout-container py-8'>
+		<div className='layout-container pt-4 pb-3 md:py-8'>
 			<Breadcrumbs
 				items={[
 					{ label: PAGE_INFO.HOME.title, href: PAGE_INFO.HOME.href },
@@ -31,7 +31,7 @@ export function ServiceHeading({ service }: Props) {
 
 					...(service?.title ? [{ label: service.title, isCurrent: true }] : [])
 				]}
-				className='mb-3'
+				className='pb-3'
 			></Breadcrumbs>
 		</div>
 	);

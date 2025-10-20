@@ -10,7 +10,7 @@ interface Props {
 export function ServicesText({ text }: Props) {
 	return (
 		<section className='bg-light-gray'>
-			<div className='layout-container py-16 md:py-20 lg:py-25'>
+			<div className='layout-container py-12 lg:py-20'>
 				{text ? (
 					<ReactMarkdown
 						remarkPlugins={[remarkGfm]}

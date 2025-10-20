@@ -24,18 +24,18 @@ export function EstimateForm() {
 	const { onSubmit, isLoading } = useOrderForm(reset);
 	return (
 		<section>
-			<div className='layout-container py-25'>
-				<div className='flex gap-5'>
-					<div className='flex-1/2 bg-accent py-16 px-12 rounded-xl'>
+			<div className='layout-container pt-16 pb-4 md:py-20 lg:py-25'>
+				<div className='flex flex-col md:flex-row gap-2 md:gap-4 lg:gap-5'>
+					<div className='md:flex-1/2 bg-accent p-6 lg:py-16 lg:px-12 rounded-xl'>
 						<Title
 							type='h3'
-							className='mb-10'
+							className='mb-6 lg:mb-10'
 						>
 							Получите готовую смету бесплатно
 						</Title>
 						<form
 							onSubmit={handleSubmit(onSubmit)}
-							className='flex flex-col gap-3'
+							className='flex flex-col gap-3 md:gap-1'
 						>
 							<Field
 								type='text'
@@ -81,7 +81,7 @@ export function EstimateForm() {
 							</p>
 						</div>
 					</div>
-					<div className='relative flex-1/2'>
+					<div className='relative md:flex-1/2 aspect-[4/3] md:aspect-auto'>
 						<Image
 							src={formImage}
 							fill

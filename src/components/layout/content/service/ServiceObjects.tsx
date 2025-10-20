@@ -11,14 +11,14 @@ interface Props {
 export function ServiceObjects({ objects }: Props) {
 	return (
 		<section>
-			<div className='layout-container py-25'>
+			<div className='layout-container pt-16 md:pt-20'>
 				<Title
 					type='h2'
-					className='mb-8'
+					className='mb-6 md:mb-8'
 				>
-					Недавние реализованные объекты
+					Свежие проекты
 				</Title>
-				<div className='grid grid-cols-4 gap-5'>
+				<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
 					{objects?.slice(0, 4).map(object => (
 						<Object
 							key={object.id}
