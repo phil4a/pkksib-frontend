@@ -213,21 +213,21 @@ export function Menu() {
 																</Link>
 															</li>
 														))}
-												</ul>
-											</div>
-										</li>
-									);
-								}
-								return (
-									<li
-										key={menuItem.label}
-										className={cn(
-											'w-full border-t border-light-gray',
-											isLast && 'border-b border-light-gray',
-											isExact(menuItem.href) && 'bg-accent'
-										)}
-									>
-										<Link
+											</ul>
+										</div>
+									</li>
+								);
+							}
+							return (
+								<li
+									key={menuItem.label}
+									className={cn(
+										'w-full border-t border-light-gray',
+										isLast && 'border-b border-light-gray',
+										isExact(menuItem.href) && 'bg-accent'
+									)}
+								>
+									<Link
 											href={menuItem.href}
 											className={cn(
 												'block py-4 font-semibold'
@@ -236,51 +236,51 @@ export function Menu() {
 											onClick={() => setMobileOpen(false)}
 										>
 											{menuItem.label}
-										</Link>
+											</Link>
 									</li>
 								);
-							})}
-						</ul>
-					</nav>
+						})}
+					</ul>
+				</nav>
 
 					<div className='layout-container w-full sm:w-fit'>
 						<div className='flex items-center justify-center gap-2 pb-6'>
 							<Link
-								href='https://t.me/pkksib'
-								aria-label='Telegram'
-								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
+									href='https://t.me/pkksib'
+									aria-label='Telegram'
+									className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
+								>
+									<TelegramIcon />
+								</Link>
+								<Link
+									href='https://wa.me/73832866444'
+									aria-label='WhatsApp'
+									className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
+								>
+									<WhatsAppIcon />
+								</Link>
+							</div>
+							<div className='flex flex-col gap-4 mb-6'>
+								<Link
+									href={`tel:${SITE_CONFIG.phoneNumber}`}
+									className='text-center text-lg font-semibold'
+								>
+									{SITE_CONFIG.phoneNumber}
+								</Link>
+								<Link
+									href={`mailto:${SITE_CONFIG.email}`}
+									className='text-center text-lg  font-semibold text-dark-gray'
+								>
+									{SITE_CONFIG.email}
+								</Link>
+							</div>
+							<Button
+								type='accent'
+								className='w-full justify-center mb-6'
 							>
-								<TelegramIcon />
-							</Link>
-							<Link
-								href='https://wa.me/73832866444'
-								aria-label='WhatsApp'
-								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
-							>
-								<WhatsAppIcon />
-							</Link>
+								Связаться с нами
+							</Button>
 						</div>
-						<div className='flex flex-col gap-4 mb-6'>
-							<Link
-								href={`tel:${SITE_CONFIG.phoneNumber}`}
-								className='text-center text-lg font-semibold'
-							>
-								{SITE_CONFIG.phoneNumber}
-							</Link>
-							<Link
-								href={`mailto:${SITE_CONFIG.email}`}
-								className='text-center text-lg  font-semibold text-dark-gray'
-							>
-								{SITE_CONFIG.email}
-							</Link>
-						</div>
-						<Button
-							type='accent'
-							className='w-full justify-center mb-6'
-						>
-							Связаться с нами
-						</Button>
-					</div>
 				</div>
 			)}
 		</>

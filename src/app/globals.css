@@ -55,10 +55,21 @@
 
 body {
 	color: var(--primary);
+	/* Global scroll lock (applied when html has class .lock) */
 	.lock & {
+		/* iOS Safari-friendly scroll lock */
+		position: fixed;
+		width: 100%;
+		left: 0;
+		right: 0;
+		top: var(--lock-scroll-y, 0);
 		overflow: hidden;
-		touch-action: none;
+		/* Prevent scroll chaining */
 		overscroll-behavior: none;
+		/* Disable momentum scrolling on iOS */
+		-webkit-overflow-scrolling: auto;
+		/* touch-action is not fully effective on body in iOS, keep anyway */
+		touch-action: none;
 	}
 }
 ::selection {
