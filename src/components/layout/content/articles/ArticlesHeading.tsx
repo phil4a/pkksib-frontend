@@ -9,14 +9,14 @@ interface Props {
 
 export function ArticlesHeading({ title }: Props) {
 	return (
-		<div className='pt-8'>
+		<div className='pt-4 md:pt-8'>
 			<Breadcrumbs
 				items={[
 					{ label: PAGE_INFO.HOME.title, href: PAGE_INFO.HOME.href },
 					{ label: PAGE_INFO.ARTICLES.title, href: PAGE_INFO.ARTICLES.href, isCurrent: !title },
 					...(title ? [{ label: title, isCurrent: true }] : [])
 				]}
-				className='mb-3'
+				className='pb-3'
 			></Breadcrumbs>
 			<Title
 				type='h1'

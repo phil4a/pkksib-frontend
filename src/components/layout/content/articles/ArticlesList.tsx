@@ -10,9 +10,9 @@ interface Props {
 
 export function ArticlesList({ articlesLoading, articles }: Props) {
 	return (
-		<div className='mb-25'>
+		<div className='mb-16 lg:mb-25'>
 			{articlesLoading && (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5'>
 					{Array.from({ length: 3 }).map((_, i) => (
 						<SkeletonLoader
 							key={i}
@@ -22,7 +22,7 @@ export function ArticlesList({ articlesLoading, articles }: Props) {
 				</div>
 			)}
 			{!articlesLoading && (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5'>
 					{articles.map((item, idx) => (
 						<ArticleCard
 							key={item.id}

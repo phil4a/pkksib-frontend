@@ -35,10 +35,10 @@ export function ArticleCard({ item, priority }: Props) {
 			</div>
 			<div className='p-6 pt-5 flex flex-col h-full'>
 				<p className='text-dark-gray mb-1'>{formatDateToRu(item.createdAt)}</p>
-				<h3 className='text-[22px] font-semibold mb-3'>{item.title}</h3>
+				<h3 className='text-lg lg:text-[22px] font-semibold mb-3 leading-[1.25]'>{item.title}</h3>
 				<p className='text-dark-gray line-clamp-2 mb-4'>{item.short_description}</p>
 				<div className='font-semibold mt-auto flex items-center gap-2'>
-					Читать далее <span>→</span>
+					Читать <span>→</span>
 				</div>
 			</div>
 		</Link>
