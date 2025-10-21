@@ -15,7 +15,7 @@ export function PricesHeading() {
 			></Breadcrumbs>
 			<Title
 				type='h1'
-				className='mb-0'
+				className='mb-0 text-[32px] lg:text-[44px]'
 			>
 				Прайс-лист
 			</Title>
