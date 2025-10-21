@@ -6,7 +6,7 @@ import type { IArticle } from '@/types/article.types';
 
 export function ArticleContent({ article }: { article: IArticle }) {
 	return (
-		<div className='mt-16 mb-25'>
+		<div className='mt-12 lg:mt-16 mb-16 lg:mb-25'>
 			<ReactMarkdown
 				remarkPlugins={[remarkGfm]}
 				components={{
