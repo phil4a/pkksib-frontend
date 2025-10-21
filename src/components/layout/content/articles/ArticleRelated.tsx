@@ -29,7 +29,7 @@ export function ArticleRelated({ tagId, excludeSlug, limit = 3 }: Props) {
 	}
 
 	return (
-		<section className='mb-25'>
+		<section className='mb-16 lg:mb-25'>
 			<Title
 				type='h2'
 				className='text-[28px] font-semibold mb-8'

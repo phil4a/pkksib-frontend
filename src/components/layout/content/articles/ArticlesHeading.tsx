@@ -20,7 +20,7 @@ export function ArticlesHeading({ title }: Props) {
 			></Breadcrumbs>
 			<Title
 				type='h1'
-				className='mb-4'
+				className='mt-4 mb-4 leading-[1.15]'
 			>
 				{title ? title : PAGE_INFO.ARTICLES.title}
 			</Title>

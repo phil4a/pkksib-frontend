@@ -44,7 +44,7 @@ export default async function ArticlePage({ params }: TPageSlugProp) {
 	const article = data?.data;
 
 	return (
-		<div className='layout-container'>
+		<div className='layout-container overflow-hidden'>
 			<ArticlesHeading title={article?.title} />
 			<p className='my-6 text-dark-gray'>{formatDateToRu(article?.createdAt)}</p>
 			<div className='relative w-full h-120 rounded-xl overflow-hidden'>
