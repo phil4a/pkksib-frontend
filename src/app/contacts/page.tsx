@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Contacts } from '@/components/layout/content/contacts/Contacts';
+import { ContactsClient } from '@/components/layout/content/contacts/ContactsClient';
 import { Details } from '@/components/layout/content/contacts/Details';
 import { Heading } from '@/components/layout/content/contacts/Heading';
 import { OrderForm } from '@/components/layout/form/order/OrderForm';
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 export default function ContactsPage() {
 	return (
-		<div className='layout-container mt-8'>
+		<div className='layout-container mt-4 lg:mt-8'>
 			<Heading />
-			<Contacts />
+			<ContactsClient />
 			<Details />
-			<div className='container-layout my-25'>
+			<div className='container-layout my-16 lg:my-25'>
 				<OrderForm
 					title={[
 						{ text: 'Оставьте заявку –' },

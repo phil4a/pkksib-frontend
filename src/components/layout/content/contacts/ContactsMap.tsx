@@ -1,9 +1,8 @@
 'use client';
 
 import { GoogleMap, InfoWindow, OverlayView, useLoadScript } from '@react-google-maps/api';
+import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-
-import { CustomMarker } from '@/components/layout/content/home-page/objects-map/CustomMarker';
 
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 
@@ -11,6 +10,8 @@ import { CONTACT_MARKERS } from '@/constants/contact-markers';
 import type { IContactMarker } from '@/constants/contact-markers';
 
 import { calculateMarkersCenter, calculateOptimalZoom, defaultCenter } from '@/utils/map';
+
+import { ContactsMarker } from './ContactsMarker';
 
 const containerStyle = {
 	width: '100%',
@@ -114,10 +115,7 @@ export default function ContactsMap({
 					position={marker.coordinates}
 					mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
 				>
-					<CustomMarker
-						marker={marker}
-						onClick={() => onMarkerClick(marker)}
-					/>
+					<ContactsMarker onClick={() => onMarkerClick(marker)} />
 				</OverlayView>
 			))}
 
@@ -129,7 +127,7 @@ export default function ContactsMap({
 					}}
 					onCloseClick={onInfoWindowClose}
 				>
-					<div className='p-2 min-w-[300px] max-w-[400px] text-base'>
+					<div className='p-2 pt-10 min-[360px]:pt-2 w-fit max-w-[400px] text-base'>
 						<div className='inline-flex items-center gap-2'>
 							<svg
 								width='9'
@@ -145,19 +143,19 @@ export default function ContactsMap({
 							</svg>
 							<span className='font-semibold'>{selectedMarker.city}</span>
 						</div>
-						<div className='mt-1'>
-							<span className='pb-1 block'>{selectedMarker.title}</span>
-							<p>
+						<div className='mt-1 w-fit'>
+							{/* <span className='pb-1 block'>{selectedMarker.title}</span> */}
+							<p className='text-sm min-[360px]:text-base'>
 								{selectedMarker.postalCode}, г. {selectedMarker.addressLocality},{' '}
 								{selectedMarker.streetAddress}
 							</p>
-							<a
+							<Link
 								href={`tel:${selectedMarker.telephoneLink}`}
-								className='font-semibold py-2'
+								className='block font-semibold text-sm min-[360px]:text-base py-2'
 							>
 								{selectedMarker.telephone}
-							</a>
-							<p>{selectedMarker.schedule}</p>
+							</Link>
+							<p className='text-sm min-[360px]:text-base'>{selectedMarker.schedule}</p>
 						</div>
 					</div>
 				</InfoWindow>

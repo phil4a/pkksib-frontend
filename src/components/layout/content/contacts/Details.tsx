@@ -2,7 +2,7 @@ import { Title } from '@/ui/title/Title';
 
 export function Details() {
 	return (
-		<div className='p-10 border-1 border-light-gray rounded-xl'>
+		<div className='p-6 lg:p-10 border-1 border-light-gray rounded-xl'>
 			<Title
 				type='h2'
 				className='text-[22px] font-semibold'
