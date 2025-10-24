@@ -6,8 +6,8 @@ import { PricesHeading } from '@/components/layout/content/prices/PricesHeading'
 import { serviceService } from '@/services/service.service';
 
 export const metadata: Metadata = {
-	title: '',
-	description: ''
+	title: `Цены на кровельные работы в Новосибирске в ${new Date().getFullYear()} году`,
+	description: `Актуальные цены на кровельные работы в Новосибирске. Узнайте стоимость монтажа, ремонта и обслуживания кровли под ключ. Прайс-лист ${new Date().getFullYear()} года.`
 };
 
 export const revalidate = 300;
