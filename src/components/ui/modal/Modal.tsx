@@ -41,10 +41,10 @@ export function Modal({ open, onClose, children }: ModalProps) {
 					type='button'
 					onClick={onClose}
 					aria-label='Закрыть'
-					className='absolute cursor-pointer top-3 right-3 inline-flex items-center justify-center size-8 rounded-md hover:bg-white'
+					className='absolute group cursor-pointer top-3 right-3 inline-flex items-center justify-center size-8 rounded-md hover:bg-white transition-colors'
 				>
 					<span className='sr-only'>Закрыть</span>
-					<X className='size-6 text-white' />
+					<X className='size-6 text-white group-hover:text-dark-gray transition-colors' />
 				</button>
 				{children}
 			</div>
