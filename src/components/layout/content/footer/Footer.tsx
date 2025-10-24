@@ -7,26 +7,21 @@ import { SITE_CONFIG } from '@/config/site.config';
 
 import { FooterCollapse } from './FooterCollapse';
 import { FooterCopyright } from './FooterCopyright';
+import { getFooterServicesCached } from '@/services/footer-cache';
 import { serviceService } from '@/services/service.service';
 import type { IService, IServiceCategory } from '@/types/service.types';
 
-let categories: IServiceCategory[] = [];
-try {
-	const data = await serviceService.getCategories();
-	categories = data?.data?.data ?? [];
-} catch {
-	categories = [];
-}
+export async function Footer() {
+	let categories: IServiceCategory[] = [];
+	try {
+		const data = await serviceService.getCategories();
+		categories = data?.data?.data ?? [];
+	} catch {
+		categories = [];
+	}
 
-let footerServices: IService[] = [];
-try {
-	const footerServicesData = await serviceService.getFooterServices();
-	footerServices = footerServicesData?.data?.data ?? [];
-} catch {
-	footerServices = [];
-}
+	const footerServices: IService[] = await getFooterServicesCached();
 
-export function Footer() {
 	return (
 		<div className='bg-primary text-white'>
 			<div className='layout-container pt-16 pb-10'>
