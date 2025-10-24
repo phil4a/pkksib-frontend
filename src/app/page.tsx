@@ -35,6 +35,7 @@ export default function HomePage() {
 							<Button
 								type='black'
 								className='z-2'
+								data-open-consult
 							>
 								Получить консультацию
 							</Button>
