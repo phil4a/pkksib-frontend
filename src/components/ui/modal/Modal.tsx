@@ -32,7 +32,7 @@ export function Modal({ open, onClose, children }: ModalProps) {
 	return (
 		<div className='fixed inset-0 z-[1000] flex items-center justify-center'>
 			<div
-				className='absolute inset-0 bg-black/50'
+				className='absolute inset-0 bg-black/50 backdrop-blur-xs'
 				onClick={onClose}
 				aria-label='Закрыть модальное окно'
 			/>
@@ -41,10 +41,10 @@ export function Modal({ open, onClose, children }: ModalProps) {
 					type='button'
 					onClick={onClose}
 					aria-label='Закрыть'
-					className='absolute group cursor-pointer top-3 right-3 inline-flex items-center justify-center size-8 rounded-md hover:bg-white transition-colors'
+					className='absolute cursor-pointer top-3 right-3 inline-flex items-center justify-center size-8 rounded-md hover:bg-white'
 				>
 					<span className='sr-only'>Закрыть</span>
-					<X className='size-6 text-white group-hover:text-dark-gray transition-colors' />
+					<X className='size-6 text-white' />
 				</button>
 				{children}
 			</div>
