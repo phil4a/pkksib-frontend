@@ -61,7 +61,7 @@ export function TeamSlider({ onSwiperReady }: Props) {
 
 	return (
 		<Swiper
-			className='!overflow-visible'
+			className='!overflow-visible lg:!overflow-hidden'
 			slidesPerView={1.1}
 			spaceBetween={20}
 			onSwiper={onSwiperReady}

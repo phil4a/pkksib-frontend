@@ -2,7 +2,8 @@ import { Title } from '@/ui/title/Title';
 
 export function OurValues() {
 	return (
-		<div className='relative overflow-hidden mt-16 lg:mt-20 bg-accent pt-8 pb-10 px-6 md:p-12 rounded-xl'>
+		// <div className='relative overflow-hidden mt-16 lg:mt-20 bg-accent pt-8 pb-10 px-6 md:p-12 rounded-xl'>
+		<div className='relative overflow-hidden  bg-accent pt-8 pb-10 px-6 md:p-12 rounded-xl'>
 			<Title
 				type='h2'
 				className='mb-6 md:mb-10'

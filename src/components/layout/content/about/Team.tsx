@@ -31,13 +31,13 @@ export function Team() {
 	return (
 		<section className='bg-light-gray pt-16  md:pt-20 lg:pt-25 pb-16 md:pb-20 overflow-hidden'>
 			<div className='layout-container'>
-				<TeamHeading
+				{/* <TeamHeading
 					onPrev={() => swiper?.slidePrev()}
 					onNext={() => swiper?.slideNext()}
 					canPrev={swiper ? canPrev : false}
 					canNext={swiper ? canNext : false}
 				/>
-				<TeamSlider onSwiperReady={setSwiper} />
+				<TeamSlider onSwiperReady={setSwiper} /> */}
 				<OurValues />
 			</div>
 		</section>
