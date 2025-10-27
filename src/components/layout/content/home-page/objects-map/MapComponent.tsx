@@ -4,11 +4,13 @@ import { GoogleMap, InfoWindow, OverlayView, useLoadScript } from '@react-google
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import Supercluster, { type ClusterFeature, type PointFeature } from 'supercluster';
 
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 
 import { calculateMarkersCenter, calculateOptimalZoom, defaultCenter } from '@/utils/map';
 
+import ClusterMarker from './ClusterMarker';
 import { CustomMarker } from './CustomMarker';
 import { objectService } from '@/services/object.service';
 import type { IObjectMarker } from '@/types/object.types';
@@ -25,6 +27,11 @@ export default function MapComponent() {
 	const [mapCenter, setMapCenter] = useState(defaultCenter);
 	const [mapZoom, setMapZoom] = useState(8);
 	const mapRef = useRef<google.maps.Map | null>(null);
+	const [clusters, setClusters] = useState<
+		(PointFeature<PointProps> | ClusterFeature<ClusterProps>)[]
+	>([]);
+	const superclusterRef = useRef<Supercluster<PointProps, ClusterProps> | null>(null);
+	const markerMapRef = useRef<Record<string, IObjectMarker>>({});
 
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
@@ -35,6 +42,21 @@ export default function MapComponent() {
 			try {
 				const markersData = await objectService.getObjectMarkers();
 				setMarkers(markersData);
+
+				// Построение индекса для кластеризации
+				markerMapRef.current = Object.fromEntries(markersData.map(m => [String(m.id), m]));
+				const points: PointFeature<PointProps>[] = markersData
+					.filter(m => !!m.coordinates)
+					.map(m => ({
+						type: 'Feature',
+						properties: { markerId: String(m.id) },
+						geometry: { type: 'Point', coordinates: [m.coordinates.lng, m.coordinates.lat] }
+					}));
+				superclusterRef.current = new Supercluster<PointProps, ClusterProps>({
+					radius: 60,
+					maxZoom: 20
+				});
+				superclusterRef.current.load(points);
 
 				// Автоматически центрируем карту и устанавливаем зум
 				if (markersData.length > 0) {
@@ -63,9 +85,27 @@ export default function MapComponent() {
 		setSelectedMarker(null);
 	}, []);
 
-	const onMapLoad = useCallback((map: google.maps.Map) => {
-		mapRef.current = map;
+	const updateClusters = useCallback(() => {
+		const map = mapRef.current;
+		const index = superclusterRef.current;
+		if (!map || !index) return;
+		const bounds = map.getBounds();
+		if (!bounds) return;
+		const ne = bounds.getNorthEast();
+		const sw = bounds.getSouthWest();
+		const zoom = Math.round(map.getZoom() || 0);
+		const clusters = index.getClusters([sw.lng(), sw.lat(), ne.lng(), ne.lat()], zoom);
+		setClusters(clusters);
 	}, []);
+
+	const onMapLoad = useCallback(
+		(map: google.maps.Map) => {
+			mapRef.current = map;
+			// Первичное вычисление кластеров после загрузки карты
+			setTimeout(() => updateClusters(), 0);
+		},
+		[updateClusters]
+	);
 
 	if (!isLoaded || isLoadingMarkers) {
 		return <SkeletonLoader className='h-90 sm:h-140 md:h-150 w-full' />;
@@ -78,6 +118,7 @@ export default function MapComponent() {
 				center={mapCenter}
 				zoom={mapZoom}
 				onLoad={onMapLoad}
+				onIdle={updateClusters}
 				options={{
 					//mapId: 'ac105ed86c9bd12f614f546f', доработать отображение - вызывает лаги
 					disableDefaultUI: true,
@@ -87,18 +128,44 @@ export default function MapComponent() {
 					fullscreenControl: true
 				}}
 			>
-				{markers.map(marker => (
-					<OverlayView
-						key={marker.id}
-						position={marker.coordinates}
-						mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-					>
-						<CustomMarker
-							marker={marker}
-							onClick={() => onMarkerClick(marker)}
-						/>
-					</OverlayView>
-				))}
+				{clusters.map(item => {
+					const [lng, lat] = item.geometry.coordinates;
+					const position = { lat, lng };
+
+					if ('cluster' in item.properties) {
+						const count = item.properties.point_count as number;
+						const clusterId = item.properties.cluster_id as number;
+						return (
+							<ClusterMarker
+								key={`cluster-${clusterId}`}
+								position={position}
+								count={count}
+								onClick={() => {
+									if (!superclusterRef.current || !mapRef.current) return;
+									const expansionZoom = superclusterRef.current.getClusterExpansionZoom(clusterId);
+									mapRef.current.setZoom(expansionZoom);
+									mapRef.current.panTo(position);
+								}}
+							/>
+						);
+					}
+
+					const markerId = (item.properties as PointProps).markerId;
+					const marker = markerMapRef.current[markerId];
+					if (!marker) return null;
+					return (
+						<OverlayView
+							key={marker.id}
+							position={marker.coordinates}
+							mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+						>
+							<CustomMarker
+								marker={marker}
+								onClick={() => onMarkerClick(marker)}
+							/>
+						</OverlayView>
+					);
+				})}
 
 				{selectedMarker && (
 					<InfoWindow
@@ -167,3 +234,6 @@ export default function MapComponent() {
 		</div>
 	);
 }
+
+type PointProps = { markerId: string };
+type ClusterProps = object;

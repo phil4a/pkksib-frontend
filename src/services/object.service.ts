@@ -129,14 +129,31 @@ class ObjectService {
 	}
 
 	async getObjectMarkers(): Promise<IObjectMarker[]> {
-		const objectsQuery = qs.stringify({
-			populate: { location: true, photos: true },
-			fields: ['id', 'slug', 'title', 'area', 'time', 'short_description']
-		});
+		// Strapi по умолчанию отдает только первую страницу (обычно 25 записей),
+		// поэтому собираем все страницы.
+		const pageSize = 200;
+		let page = 1;
+		let all = [] as IObject[];
 
-		const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
+		while (true) {
+			const objectsQuery = qs.stringify(
+				{
+					populate: { location: true, photos: true },
+					fields: ['id', 'slug', 'title', 'area', 'time', 'short_description'],
+					pagination: { page, pageSize },
+					sort: ['updatedAt:desc']
+				},
+				{ encodeValuesOnly: true }
+			);
 
-		return response.data.data
+			const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
+			all = all.concat(response.data.data);
+			const pageCount = response.data.meta?.pagination?.pageCount ?? 1;
+			if (page >= pageCount) break;
+			page += 1;
+		}
+
+		return all
 			.filter(obj => obj.location && obj.location.coordinates)
 			.map(obj => {
 				const [lat, lng] = obj.location.coordinates
