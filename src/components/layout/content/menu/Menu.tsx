@@ -70,12 +70,12 @@ export function Menu() {
 													<li key={`${menuItem.label}-all`}>
 														<NavigationMenuLink
 															asChild
-															className='p-0 hover:bg-transparent text-dark-gray'
+															className='p-0 hover:bg-transparent'
 														>
 															<Link
 																href={menuItem.href}
 																className={cn(
-																	'block leading-[1.4] select-none bg-transparent border-transparent   font-semibold outline-none rounded-none  hover:bg-transparent  hover:underline',
+																	'block leading-[1.4] select-none bg-transparent border-transparent font-semibold outline-none rounded-none hover:bg-transparent  hover:underline',
 																	isExact(menuItem.href) && 'text-primary underline'
 																)}
 															>
@@ -94,7 +94,7 @@ export function Menu() {
 																<Link
 																	href={PAGE.SERVICE(category.slug)}
 																	className={cn(
-																		'block leading-[1.4] select-none bg-transparent rounded-md  border-transparent outline-none rounded-none text-dark-gray  hover:bg-transparent hover:underline',
+																		'block leading-[1.4] select-none bg-transparent rounded-md  border-transparent outline-none rounded-none hover:bg-transparent hover:underline',
 																		isExact(PAGE.SERVICE(category.slug)) && 'text-primary underline'
 																	)}
 																>
