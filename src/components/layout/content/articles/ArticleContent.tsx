@@ -26,6 +26,14 @@ export function ArticleContent({ article }: { article: IArticle }) {
 					p: ({ children }) => (
 						<p className='text-base leading-relaxed mb-4 max-w-[860px]'>{children}</p>
 					),
+					a: ({ children, href }) => (
+						<a
+							className='text-accent underline'
+							href={href}
+						>
+							{children}
+						</a>
+					),
 					ul: ({ children }) => (
 						<ul className='list-disc pl-6 mb-4 space-y-2 marker:text-accent max-w-[860px]'>
 							{children}
