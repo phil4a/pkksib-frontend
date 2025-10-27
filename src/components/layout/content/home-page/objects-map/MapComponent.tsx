@@ -120,7 +120,7 @@ export default function MapComponent() {
 				onLoad={onMapLoad}
 				onIdle={updateClusters}
 				options={{
-					//mapId: 'ac105ed86c9bd12f614f546f', доработать отображение - вызывает лаги
+					// mapId: 'ac105ed86c9bd12f614f546f',
 					disableDefaultUI: true,
 					streetViewControl: false,
 					mapTypeControl: false,
