@@ -1,17 +1,18 @@
 'use client';
 
-import { GoogleMap, InfoWindow, OverlayView, useLoadScript } from '@react-google-maps/api';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import { GoogleMap, InfoWindow, useLoadScript } from '@react-google-maps/api';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Supercluster, { type ClusterFeature, type PointFeature } from 'supercluster';
+import { type Root, createRoot } from 'react-dom/client';
+
+import { CustomMarker } from '@/components/layout/content/home-page/objects-map/CustomMarker';
 
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 
 import { calculateMarkersCenter, calculateOptimalZoom, defaultCenter } from '@/utils/map';
 
-import ClusterMarker from './ClusterMarker';
-import { CustomMarker } from './CustomMarker';
 import { objectService } from '@/services/object.service';
 import type { IObjectMarker } from '@/types/object.types';
 
@@ -27,36 +28,136 @@ export default function MapComponent() {
 	const [mapCenter, setMapCenter] = useState(defaultCenter);
 	const [mapZoom, setMapZoom] = useState(8);
 	const mapRef = useRef<google.maps.Map | null>(null);
-	const [clusters, setClusters] = useState<
-		(PointFeature<PointProps> | ClusterFeature<ClusterProps>)[]
-	>([]);
-	const superclusterRef = useRef<Supercluster<PointProps, ClusterProps> | null>(null);
-	const markerMapRef = useRef<Record<string, IObjectMarker>>({});
+	const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
+	const markerRootsRef = useRef<Root[]>([]);
+	const markerClustererRef = useRef<MarkerClusterer | null>(null);
 
 	const { isLoaded } = useLoadScript({
-		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
+		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+		libraries: ['marker']
 	});
+
+	const createCustomMarkerIcon = useCallback((marker: IObjectMarker) => {
+		// Создаем SVG иконку для маркера
+		const svg = `
+			<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="20" cy="20" r="18" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+				<circle cx="20" cy="20" r="8" fill="#2563eb"/>
+			</svg>
+		`;
+
+		return {
+			url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+			scaledSize: new google.maps.Size(40, 40),
+			anchor: new google.maps.Point(20, 20)
+		};
+	}, []);
+
+	const createMarkers = useCallback(
+		(markersData: IObjectMarker[]) => {
+			if (!mapRef.current) {
+				console.log('❌ No map reference, skipping marker creation');
+				return;
+			}
+
+			// Очищаем существующие маркеры и React-рендеры
+			markersRef.current.forEach(marker => (marker.map = null));
+			markersRef.current = [];
+			markerRootsRef.current.forEach(root => {
+				try {
+					root.unmount();
+				} catch {}
+			});
+			markerRootsRef.current = [];
+
+			// Очищаем существующий кластеризатор
+			if (markerClustererRef.current) {
+				markerClustererRef.current.clearMarkers();
+				markerClustererRef.current = null;
+			}
+
+			// Создаем новые маркеры
+			const validMarkers = markersData.filter(m => !!m.coordinates);
+
+			const newMarkers = validMarkers.map(markerData => {
+				// Контейнер и React-рендер кастомного маркера
+				const container = document.createElement('div');
+				const root = createRoot(container);
+				root.render(
+					<CustomMarker
+						marker={markerData}
+						onClick={() => setSelectedMarker(markerData)}
+					/>
+				);
+				markerRootsRef.current.push(root);
+
+				const advMarker = new google.maps.marker.AdvancedMarkerElement({
+					position: { lat: markerData.coordinates.lat, lng: markerData.coordinates.lng },
+					map: mapRef.current!,
+					content: container,
+					title: markerData.title
+				});
+
+				advMarker.addListener('click', () => {
+					setSelectedMarker(markerData);
+				});
+
+				return advMarker;
+			});
+
+			markersRef.current = newMarkers;
+
+			// Создаем кластеризатор
+			if (newMarkers.length > 0) {
+				markerClustererRef.current = new MarkerClusterer({
+					map: mapRef.current,
+					markers: newMarkers,
+					renderer: {
+						render: ({ count, position }) => {
+							// DOM-контент для кластера через AdvancedMarkerElement
+							const cluster = document.createElement('div');
+							cluster.style.width = '42px';
+							cluster.style.height = '42px';
+							cluster.style.borderRadius = '50%';
+							cluster.style.backgroundColor = 'var(--primary)';
+							cluster.style.color = 'var(--accent)';
+							cluster.style.display = 'flex';
+							cluster.style.alignItems = 'center';
+							cluster.style.justifyContent = 'center';
+							cluster.style.fontWeight = 'semibold';
+							cluster.style.fontSize = '16px';
+							cluster.style.border = '1px solid var(--light-gray)';
+							cluster.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+							cluster.textContent = String(count);
+
+							const advClusterMarker = new google.maps.marker.AdvancedMarkerElement({
+								position,
+								content: cluster
+							});
+
+							advClusterMarker.addListener('click', () => {
+								const map = mapRef.current;
+								if (!map) return;
+								map.panTo(position);
+								map.setZoom(Math.min((map.getZoom() ?? 8) + 2, 18));
+							});
+
+							// Приведение типов для совместимости с MarkerClusterer
+							return advClusterMarker as unknown as google.maps.Marker;
+						}
+					}
+				});
+			}
+		},
+		[createCustomMarkerIcon]
+	);
 
 	useEffect(() => {
 		const fetchMarkers = async () => {
 			try {
 				const markersData = await objectService.getObjectMarkers();
-				setMarkers(markersData);
 
-				// Построение индекса для кластеризации
-				markerMapRef.current = Object.fromEntries(markersData.map(m => [String(m.id), m]));
-				const points: PointFeature<PointProps>[] = markersData
-					.filter(m => !!m.coordinates)
-					.map(m => ({
-						type: 'Feature',
-						properties: { markerId: String(m.id) },
-						geometry: { type: 'Point', coordinates: [m.coordinates.lng, m.coordinates.lat] }
-					}));
-				superclusterRef.current = new Supercluster<PointProps, ClusterProps>({
-					radius: 60,
-					maxZoom: 20
-				});
-				superclusterRef.current.load(points);
+				setMarkers(markersData);
 
 				// Автоматически центрируем карту и устанавливаем зум
 				if (markersData.length > 0) {
@@ -66,7 +167,7 @@ export default function MapComponent() {
 					setMapZoom(zoom);
 				}
 			} catch (error) {
-				console.error('Ошибка при загрузке меток объектов:', error);
+				console.error('❌ Ошибка при загрузке меток объектов:', error);
 			} finally {
 				setIsLoadingMarkers(false);
 			}
@@ -77,35 +178,43 @@ export default function MapComponent() {
 		}
 	}, [isLoaded]);
 
-	const onMarkerClick = useCallback((marker: IObjectMarker) => {
-		setSelectedMarker(marker);
-	}, []);
+	// Создаем маркеры после загрузки данных и карты
+	useEffect(() => {
+		if (markers.length > 0 && mapRef.current && !isLoadingMarkers) {
+			// Небольшая задержка для гарантии того, что карта полностью загружена
+			setTimeout(() => {
+				createMarkers(markers);
+			}, 100);
+		}
+	}, [markers, createMarkers, isLoadingMarkers]);
 
 	const onInfoWindowClose = useCallback(() => {
 		setSelectedMarker(null);
 	}, []);
 
-	const updateClusters = useCallback(() => {
-		const map = mapRef.current;
-		const index = superclusterRef.current;
-		if (!map || !index) return;
-		const bounds = map.getBounds();
-		if (!bounds) return;
-		const ne = bounds.getNorthEast();
-		const sw = bounds.getSouthWest();
-		const zoom = Math.round(map.getZoom() || 0);
-		const clusters = index.getClusters([sw.lng(), sw.lat(), ne.lng(), ne.lat()], zoom);
-		setClusters(clusters);
-	}, []);
-
 	const onMapLoad = useCallback(
 		(map: google.maps.Map) => {
 			mapRef.current = map;
-			// Первичное вычисление кластеров после загрузки карты
-			setTimeout(() => updateClusters(), 0);
+
+			// Если у нас уже есть маркеры, создаем их
+			if (markers.length > 0 && !isLoadingMarkers) {
+				setTimeout(() => {
+					createMarkers(markers);
+				}, 100);
+			}
 		},
-		[updateClusters]
+		[markers, createMarkers, isLoadingMarkers]
 	);
+
+	// Очистка при размонтировании
+	useEffect(() => {
+		return () => {
+			if (markerClustererRef.current) {
+				markerClustererRef.current.clearMarkers();
+			}
+			markersRef.current.forEach(marker => (marker.map = null));
+		};
+	}, []);
 
 	if (!isLoaded || isLoadingMarkers) {
 		return <SkeletonLoader className='h-90 sm:h-140 md:h-150 w-full' />;
@@ -118,9 +227,8 @@ export default function MapComponent() {
 				center={mapCenter}
 				zoom={mapZoom}
 				onLoad={onMapLoad}
-				onIdle={updateClusters}
 				options={{
-					// mapId: 'ac105ed86c9bd12f614f546f',
+					mapId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID as string | undefined,
 					disableDefaultUI: true,
 					streetViewControl: false,
 					mapTypeControl: false,
@@ -128,50 +236,16 @@ export default function MapComponent() {
 					fullscreenControl: true
 				}}
 			>
-				{clusters.map(item => {
-					const [lng, lat] = item.geometry.coordinates;
-					const position = { lat, lng };
-
-					if ('cluster' in item.properties) {
-						const count = item.properties.point_count as number;
-						const clusterId = item.properties.cluster_id as number;
-						return (
-							<ClusterMarker
-								key={`cluster-${clusterId}`}
-								position={position}
-								count={count}
-								onClick={() => {
-									if (!superclusterRef.current || !mapRef.current) return;
-									const expansionZoom = superclusterRef.current.getClusterExpansionZoom(clusterId);
-									mapRef.current.setZoom(expansionZoom);
-									mapRef.current.panTo(position);
-								}}
-							/>
-						);
-					}
-
-					const markerId = (item.properties as PointProps).markerId;
-					const marker = markerMapRef.current[markerId];
-					if (!marker) return null;
-					return (
-						<OverlayView
-							key={marker.id}
-							position={marker.coordinates}
-							mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-						>
-							<CustomMarker
-								marker={marker}
-								onClick={() => onMarkerClick(marker)}
-							/>
-						</OverlayView>
-					);
-				})}
-
 				{selectedMarker && (
 					<InfoWindow
 						position={{
 							lat: selectedMarker.coordinates.lat,
 							lng: selectedMarker.coordinates.lng
+						}}
+						options={{
+							// Сдвигаем окно вверх на 40px, чтобы не перекрывать кастомный маркер
+							pixelOffset: new google.maps.Size(0, -40),
+							disableAutoPan: false
 						}}
 						onCloseClick={onInfoWindowClose}
 					>
@@ -234,6 +308,3 @@ export default function MapComponent() {
 		</div>
 	);
 }
-
-type PointProps = { markerId: string };
-type ClusterProps = object;
