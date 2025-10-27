@@ -28,7 +28,7 @@ export function ArticleContent({ article }: { article: IArticle }) {
 					),
 					a: ({ children, href }) => (
 						<a
-							className='text-accent underline'
+							className='underline'
 							href={href}
 						>
 							{children}
