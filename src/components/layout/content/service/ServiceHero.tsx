@@ -46,6 +46,7 @@ export function ServiceHero({ service }: Props) {
 					<Button
 						type='accent'
 						className='mt-6'
+						data-open-consult
 					>
 						Рассчитать стоимость
 					</Button>
