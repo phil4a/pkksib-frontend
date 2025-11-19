@@ -4,6 +4,7 @@ import { HeroBullet } from '@/components/layout/content/home-page/hero/HeroBulle
 import { HowWeWork } from '@/components/layout/content/home-page/how-we-work/HowWeWork';
 import { ObjectsMap } from '@/components/layout/content/home-page/objects-map/ObjectsMap';
 import { OurServices } from '@/components/layout/content/home-page/our-services/OurServices';
+import { Partners } from '@/components/layout/content/home-page/partners/Partners';
 import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
 
 import { Button } from '@/ui/button/Button';
@@ -120,6 +121,7 @@ export default function HomePage() {
 			<OurServices />
 			<WhyChooseUs />
 			<ObjectsMap />
+			<Partners />
 		</>
 	);
 }
