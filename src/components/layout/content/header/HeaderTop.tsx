@@ -11,16 +11,16 @@ export function HeaderTop() {
 					<HeaderLink
 						href='/'
 						secondary
-						className='text-sm font-semibold leading-normal'
+						className='text-sm font-semibold leading-normal text-[#24A1DE] hover:text-[#196e99]'
 					>
 						<TelegramIcon />
-						Телеграм
+						Telegram
 					</HeaderLink>
 
 					<HeaderLink
 						href='/'
 						secondary
-						className='text-sm font-semibold leading-normal'
+						className='text-sm font-semibold leading-normal text-[#25d366] hover:text-[#199944]'
 					>
 						<WhatsAppIcon />
 						WhatsApp

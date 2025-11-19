@@ -29,14 +29,14 @@ export function Header() {
 	}, []);
 
 	return (
-		<>
+		<div className={cn('sticky top-0 z-50 bg-white transition-shadow', scrolled && 'shadow-sm')}>
 			<HeaderTop />
 			<div
 				ref={sentinelRef}
 				aria-hidden='true'
 				className='h-px'
 			></div>
-			<div className={cn('sticky top-0 z-50 bg-white transition-shadow', scrolled && 'shadow-sm')}>
+			<div>
 				<div className='layout-container flex gap-6 justify-between items-center py-2'>
 					<Logo />
 					<Menu />
@@ -45,6 +45,6 @@ export function Header() {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
