@@ -96,3 +96,7 @@ body {
 	max-height: none !important;
 	height: none !important;
 }
+
+.partners-wrapper {
+	transition-timing-function: linear !important;
+}
