@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 
 import { Button } from '@/ui/button/Button';
 import { Field } from '@/ui/field/Field';
+import { TelegramIcon } from '@/ui/icons/TelegramIcon';
+import { WhatsAppIcon } from '@/ui/icons/WhatsAppIcon';
 import { Title } from '@/ui/title/Title';
 
 import { formService } from '@/services/order-form.service';
@@ -120,6 +122,34 @@ export function ConsultForm({ onSubmitted }: ConsultFormProps) {
 						политикой конфиденциальности и обработки персональных данных
 					</Link>
 				</p>
+			</div>
+			<div className='mt-6 text-white/80 flex flex-col gap-4'>
+				<Link
+					href='tg://resolve?phone=79137334555'
+					target='_blank'
+					rel='noopener noreferrer'
+					className='hover:text-white transition-colors flex items-center gap-2'
+				>
+					<TelegramIcon
+						color='#24A1DE'
+						width={20}
+						height={20}
+					/>
+					— написать в Telegram
+				</Link>
+				<Link
+					href='https://wa.me/79137334555'
+					target='_blank'
+					rel='noopener noreferrer'
+					className='hover:text-white transition-colors flex items-center gap-2'
+				>
+					<WhatsAppIcon
+						color='#25d366'
+						width={20}
+						height={20}
+					/>
+					— написать в Whatsapp
+				</Link>
 			</div>
 		</div>
 	);
