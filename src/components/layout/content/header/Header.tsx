@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Logo } from '../logo/Logo';
 import { Menu } from '../menu/Menu';
@@ -11,31 +11,25 @@ import { cn } from '@/lib/utils';
 
 export function Header() {
 	const [scrolled, setScrolled] = useState(false);
-	const sentinelRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
-		const el = sentinelRef.current;
-		if (!el) return;
+		const onScroll = () => {
+			setScrolled(window.scrollY > 0);
+		};
 
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				setScrolled(!entry.isIntersecting);
-			},
-			{ root: null, threshold: 0 }
-		);
-
-		observer.observe(el);
-		return () => observer.disconnect();
+		onScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 
 	return (
-		<div className={cn('sticky top-0 z-50 bg-white transition-shadow', scrolled && 'shadow-sm')}>
+		<div
+			className={cn(
+				'sticky top-0 z-50 bg-white transition-shadow',
+				scrolled && 'shadow-[0_1px_6px_rgba(0,0,0,0.05)]'
+			)}
+		>
 			<HeaderTop />
-			<div
-				ref={sentinelRef}
-				aria-hidden='true'
-				className='h-px'
-			></div>
 			<div>
 				<div className='layout-container flex gap-6 justify-between items-center py-2'>
 					<Logo />
