@@ -12,6 +12,8 @@ import { TelegramIcon } from '@/ui/icons/TelegramIcon';
 import { WhatsAppIcon } from '@/ui/icons/WhatsAppIcon';
 import { Title } from '@/ui/title/Title';
 
+import { SITE_CONFIG } from '@/config/site.config';
+
 import { formService } from '@/services/order-form.service';
 import type { IOrderForm } from '@/types/form.types';
 
@@ -125,7 +127,7 @@ export function ConsultForm({ onSubmitted }: ConsultFormProps) {
 			</div>
 			<div className='mt-6 text-white/80 flex flex-col gap-4'>
 				<Link
-					href='tg://resolve?phone=79137334555'
+					href={SITE_CONFIG.telegramLink}
 					target='_blank'
 					rel='noopener noreferrer'
 					className='hover:text-white transition-colors flex items-center gap-2'
@@ -138,7 +140,7 @@ export function ConsultForm({ onSubmitted }: ConsultFormProps) {
 					— написать в Telegram
 				</Link>
 				<Link
-					href='https://wa.me/79137334555'
+					href={SITE_CONFIG.whatsappLink}
 					target='_blank'
 					rel='noopener noreferrer'
 					className='hover:text-white transition-colors flex items-center gap-2'

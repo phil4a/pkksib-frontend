@@ -246,14 +246,14 @@ export function Menu() {
 					<div className='layout-container w-full sm:w-fit'>
 						<div className='flex items-center justify-center gap-2 pb-6'>
 							<Link
-								href='https://t.me/pkksib'
+								href={SITE_CONFIG.telegramLink}
 								aria-label='Telegram'
 								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
 							>
 								<TelegramIcon />
 							</Link>
 							<Link
-								href='https://wa.me/73832866444'
+								href={SITE_CONFIG.whatsappLink}
 								aria-label='WhatsApp'
 								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
 							>
