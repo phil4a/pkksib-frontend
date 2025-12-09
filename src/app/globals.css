@@ -2,8 +2,6 @@
 @plugin "tailwind-clamp";
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
 	/* Colors */
 	--primary: #21282b;

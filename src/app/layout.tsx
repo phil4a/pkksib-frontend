@@ -22,8 +22,7 @@ export const metadata: Metadata = {
 
 const roboto = Roboto({
 	subsets: ['cyrillic'],
-	weight: ['400', '700'],
-	display: 'swap',
+	weight: ['200', '300', '400', '500', '600', '700', '800'],
 	preload: false
 });
 
