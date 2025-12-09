@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
 	phoneNumber: '+7 (383) 286-64-44',
 	email: 'info@pkksib.ru',
 	whatsappLink: 'https://wa.me/79137334555',
-	telegramLink: 'tg://resolve?phone=79137334555',
+	telegramLink: 'https://t.me/Yuriy_Titkov',
 	revalidatePeriod: 300
 };
 
