@@ -10,6 +10,7 @@ import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us
 import { Button } from '@/ui/button/Button';
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 import { Title } from '@/ui/title/Title';
+import { ViewportLazy } from '@/ui/viewport/ViewportLazy';
 
 import { COMPANY_FIGURES } from '@/config/site.config';
 
@@ -123,7 +124,16 @@ export default function HomePage() {
 			<LazyHowWeWork />
 			<LazyOurServices />
 			<WhyChooseUs />
-			<LazyObjectsMap />
+			<ViewportLazy
+				rootMargin='500px'
+				placeholder={
+					<div className='layout-container my-16'>
+						<SkeletonLoader className='h-90 sm:h-140 md:h-150 w-full rounded-xl' />
+					</div>
+				}
+			>
+				<LazyObjectsMap />
+			</ViewportLazy>
 			<LazyPartners />
 		</>
 	);
