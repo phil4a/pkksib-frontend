@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+import { Suspense } from 'react';
 
 import { Footer } from '@/components/layout/content/footer/Footer';
 import { Header } from '@/components/layout/content/header/Header';
+import { YandexMetrica } from '@/components/ui/analytics/YandexMetrica';
 
 import { Providers } from '@/providers/Providers';
 
@@ -64,6 +66,9 @@ export default function RootLayout({
 			</head>
 			<body>
 				<Providers>
+					<Suspense>
+						<YandexMetrica />
+					</Suspense>
 					<Header />
 					<main className='mt-4 lg:mt-5'>{children}</main>
 					<Footer />
