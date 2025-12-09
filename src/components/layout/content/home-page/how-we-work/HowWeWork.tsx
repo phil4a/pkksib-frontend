@@ -78,6 +78,7 @@ export function HowWeWork() {
 					</div>
 					<div className='flex gap-2'>
 						<Button
+							aria-label='Предыдущий слайд'
 							onClick={() => swiper?.slidePrev()}
 							type='accent'
 							disabled={!canPrev}
@@ -98,6 +99,7 @@ export function HowWeWork() {
 							</svg>
 						</Button>
 						<Button
+							aria-label='Следующий слайд'
 							onClick={() => swiper?.slideNext()}
 							type='accent'
 							disabled={!canNext}

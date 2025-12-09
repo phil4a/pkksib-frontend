@@ -57,6 +57,7 @@ function ServiceItem({ title, image, slug, shortDescription }: IServiceCategory)
 			<div className='bg-light-gray rounded-xl relative overflow-hidden group aspect-square w-full h-auto md:h-[320px] md:h-[480px]'>
 				<Link
 					href={PAGE.SERVICE(slug)}
+					aria-label={`Услуга: ${title}`}
 					className='z-2 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[calc(100%-24px)] w-[calc(100%-24px)] rounded-lg group-hover:bg-white/60 group-hover:backdrop-blur-[20px] transition-all'
 				>
 					<p className='hidden md:block text-[22px] font-semibold px-4 pt-7'>{title}</p>
@@ -74,9 +75,11 @@ function ServiceItem({ title, image, slug, shortDescription }: IServiceCategory)
 				</div>
 				<Link
 					href={PAGE.SERVICE(slug)}
+					aria-label={`Перейти к услуге: ${title}`}
 					className='hidden md:flex items-center justify-center z-3 absolute bottom-6 right-6 bg-accent hover:bg-primary hover:text-accent w-10 h-10 rounded-sm transition-colors'
 				>
 					<svg
+						aria-hidden='true'
 						width='10'
 						height='16'
 						viewBox='0 0 10 16'
