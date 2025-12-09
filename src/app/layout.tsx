@@ -37,7 +37,7 @@ export default function RootLayout({
 		>
 			<head>
 				<link
-					rel='preconnet'
+					rel='preconnect'
 					href='https://api.pkksib.ru'
 				/>
 				<link
