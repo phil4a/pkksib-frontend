@@ -22,7 +22,9 @@ export const metadata: Metadata = {
 
 const roboto = Roboto({
 	subsets: ['cyrillic'],
-	display: 'swap'
+	weight: ['400', '700'],
+	display: 'swap',
+	preload: false
 });
 
 export default function RootLayout({
