@@ -1,39 +1,20 @@
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import { HeroBullet } from '@/components/layout/content/home-page/hero/HeroBullet';
+import { LazyHowWeWork } from '@/components/layout/content/home-page/how-we-work/LazyHowWeWork';
+import { LazyObjectsMap } from '@/components/layout/content/home-page/objects-map/LazyObjectsMap';
+import { LazyOurServices } from '@/components/layout/content/home-page/our-services/LazyOurServices';
+import { LazyPartners } from '@/components/layout/content/home-page/partners/LazyPartners';
+import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
 
 import { Button } from '@/ui/button/Button';
+import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 import { Title } from '@/ui/title/Title';
 
 import { COMPANY_FIGURES } from '@/config/site.config';
 
 import mainBgImage from '@/assets/home-page/hero/main-bg.jpg';
 import roofImage from '@/assets/home-page/hero/roof.png';
-
-const DynamicWhyChooseUs = dynamic(() =>
-	import('@/components/layout/content/home-page/why-choose-us/WhyChooseUs').then(
-		mod => mod.WhyChooseUs
-	)
-);
-
-const DynamicPartners = dynamic(() =>
-	import('@/components/layout/content/home-page/partners/Partners').then(mod => mod.Partners)
-);
-
-const DynamicOurServices = dynamic(() =>
-	import('@/components/layout/content/home-page/our-services/OurServices').then(
-		mod => mod.OurServices
-	)
-);
-
-const DynamicObjectsMap = dynamic(() =>
-	import('@/components/layout/content/home-page/objects-map/ObjectsMap').then(mod => mod.ObjectsMap)
-);
-
-const DynamicHowWeWork = dynamic(() =>
-	import('@/components/layout/content/home-page/how-we-work/HowWeWork').then(mod => mod.HowWeWork)
-);
 
 export default function HomePage() {
 	return (
@@ -139,11 +120,11 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
-			<DynamicHowWeWork />
-			<DynamicOurServices />
-			<DynamicWhyChooseUs />
-			<DynamicObjectsMap />
-			<DynamicPartners />
+			<LazyHowWeWork />
+			<LazyOurServices />
+			<WhyChooseUs />
+			<LazyObjectsMap />
+			<LazyPartners />
 		</>
 	);
 }
