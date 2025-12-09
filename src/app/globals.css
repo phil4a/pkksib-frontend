@@ -98,3 +98,28 @@ body {
 .partners-wrapper {
 	transition-timing-function: linear !important;
 }
+
+#sw-app-471f80d9de5ce5852981df97fe33cf0a .sw-app-body {
+	width: 100% !important;
+}
+.sw-app .sw-swiper-button-arrow-type2:hover {
+	background-color: var(--accent) !important;
+}
+
+/* Hide SmartWidgets attribution link "Сделано на SmartWidgets" */
+.sw-app a[href*='utm_medium=createdby'] {
+	display: none !important;
+	opacity: 0 !important;
+}
+/* Fallback: hide anchor that contains SmartWidgets grey logo */
+.sw-app a:has(img[src*='sw_logo_grey.svg']) {
+	display: none !important;
+	opacity: 0 !important;
+}
+
+.sw-review-bottom {
+	a {
+		display: none !important;
+		opacity: 0 !important;
+	}
+}

@@ -6,6 +6,7 @@ import { LazyObjectsMap } from '@/components/layout/content/home-page/objects-ma
 import { LazyOurServices } from '@/components/layout/content/home-page/our-services/LazyOurServices';
 import { LazyPartners } from '@/components/layout/content/home-page/partners/LazyPartners';
 import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
+import SmartWidget from '@/components/ui/SmartWidget';
 
 import { Button } from '@/ui/button/Button';
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
@@ -124,6 +125,15 @@ export default function HomePage() {
 			<LazyHowWeWork />
 			<LazyOurServices />
 			<WhyChooseUs />
+
+			{/* SmartWidgets: отзывы/виджет */}
+			<section className='my-16'>
+				<div className='layout-container'>
+					<div className='mx-auto'>
+						<SmartWidget appId='471f80d9de5ce5852981df97fe33cf0a' />
+					</div>
+				</div>
+			</section>
 			<ViewportLazy
 				rootMargin='500px'
 				placeholder={
