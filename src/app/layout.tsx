@@ -13,7 +13,7 @@ import './globals.css';
 export const metadata: Metadata = {
 	title: {
 		absolute: 'Кровельные работы в Новосибирске'
-		// template: `%s | Video platform`
+		// template: `%s | Первая Кровельная Компания`
 	},
 	description:
 		'В «Первой Кровельной Компании» помимо товаров для кровли европейского качества предоставляется ряд услуг. У нас имеются мастера, которые выполнят монтажные работы в Новосибирске и области.',
@@ -36,6 +36,14 @@ export default function RootLayout({
 			className={`${roboto.className} antialiased`}
 		>
 			<head>
+				<link
+					rel='preconnet'
+					href='https://api.pkksib.ru'
+				/>
+				<link
+					rel='dns-prefetch'
+					href='https://api.pkksib.ru'
+				/>
 				<link
 					rel='preconnect'
 					href='https://cdn.pkksib.ru'
