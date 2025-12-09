@@ -15,6 +15,8 @@ import dorken from '@/assets/home-page/partners/doerken.png';
 import domProsto from '@/assets/home-page/partners/dom-prosto.webp';
 import factum from '@/assets/home-page/partners/factum.svg';
 import fakro from '@/assets/home-page/partners/fakro.png';
+import penoplex from '@/assets/home-page/partners/penoplex.png';
+import sgk from '@/assets/home-page/partners/sgk.svg';
 import shinglas from '@/assets/home-page/partners/shinglas.png';
 import sibBiz from '@/assets/home-page/partners/sib-biz.webp';
 import tegola from '@/assets/home-page/partners/tegola.svg';
@@ -161,6 +163,30 @@ export function Partners() {
 							width={222}
 							src={shinglas}
 							alt='Шинглас'
+						/>
+					</div>
+				</SwiperSlide>
+				<SwiperSlide className='relative self-center'>
+					<div className='h-25'>
+						<Image
+							draggable={false}
+							className='w-full h-full object-contain'
+							height={100}
+							width={222}
+							src={penoplex}
+							alt='Penoplex'
+						/>
+					</div>
+				</SwiperSlide>
+				<SwiperSlide className='relative self-center'>
+					<div className='h-25'>
+						<Image
+							draggable={false}
+							className='w-full h-full object-contain'
+							height={100}
+							width={222}
+							src={sgk}
+							alt='СГК'
 						/>
 					</div>
 				</SwiperSlide>
