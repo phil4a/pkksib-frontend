@@ -1,11 +1,7 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import { HeroBullet } from '@/components/layout/content/home-page/hero/HeroBullet';
-import { HowWeWork } from '@/components/layout/content/home-page/how-we-work/HowWeWork';
-import { ObjectsMap } from '@/components/layout/content/home-page/objects-map/ObjectsMap';
-import { OurServices } from '@/components/layout/content/home-page/our-services/OurServices';
-import { Partners } from '@/components/layout/content/home-page/partners/Partners';
-import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
 
 import { Button } from '@/ui/button/Button';
 import { Title } from '@/ui/title/Title';
@@ -14,6 +10,30 @@ import { COMPANY_FIGURES } from '@/config/site.config';
 
 import mainBgImage from '@/assets/home-page/hero/main-bg.jpg';
 import roofImage from '@/assets/home-page/hero/roof.png';
+
+const DynamicWhyChooseUs = dynamic(() =>
+	import('@/components/layout/content/home-page/why-choose-us/WhyChooseUs').then(
+		mod => mod.WhyChooseUs
+	)
+);
+
+const DynamicPartners = dynamic(() =>
+	import('@/components/layout/content/home-page/partners/Partners').then(mod => mod.Partners)
+);
+
+const DynamicOurServices = dynamic(() =>
+	import('@/components/layout/content/home-page/our-services/OurServices').then(
+		mod => mod.OurServices
+	)
+);
+
+const DynamicObjectsMap = dynamic(() =>
+	import('@/components/layout/content/home-page/objects-map/ObjectsMap').then(mod => mod.ObjectsMap)
+);
+
+const DynamicHowWeWork = dynamic(() =>
+	import('@/components/layout/content/home-page/how-we-work/HowWeWork').then(mod => mod.HowWeWork)
+);
 
 export default function HomePage() {
 	return (
@@ -66,6 +86,7 @@ export default function HomePage() {
 								alt={'Первая кровельная компания'}
 								className='object-cover rounded-xl'
 								priority={true}
+								fetchPriority='high'
 								draggable={false}
 								fill={true}
 								sizes='(max-width: 768px) 100vw, 50vw'
@@ -77,8 +98,9 @@ export default function HomePage() {
 							<Image
 								src={roofImage}
 								alt='кровля дома'
-								priority={true}
-								className='object-cover '
+								// priority={true}
+								loading='lazy'
+								className='object-cover'
 								draggable={false}
 							></Image>
 						</div>
@@ -117,11 +139,11 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
-			<HowWeWork />
-			<OurServices />
-			<WhyChooseUs />
-			<ObjectsMap />
-			<Partners />
+			<DynamicHowWeWork />
+			<DynamicOurServices />
+			<DynamicWhyChooseUs />
+			<DynamicObjectsMap />
+			<DynamicPartners />
 		</>
 	);
 }

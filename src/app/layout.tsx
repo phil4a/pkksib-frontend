@@ -35,6 +35,24 @@ export default function RootLayout({
 			lang='ru'
 			className={`${roboto.className} antialiased`}
 		>
+			<head>
+				<link
+					rel='preconnect'
+					href='https://cdn.pkksib.ru'
+				/>
+				<link
+					rel='dns-prefetch'
+					href='https://cdn.pkksib.ru'
+				/>
+				<link
+					rel='preconnect'
+					href='https://befbb7a338eb-pkk-media.s3.ru1.storage.beget.cloud'
+				/>
+				<link
+					rel='dns-prefetch'
+					href='https://befbb7a338eb-pkk-media.s3.ru1.storage.beget.cloud'
+				/>
+			</head>
 			<body>
 				<Providers>
 					<Header />

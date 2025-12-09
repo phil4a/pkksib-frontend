@@ -2,6 +2,7 @@
 
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { GoogleMap, InfoWindow, useLoadScript } from '@react-google-maps/api';
+import type { Libraries } from '@react-google-maps/api';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -17,9 +18,12 @@ import { objectService } from '@/services/object.service';
 import type { IObjectMarker } from '@/types/object.types';
 
 const containerStyle = {
-	width: '100%',
-	height: '100%'
+    width: '100%',
+    height: '100%'
 };
+
+// Делаем массив библиотек стабильным, чтобы не пересоздавался на каждом рендере
+const GOOGLE_MAP_LIBRARIES: Libraries = ['marker'];
 
 export default function MapComponent() {
 	const [markers, setMarkers] = useState<IObjectMarker[]>([]);
@@ -32,10 +36,10 @@ export default function MapComponent() {
 	const markerRootsRef = useRef<Root[]>([]);
 	const markerClustererRef = useRef<MarkerClusterer | null>(null);
 
-	const { isLoaded } = useLoadScript({
-		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-		libraries: ['marker']
-	});
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+        libraries: GOOGLE_MAP_LIBRARIES
+    });
 
 	const createCustomMarkerIcon = useCallback((marker: IObjectMarker) => {
 		// Создаем SVG иконку для маркера
