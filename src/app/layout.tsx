@@ -39,6 +39,12 @@ export default function RootLayout({
 			className={`${roboto.className}  antialiased`}
 		>
 			<head>
+				{process.env.NODE_ENV === 'production' && (
+					<meta
+						name='yandex-verification'
+						content='d2dbd3db7f8ba4ff'
+					/>
+				)}
 				<link
 					rel='preconnect'
 					href='https://api.pkksib.ru'
