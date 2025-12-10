@@ -10,7 +10,7 @@ export interface IContactMarker
 	streetAddress: string;
 	telephone: string;
 	telephoneLink: string;
-	schedule: string;
+	schedule: string | string[];
 }
 
 export const CONTACT_MARKERS: IContactMarker[] = [
@@ -26,20 +26,20 @@ export const CONTACT_MARKERS: IContactMarker[] = [
 		streetAddress: 'ул. Красный проспект 218/1, офис 1',
 		telephone: '+7 (383) 286-64-44',
 		telephoneLink: '+73832866444',
-		schedule: 'Ежедневно 10:00-20:00'
-	},
-	{
-		id: 2,
-		title: 'Торговый дом Форум',
-		slug: '',
-		coordinates: { lat: 54.759794, lng: 83.107262 },
-		isCommercial: false,
-		city: 'Бердск',
-		postalCode: '633010',
-		addressLocality: 'Бердск',
-		streetAddress: 'ул М.Горького, д. 4А, 4 этаж, офис 410',
-		telephone: '+7 (983) 003-65-55',
-		telephoneLink: '+79830036555',
-		schedule: 'Ежедневно 10:00-20:00'
+		schedule: ['пн-сб: 10:00-18:00', 'вс: выходной']
 	}
+	// {
+	// 	id: 2,
+	// 	title: 'Торговый дом Форум',
+	// 	slug: '',
+	// 	coordinates: { lat: 54.759794, lng: 83.107262 },
+	// 	isCommercial: false,
+	// 	city: 'Бердск',
+	// 	postalCode: '633010',
+	// 	addressLocality: 'Бердск',
+	// 	streetAddress: 'ул М.Горького, д. 4А, 4 этаж, офис 410',
+	// 	telephone: '+7 (983) 003-65-55',
+	// 	telephoneLink: '+79830036555',
+	// 	schedule: 'Ежедневно: 10:00-18:00'
+	// }
 ];

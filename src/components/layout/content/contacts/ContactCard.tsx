@@ -64,7 +64,71 @@ export default function ContactCard({ contact, onSelect, isSelected }: ContactCa
 				>
 					{telephone}
 				</Link>
-				<p>{schedule}</p>
+				{Array.isArray(schedule) ? (
+					<ul className='mt-1 space-y-1'>
+						{schedule.map((line, idx) => (
+							<li
+								key={idx}
+								className='flex items-center gap-2'
+							>
+								<svg
+									width='14'
+									height='14'
+									viewBox='0 0 24 24'
+									fill='none'
+									xmlns='http://www.w3.org/2000/svg'
+								>
+									<path
+										d='M12 8v5l4 2'
+										stroke='#868686'
+										strokeWidth='1.6'
+										strokeLinecap='round'
+										strokeLinejoin='round'
+									/>
+									<path
+										d='M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+										stroke='#868686'
+										strokeWidth='1.6'
+									/>
+								</svg>
+								<span>{line}</span>
+							</li>
+						))}
+					</ul>
+				) : schedule && typeof schedule === 'string' && schedule.includes('\n') ? (
+					<ul className='mt-1 space-y-1'>
+						{schedule.split(/\r?\n/).map((line, idx) => (
+							<li
+								key={idx}
+								className='flex items-center gap-2'
+							>
+								<svg
+									width='14'
+									height='14'
+									viewBox='0 0 24 24'
+									fill='none'
+									xmlns='http://www.w3.org/2000/svg'
+								>
+									<path
+										d='M12 8v5l4 2'
+										stroke='#868686'
+										strokeWidth='1.6'
+										strokeLinecap='round'
+										strokeLinejoin='round'
+									/>
+									<path
+										d='M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+										stroke='#868686'
+										strokeWidth='1.6'
+									/>
+								</svg>
+								<span>{line}</span>
+							</li>
+						))}
+					</ul>
+				) : (
+					<p>{schedule}</p>
+				)}
 			</div>
 		</li>
 	);
