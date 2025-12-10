@@ -1,17 +1,13 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 export function Logo() {
 	return (
-		<Link
-			href='/'
-			className='grow-0 shrink-0 h-12 w-12 relative'
-		>
+		<span className='shrink-0 block h-9 w-9 lg:h-12 md:w-12 relative'>
 			<Image
 				src={'/logo.svg'}
 				alt={'logo'}
 				fill
-			></Image>
-		</Link>
+			/>
+		</span>
 	);
 }

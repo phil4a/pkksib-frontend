@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
+import { Roboto, Roboto_Condensed } from 'next/font/google';
 import { Suspense } from 'react';
 
 import { Footer } from '@/components/layout/content/footer/Footer';
@@ -36,7 +36,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang='ru'
-			className={`${roboto.className} antialiased`}
+			className={`${roboto.className}  antialiased`}
 		>
 			<head>
 				<link
