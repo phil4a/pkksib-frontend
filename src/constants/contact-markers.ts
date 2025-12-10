@@ -26,7 +26,7 @@ export const CONTACT_MARKERS: IContactMarker[] = [
 		streetAddress: 'ул. Красный проспект 218/1, офис 1',
 		telephone: '+7 (383) 286-64-44',
 		telephoneLink: '+73832866444',
-		schedule: ['пн-сб: 10:00-18:00', 'вс: выходной']
+		schedule: ['пн-пт: 10:00-18:00', 'сб: ​по предварительному звонку', 'вс: выходной']
 	}
 	// {
 	// 	id: 2,
