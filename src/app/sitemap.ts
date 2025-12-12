@@ -52,13 +52,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		priority: priorityMap[key as keyof typeof PAGE_INFO] ?? 0.7
 	}));
 
-	const [articles, services, objects] = hasApi
+	const [articles, services, serviceCategories, objects] = hasApi
 		? await Promise.all([
 				collectSlugs(API_PATHS.ARTICLES),
 				collectSlugs(API_PATHS.SERVICES),
+				collectSlugs(API_PATHS.SERVICE_CATEGORIES),
 				collectSlugs(API_PATHS.OBJECTS)
 			])
-		: [[], [], []];
+		: [[], [], [], []];
 
 	const toEntries = (items: SlugItem[], prefix: string): MetadataRoute.Sitemap =>
 		items.map(i => ({
@@ -72,6 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		...staticRoutes,
 		...toEntries(articles, '/articles'),
 		...toEntries(services, '/services'),
+		...toEntries(serviceCategories, '/services'),
 		...toEntries(objects, '/objects')
 	];
 }
