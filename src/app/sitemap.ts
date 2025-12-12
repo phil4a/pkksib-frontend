@@ -77,3 +77,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		...toEntries(objects, '/objects')
 	];
 }
+
+export const revalidate = 86400;
