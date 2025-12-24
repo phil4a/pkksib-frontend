@@ -92,7 +92,7 @@ export function PriceLists({ items }: PriceListsProps) {
 											<span className='text-dark-gray'>Единица измерения</span>
 											<span>{formatUnit(service.units)}</span>
 										</div>
-										<div className='flex items-center justify-between'>
+										<div className='flex items-center justify-between gap-2'>
 											<span className='text-dark-gray'>Цена (без стоимости материалов)</span>
 											<span className='shrink-0'>от {service.price} ₽</span>
 										</div>
