@@ -20,8 +20,8 @@ export default function AboutPage() {
 			<WhyChooseUs />
 			<Team />
 			<CompanyNumbers />
-			<AboutCertificates />
-			<div className='layout-container mb-25'>
+			{/* <AboutCertificates /> */}
+			<div className='layout-container my-20 md:my-25'>
 				<OrderForm
 					title={[
 						{ text: 'Оставьте заявку', accent: true },

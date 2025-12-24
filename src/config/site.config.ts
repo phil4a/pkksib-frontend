@@ -18,19 +18,19 @@ export const COMPANY_FIGURES = [
 	},
 	{
 		title: 'смонтированных домов из клееного и профильного бруса',
-		number: 50000,
+		number: 2000,
 		units: 'м³',
 		icon: '/assets/icons/house-icon.svg'
 	},
 	{
 		title: 'выполненных различных фасадных работ',
-		number: 250000,
+		number: 25000,
 		units: 'м²',
 		icon: '/assets/icons/bricks-icon.svg'
 	},
 	{
 		title: 'выполненных строительных объектов',
-		number: 6000,
+		number: 600,
 		units: '',
 		icon: '/assets/icons/building-icon.svg'
 	}

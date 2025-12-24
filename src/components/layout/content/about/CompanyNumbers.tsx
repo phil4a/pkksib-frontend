@@ -46,16 +46,16 @@ export function CompanyNumbers() {
 							кровельных работ, из них по реконструкции более 5000 м²
 						</p>
 					</li>
-					<li className='p-6 pt-5 bg-white/20 border-1 border-white/20 rounded-xl backdrop-blur-sm'>
+					{/* <li className='p-6 pt-5 bg-white/20 border-1 border-white/20 rounded-xl backdrop-blur-sm'>
 						<p className='text-[26px] md:text-4xl font-semibold mb-2 text-accent'>5000 м³</p>
 						<p className='text-light-gray'>смонтированных домов из клееного и профильного бруса</p>
-					</li>
+					</li> */}
 					<li className='p-6 pt-5 bg-white/20 border-1 border-white/20 rounded-xl backdrop-blur-sm'>
-						<p className='text-[26px] md:text-4xl font-semibold mb-2 text-accent'>20000 м²</p>
+						<p className='text-[26px] md:text-4xl font-semibold mb-2 text-accent'>2000 м²</p>
 						<p className='text-light-gray'>выполненных различных фасадных работ</p>
 					</li>
 					<li className='p-6 pt-5 bg-white/20 border-1 border-white/20 rounded-xl backdrop-blur-sm'>
-						<p className='text-[26px] md:text-4xl font-semibold mb-2 text-accent'>100</p>
+						<p className='text-[26px] md:text-4xl font-semibold mb-2 text-accent'>30</p>
 						<p className='text-light-gray'>выполненных строительных объектов</p>
 					</li>
 				</ul>

@@ -16,7 +16,6 @@ import { ViewportLazy } from '@/ui/viewport/ViewportLazy';
 import { COMPANY_FIGURES } from '@/config/site.config';
 
 import mainImage from '@/assets/home-page/hero/main-image.png';
-import roofImage from '@/assets/home-page/hero/roof.png';
 
 export default function HomePage() {
 	return (
