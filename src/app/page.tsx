@@ -84,13 +84,13 @@ export default function HomePage() {
 			<WhyChooseUs />
 
 			{/* SmartWidgets: отзывы/виджет */}
-			<section className='my-16'>
+			{/* <section className='my-16'>
 				<div className='layout-container'>
 					<div className='mx-auto'>
 						<SmartWidget appId='471f80d9de5ce5852981df97fe33cf0a' />
 					</div>
 				</div>
-			</section>
+			</section> */}
 			<ViewportLazy
 				rootMargin='500px'
 				placeholder={
