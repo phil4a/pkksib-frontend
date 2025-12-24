@@ -17,10 +17,30 @@ export default async function PricesPage() {
 	const { data } = await serviceService.getCategories();
 	const categories = data.data;
 
+	const ROOFING_KEYWORDS = [
+		'кровл',
+		'кровель',
+		'крыш',
+		'черепиц',
+		'профнастил',
+		'фальц',
+		'шифер',
+		'ондулин'
+	];
+
+	const sortedCategories = [...categories].sort((a, b) => {
+		const isRoofingA = ROOFING_KEYWORDS.some(k => a.title.toLowerCase().includes(k));
+		const isRoofingB = ROOFING_KEYWORDS.some(k => b.title.toLowerCase().includes(k));
+
+		if (isRoofingA && !isRoofingB) return -1;
+		if (!isRoofingA && isRoofingB) return 1;
+		return 0;
+	});
+
 	return (
 		<div className='layout-container'>
 			<PricesHeading />
-			<PriceLists items={categories} />
+			<PriceLists items={sortedCategories} />
 		</div>
 	);
 }
