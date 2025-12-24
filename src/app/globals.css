@@ -49,6 +49,15 @@
 
 @theme inline {
 	/* --font-noto-sans: var(--font-noto-sans); */
+	--animate-ping-slow: ping-slow 1.85s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+	@keyframes ping-slow {
+		75%,
+		100% {
+			transform: scale(1.5);
+			opacity: 0;
+		}
+	}
 }
 
 body {

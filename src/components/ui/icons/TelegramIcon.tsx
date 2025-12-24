@@ -2,12 +2,14 @@ interface TelegramIconProps {
 	color?: string;
 	width?: number;
 	height?: number;
+	className?: string;
 }
 
 export function TelegramIcon({
 	color = 'currentColor',
 	width = 15,
-	height = 14
+	height = 14,
+	className
 }: TelegramIconProps) {
 	return (
 		<svg
@@ -16,6 +18,7 @@ export function TelegramIcon({
 			viewBox='0 0 15 14'
 			fill='none'
 			xmlns='http://www.w3.org/2000/svg'
+			className={className}
 		>
 			<path
 				fillRule='evenodd'
