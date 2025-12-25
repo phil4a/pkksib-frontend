@@ -8,6 +8,7 @@ import { Heading } from '@/components/layout/content/services/Heading';
 import { ServiceRelated } from '@/components/layout/content/services/ServiceRelated';
 import { ServicesList } from '@/components/layout/content/services/ServicesList';
 import { ServicesText } from '@/components/layout/content/services/ServicesText';
+import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
 import { EstimateForm } from '@/components/layout/form/estimate/EstimateForm';
 
 import { serviceService } from '@/services/service.service';
@@ -85,6 +86,12 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 				<ServicesList items={services} />
 				{category.description && <ServicesText text={category.description} />}
 				<ServiceRelated category={category} />
+				<div className='bg-light-gray'>
+					<div className='layout-container py-20'>
+						<DirectorForm />
+						{/* <OrderForm title='Оставьте заявку на выполнение такого же проекта' /> */}
+					</div>
+				</div>
 			</>
 		);
 	}
@@ -101,6 +108,12 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 				{service.description && <ServicesText text={service.description} />}
 				{!!service.objects?.length && <ServiceObjects objects={service.objects} />}
 				<EstimateForm />
+				<div className='bg-light-gray'>
+					<div className='layout-container py-20'>
+						<DirectorForm />
+						{/* <OrderForm title='Оставьте заявку на выполнение такого же проекта' /> */}
+					</div>
+				</div>
 			</>
 		);
 	}

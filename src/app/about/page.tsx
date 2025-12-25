@@ -5,6 +5,7 @@ import { CompanyNumbers } from '@/components/layout/content/about/CompanyNumbers
 import { Hero } from '@/components/layout/content/about/Hero';
 import { Team } from '@/components/layout/content/about/Team';
 import { WhyChooseUs } from '@/components/layout/content/about/WhyChooseUs';
+import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
 import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 export const metadata: Metadata = {
@@ -22,13 +23,16 @@ export default function AboutPage() {
 			<CompanyNumbers />
 			{/* <AboutCertificates /> */}
 			<div className='layout-container my-20 md:my-25'>
+				<DirectorForm />
+			</div>
+			{/* <div className='layout-container my-20 md:my-25'>
 				<OrderForm
 					title={[
 						{ text: 'Оставьте заявку', accent: true },
 						{ text: ' — мы свяжемся и рассчитаем смету' }
 					]}
 				/>
-			</div>
+			</div> */}
 		</>
 	);
 }

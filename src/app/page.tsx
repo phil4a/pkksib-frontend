@@ -84,7 +84,6 @@ export default function HomePage() {
 			<LazyOurServices />
 			<WhyChooseUs />
 
-			<DirectorForm />
 			{/* SmartWidgets: отзывы/виджет */}
 			{/* <section className='my-16'>
 				<div className='layout-container'>

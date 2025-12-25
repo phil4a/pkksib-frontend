@@ -5,6 +5,7 @@ import { Hero } from '@/components/layout/content/object-page/Hero';
 import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGallery';
 import { PageContent } from '@/components/layout/content/object-page/PageContent';
 import { RelatedObjects } from '@/components/layout/content/object-page/RelatedObjects';
+import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
 import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 import { objectService } from '@/services/object.service';
@@ -75,13 +76,16 @@ export default async function ObjectPage({ params }: TPageSlugProp) {
 			{object?.description && <PageContent description={object?.description} />}
 			{object?.photos && <ObjectGallery photos={object?.photos || []} />}
 
-			<div className='layout-container pt-0 pb-16 lg:pt-8 lg:pb-25'>
-				<OrderForm title='Оставьте заявку на выполнение такого же проекта' />
-			</div>
 			<RelatedObjects
 				objects={relatedObjects}
 				className='mb-16 lg:mb-25'
 			/>
+			<div className='bg-light-gray'>
+				<div className='layout-container py-20'>
+					<DirectorForm />
+					{/* <OrderForm title='Оставьте заявку на выполнение такого же проекта' /> */}
+				</div>
+			</div>
 		</>
 	);
 }

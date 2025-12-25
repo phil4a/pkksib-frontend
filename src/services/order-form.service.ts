@@ -9,7 +9,7 @@ interface IFormResponse {
 class FormService {
 	constructor() {}
 	private _FORM = '/order-forms';
-	private _DIRECTOR = '/director-mails'; // Hypothetical endpoint
+	private _DIRECTOR = '/director-forms';
 
 	async send(data: IOrderForm) {
 		return axiosClassic.post<IFormResponse>(`${this._FORM}`, { data });
