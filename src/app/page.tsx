@@ -7,6 +7,7 @@ import { LazyObjectsMap } from '@/components/layout/content/home-page/objects-ma
 import { LazyOurServices } from '@/components/layout/content/home-page/our-services/LazyOurServices';
 import { LazyPartners } from '@/components/layout/content/home-page/partners/LazyPartners';
 import { WhyChooseUs } from '@/components/layout/content/home-page/why-choose-us/WhyChooseUs';
+import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
 import SmartWidget from '@/components/ui/SmartWidget';
 
 import { Button } from '@/ui/button/Button';
@@ -83,6 +84,7 @@ export default function HomePage() {
 			<LazyOurServices />
 			<WhyChooseUs />
 
+			<DirectorForm />
 			{/* SmartWidgets: отзывы/виджет */}
 			{/* <section className='my-16'>
 				<div className='layout-container'>

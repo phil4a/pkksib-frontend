@@ -3,3 +3,17 @@ export interface IOrderForm {
 	phone: string;
 	message?: string;
 }
+
+export interface IDirectorForm {
+	name: string;
+	phone: string;
+	email: string;
+	message: string;
+}
+
+export interface IDirectorForm {
+	name: string;
+	email: string;
+	phone: string;
+	message: string;
+}

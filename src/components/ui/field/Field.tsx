@@ -8,7 +8,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	registration: UseFormRegisterReturn;
 }
 
-export function Field({ error, registration, ...props }: Props) {
+export function Field({ error, registration, className, ...props }: Props) {
 	return (
 		<div className='w-full'>
 			<input
@@ -16,7 +16,8 @@ export function Field({ error, registration, ...props }: Props) {
 					'w-full py-3 px-4 rounded-sm bg-white border border-light-gray focus:outline-none focus:border-accent transition-colors',
 					{
 						'border-red-500': error
-					}
+					},
+					className
 				)}
 				{...registration}
 				{...props}
