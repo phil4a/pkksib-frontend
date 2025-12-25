@@ -108,12 +108,6 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 				{service.description && <ServicesText text={service.description} />}
 				{!!service.objects?.length && <ServiceObjects objects={service.objects} />}
 				<EstimateForm />
-				<div className='bg-light-gray'>
-					<div className='layout-container py-20'>
-						<DirectorForm />
-						{/* <OrderForm title='Оставьте заявку на выполнение такого же проекта' /> */}
-					</div>
-				</div>
 			</>
 		);
 	}
