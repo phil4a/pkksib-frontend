@@ -8,13 +8,22 @@ import type { IObjectMarker } from '@/types/object.types';
 interface CustomMarkerProps {
 	marker: IObjectMarker;
 	onClick: () => void;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
 }
 
-export const CustomMarker: React.FC<CustomMarkerProps> = ({ marker, onClick }) => {
+export const CustomMarker: React.FC<CustomMarkerProps> = ({
+	marker,
+	onClick,
+	onMouseEnter,
+	onMouseLeave
+}) => {
 	return (
 		<div
 			className='custom-marker flex gap-2 items-center bg-white/90 p-1 rounded-r-sm rounded-l-2xl cursor-pointer min-w-fit truncate transition-all hover:scale-105 -translate-x-1/8  relative'
 			onClick={onClick}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
 		>
 			{/* Иконка маркера */}
 			<div>

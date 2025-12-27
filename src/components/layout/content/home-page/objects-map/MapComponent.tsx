@@ -18,8 +18,8 @@ import { objectService } from '@/services/object.service';
 import type { IObjectMarker } from '@/types/object.types';
 
 const containerStyle = {
-    width: '100%',
-    height: '100%'
+	width: '100%',
+	height: '100%'
 };
 
 // Делаем массив библиотек стабильным, чтобы не пересоздавался на каждом рендере
@@ -36,10 +36,10 @@ export default function MapComponent() {
 	const markerRootsRef = useRef<Root[]>([]);
 	const markerClustererRef = useRef<MarkerClusterer | null>(null);
 
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-        libraries: GOOGLE_MAP_LIBRARIES
-    });
+	const { isLoaded } = useLoadScript({
+		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+		libraries: GOOGLE_MAP_LIBRARIES
+	});
 
 	const createCustomMarkerIcon = useCallback((marker: IObjectMarker) => {
 		// Создаем SVG иконку для маркера
@@ -87,13 +87,6 @@ export default function MapComponent() {
 				// Контейнер и React-рендер кастомного маркера
 				const container = document.createElement('div');
 				const root = createRoot(container);
-				root.render(
-					<CustomMarker
-						marker={markerData}
-						onClick={() => setSelectedMarker(markerData)}
-					/>
-				);
-				markerRootsRef.current.push(root);
 
 				const advMarker = new google.maps.marker.AdvancedMarkerElement({
 					position: { lat: markerData.coordinates.lat, lng: markerData.coordinates.lng },
@@ -101,6 +94,20 @@ export default function MapComponent() {
 					content: container,
 					title: markerData.title
 				});
+
+				root.render(
+					<CustomMarker
+						marker={markerData}
+						onClick={() => setSelectedMarker(markerData)}
+						onMouseEnter={() => {
+							advMarker.zIndex = 1;
+						}}
+						onMouseLeave={() => {
+							advMarker.zIndex = null;
+						}}
+					/>
+				);
+				markerRootsRef.current.push(root);
 
 				advMarker.addListener('click', () => {
 					setSelectedMarker(markerData);
