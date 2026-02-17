@@ -6,6 +6,7 @@ export const SITE_CONFIG = {
 	email: 'info@pkksib.ru',
 	whatsappLink: 'https://wa.me/79137334555',
 	telegramLink: 'https://t.me/Yuriy_Titkov',
+	maxLink: 'https://max.ru/u/f9LHodD0cOJ4CgUsByZua9AN0puBZkv42qVtgk-ixeaMr1bCorYCS-hrRNI',
 	revalidatePeriod: 300
 };
 

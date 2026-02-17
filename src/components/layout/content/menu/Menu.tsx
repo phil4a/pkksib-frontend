@@ -17,6 +17,8 @@ import {
 	navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 
+import { MaxIcon } from '@/ui/icons/MaxIcon';
+
 import { MAIN_MENU } from '@/config/navigation';
 import { PAGE } from '@/config/pages';
 import { SITE_CONFIG } from '@/config/site.config';
@@ -249,6 +251,7 @@ export function Menu() {
 								href={SITE_CONFIG.telegramLink}
 								aria-label='Telegram'
 								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
+								target='_blank'
 							>
 								<TelegramIcon />
 							</Link>
@@ -256,8 +259,17 @@ export function Menu() {
 								href={SITE_CONFIG.whatsappLink}
 								aria-label='WhatsApp'
 								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
+								target='_blank'
 							>
 								<WhatsAppIcon />
+							</Link>
+							<Link
+								href={SITE_CONFIG.maxLink}
+								aria-label='MAX'
+								className='w-9 h-9 rounded-xl bg-light-gray text-dark-gray flex items-center justify-center'
+								target='_blank'
+							>
+								<MaxIcon />
 							</Link>
 						</div>
 						<div className='flex flex-col gap-4 mb-6'>

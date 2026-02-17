@@ -1,3 +1,4 @@
+import { MaxIcon } from '@/ui/icons/MaxIcon';
 import { TelegramIcon } from '@/ui/icons/TelegramIcon';
 import { WhatsAppIcon } from '@/ui/icons/WhatsAppIcon';
 
@@ -29,6 +30,16 @@ export function HeaderTop() {
 					>
 						<WhatsAppIcon />
 						WhatsApp
+					</HeaderLink>
+
+					<HeaderLink
+						href={SITE_CONFIG.maxLink}
+						target='_blank'
+						secondary
+						className='text-sm font-semibold leading-normal text-[#443064] hover:text-[#4e3477cc]'
+					>
+						<MaxIcon />
+						MAX
 					</HeaderLink>
 				</div>
 			</div>
