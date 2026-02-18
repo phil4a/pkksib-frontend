@@ -32,7 +32,8 @@ export async function GET() {
 		const query = qs.stringify(
 			{
 				populate: {
-					service_category: true
+					service_category: true,
+					image: true
 				},
 				pagination: {
 					pageSize: 500
@@ -53,7 +54,9 @@ export async function GET() {
 		const categoryIds = new Set(categories.map(c => c.id));
 
 		const offersXml = services
-			.filter(s => typeof s.price === 'number' && s.price > 0 && s.service_category?.id)
+			.filter(
+				s => typeof s.price === 'number' && s.price > 0 && s.service_category?.id && !!s.image?.url
+			)
 			.filter(s => categoryIds.has(s.service_category!.id))
 			.map(service => {
 				const id = service.id;
