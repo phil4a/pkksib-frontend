@@ -9,6 +9,7 @@ import { axiosClassic } from '@/api/axios';
 import type { IService, IServiceCategory } from '@/types/service.types';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const EXECUTOR_NAME = 'ООО "Первая Кровельная Компания"';
 
 interface ServiceResponse {
 	data: IService[];
@@ -62,7 +63,7 @@ export async function GET() {
 				const id = service.id;
 				const url = `${SITE_URL}${PAGE.SERVICE(service.slug)}`;
 				const price = service.price;
-				const name = escapeXml(service.title);
+				const name = escapeXml(EXECUTOR_NAME);
 				const categoryId = service.service_category!.id;
 				const currencyId = 'RUR';
 
@@ -72,8 +73,7 @@ export async function GET() {
 						? pictureRaw
 						: `${SITE_URL}${pictureRaw}`;
 
-				const descriptionSource = service.shortDescription || service.title;
-				const description = escapeXml(descriptionSource);
+				const description = escapeXml(service.title);
 
 				const rating = 0;
 				const reviewsCount = 0;
