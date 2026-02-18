@@ -61,13 +61,40 @@ export async function GET() {
 				const price = service.price;
 				const name = escapeXml(service.title);
 				const categoryId = service.service_category!.id;
+				const currencyId = 'RUR';
+
+				const pictureRaw = service.image?.url ?? '';
+				const picture =
+					pictureRaw.startsWith('http://') || pictureRaw.startsWith('https://')
+						? pictureRaw
+						: `${SITE_URL}${pictureRaw}`;
+
+				const descriptionSource = service.shortDescription || service.title;
+				const description = escapeXml(descriptionSource);
+
+				const rating = 0;
+				const reviewsCount = 0;
+				const yearsOfExperience = 11;
+				const region = 'Новосибирск';
+				const conversion = 1;
+
+				const setIds = 'pkksib_general';
 
 				return [
 					`    <offer id="${id}">`,
 					`      <url>${url}</url>`,
-					`      <price>${price}</price>`,
+					`      <price from="true">${price}</price>`,
+					`      <currencyId>${currencyId}</currencyId>`,
 					`      <name>${name}</name>`,
 					`      <categoryId>${categoryId}</categoryId>`,
+					`      <set-ids>${setIds}</set-ids>`,
+					`      <picture>${picture}</picture>`,
+					`      <description>${description}</description>`,
+					`      <param name="Рейтинг">${rating}</param>`,
+					`      <param name="Число отзывов">${reviewsCount}</param>`,
+					`      <param name="Годы опыта">${yearsOfExperience}</param>`,
+					`      <param name="Регион">${escapeXml(region)}</param>`,
+					`      <param name="Конверсия">${conversion}</param>`,
 					`    </offer>`
 				].join('\n');
 			})
@@ -85,7 +112,7 @@ export async function GET() {
 			'<?xml version="1.0" encoding="utf-8"?>',
 			'<yml_catalog date="' + new Date().toISOString() + '">',
 			'  <shop>',
-			'    <name>Услуги первой кровельной компании</name>',
+			'    <name>Первая кровельная</name>',
 			'    <company>Первая Кровельная Компания</company>',
 			`    <url>${SITE_URL}</url>`,
 			'    <currencies>',
