@@ -3,6 +3,7 @@ import qs from 'qs';
 
 import { API_PATHS } from '@/config/api.config';
 import { PAGE } from '@/config/pages';
+import { SITE_CONFIG } from '@/config/site.config';
 
 import { axiosClassic } from '@/api/axios';
 
@@ -10,6 +11,7 @@ import type { IService, IServiceCategory } from '@/types/service.types';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const EXECUTOR_NAME = 'ООО "Первая Кровельная Компания"';
+const SET_ID = 'pkksib_services';
 
 interface ServiceResponse {
 	data: IService[];
@@ -81,7 +83,7 @@ export async function GET() {
 				const region = 'Новосибирск';
 				const conversion = 1;
 
-				const setIds = 'pkksib_general';
+				const setIds = SET_ID;
 
 				return [
 					`    <offer id="${id}">`,
@@ -115,15 +117,22 @@ export async function GET() {
 			'<?xml version="1.0" encoding="utf-8"?>',
 			'<yml_catalog date="' + new Date().toISOString() + '">',
 			'  <shop>',
-			'    <name>Первая кровельная</name>',
-			'    <company>Первая Кровельная Компания</company>',
+			'    <name>Первая кровельная компания/name>',
+			'    <company>ООО "Первая Кровельная Компания"</company>',
 			`    <url>${SITE_URL}</url>`,
+			`    <email>${SITE_CONFIG.email}</email>`,
 			'    <currencies>',
 			'      <currency id="RUR" rate="1"/>',
 			'    </currencies>',
 			'    <categories>',
 			categoriesXml,
 			'    </categories>',
+			'    <sets>',
+			`      <set id="${SET_ID}">`,
+			'        <name>Кровельные и строительные услуги в Новосибирске</name>',
+			`        <url>${SITE_URL}/services</url>`,
+			'      </set>',
+			'    </sets>',
 			'    <offers>',
 			offersXml,
 			'    </offers>',
