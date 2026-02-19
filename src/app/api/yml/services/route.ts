@@ -10,7 +10,7 @@ import { axiosClassic } from '@/api/axios';
 import type { IService, IServiceCategory } from '@/types/service.types';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-const EXECUTOR_NAME = 'ООО "Первая Кровельная Компания"';
+const EXECUTOR_NAME = 'Первая Кровельная Компания';
 const SET_ID = 'pkksib_services';
 
 interface ServiceResponse {
@@ -117,8 +117,8 @@ export async function GET() {
 			'<?xml version="1.0" encoding="utf-8"?>',
 			'<yml_catalog date="' + new Date().toISOString() + '">',
 			'  <shop>',
-			'    <name>Первая кровельная компания/name>',
-			'    <company>ООО "Первая Кровельная Компания"</company>',
+			'    <name>Первая кровельная</name>',
+			'    <company>Первая Кровельная Компания</company>',
 			`    <url>${SITE_URL}</url>`,
 			`    <email>${SITE_CONFIG.email}</email>`,
 			'    <currencies>',
