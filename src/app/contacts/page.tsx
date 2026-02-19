@@ -20,7 +20,7 @@ export default function ContactsPage() {
 			<div className='container-layout my-16 lg:my-25'>
 				<OrderForm
 					title={[
-						{ text: 'Оставьте заявку –' },
+						{ text: 'Оставьте заявку – ' },
 						{ text: 'получите бесплатный расчет', accent: true }
 					]}
 				/>
