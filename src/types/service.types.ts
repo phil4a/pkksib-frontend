@@ -20,6 +20,7 @@ export interface IService {
 	service_category?: IServiceCategory | null;
 	objects: IObject[];
 	seo: ISeoMetatags | null;
+	sortOrder: number;
 }
 
 export interface IServiceResponse {
@@ -42,6 +43,7 @@ export interface IServiceCategory {
 	updatedAt: string;
 	publishedAt: string;
 	seo: ISeoMetatags | null;
+	sortOrder: number;
 }
 
 export enum unitsEnum {

@@ -13,7 +13,8 @@ class ServiceService {
 
 	async getAll() {
 		const servicesQuery = qs.stringify({
-			populate: '*'
+			populate: '*',
+			sort: ['sortOrder:asc']
 		});
 		return axiosClassic.get<IServiceResponse>(`${this._services}?${servicesQuery}`);
 	}
@@ -40,7 +41,15 @@ class ServiceService {
 
 	async getCategories() {
 		const serviceCategoriesQuery = qs.stringify({
-			populate: '*'
+			sort: ['sortOrder:asc'],
+			populate: {
+				image: true,
+				seo: true,
+				services: {
+					fields: ['id', 'slug', 'title', 'price', 'units', 'sortOrder'],
+					sort: ['sortOrder:asc']
+				}
+			}
 		});
 		return axiosClassic.get<IServiceCategoryResponse>(
 			`${this._serviceCategories}?${serviceCategoriesQuery}`
@@ -49,7 +58,14 @@ class ServiceService {
 
 	async getCategoryBySlug(slug: string) {
 		const serviceCategoriesQuery = qs.stringify({
-			populate: '*',
+			populate: {
+				image: true,
+				seo: true,
+				services: {
+					fields: ['id', 'slug', 'title', 'price', 'units', 'sortOrder'],
+					sort: ['sortOrder:asc']
+				}
+			},
 			filters: {
 				slug: {
 					$eq: slug
@@ -64,6 +80,7 @@ class ServiceService {
 	async getServicesByCategorySlug(slug: string) {
 		const servicesQuery = qs.stringify({
 			populate: '*',
+			sort: ['sortOrder:asc'],
 			filters: {
 				service_category: {
 					slug: {
@@ -78,6 +95,7 @@ class ServiceService {
 	async getFooterServices() {
 		const servicesQuery = qs.stringify({
 			fields: ['id', 'slug', 'title'],
+			sort: ['sortOrder:asc'],
 			filters: {
 				isShowedInFooter: {
 					$eq: true

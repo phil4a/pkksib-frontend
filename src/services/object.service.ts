@@ -56,6 +56,7 @@ class ObjectService {
 				location: true
 			},
 			sort: ['updatedAt:desc'],
+
 			pagination: { page, pageSize },
 			filters
 		};

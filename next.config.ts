@@ -8,12 +8,6 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'befbb7a338eb-pkk-media.s3.ru1.storage.beget.cloud',
-				port: '',
-				pathname: '/**'
-			},
-			{
-				protocol: 'https',
 				hostname: 'cdn.pkksib.ru',
 				port: '',
 				pathname: '/**'
