@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Roboto, Roboto_Condensed } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import { Suspense } from 'react';
 
 import { Footer } from '@/components/layout/content/footer/Footer';
@@ -55,14 +55,6 @@ export default function RootLayout({
 				<link
 					rel='dns-prefetch'
 					href='https://cdn.pkksib.ru'
-				/>
-				<link
-					rel='preconnect'
-					href='https://befbb7a338eb-pkk-media.s3.ru1.storage.beget.cloud'
-				/>
-				<link
-					rel='dns-prefetch'
-					href='https://befbb7a338eb-pkk-media.s3.ru1.storage.beget.cloud'
 				/>
 			</head>
 			<body>
