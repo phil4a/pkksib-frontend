@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 
 import { Button } from '@/ui/button/Button';
 import { Field } from '@/ui/field/Field';
+import { MaxIcon } from '@/ui/icons/MaxIcon';
 import { TelegramIcon } from '@/ui/icons/TelegramIcon';
 import { WhatsAppIcon } from '@/ui/icons/WhatsAppIcon';
 import { Title } from '@/ui/title/Title';
@@ -151,6 +152,19 @@ export function ConsultForm({ onSubmitted }: ConsultFormProps) {
 						height={20}
 					/>
 					— написать в Whatsapp
+				</Link>
+				<Link
+					href={SITE_CONFIG.maxLink}
+					target='_blank'
+					rel='noopener noreferrer'
+					className='hover:text-white transition-colors flex items-center gap-2'
+				>
+					<MaxIcon
+						color='#443064'
+						width={20}
+						height={20}
+					/>
+					— написать в Max
 				</Link>
 			</div>
 		</div>
