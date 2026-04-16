@@ -12,6 +12,12 @@ export function HeaderTop() {
 			<div className='layout-container h-full flex items-center justify-end'>
 				<div className='flex gap-4'>
 					<HeaderLink
+						href={`tel:${SITE_CONFIG.mobilePhone}`}
+						className='text-sm font-semibold leading-normal'
+					>
+						{SITE_CONFIG.mobilePhone}
+					</HeaderLink>
+					<HeaderLink
 						href={SITE_CONFIG.telegramLink}
 						secondary
 						target='_blank'

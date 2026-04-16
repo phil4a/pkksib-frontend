@@ -10,7 +10,7 @@ export function HeaderActions() {
 			<div className='flex flex-col items-end'>
 				<HeaderLink
 					href={`tel:${SITE_CONFIG.phoneNumber}`}
-					className='font-semibold'
+					className='font-semibold text-nowrap'
 				>
 					{SITE_CONFIG.phoneNumber}
 				</HeaderLink>

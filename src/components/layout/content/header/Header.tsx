@@ -4,10 +4,13 @@ import { Roboto_Condensed } from 'next/font/google';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { SITE_CONFIG } from '@/config/site.config';
+
 import { Logo } from '../logo/Logo';
 import { Menu } from '../menu/Menu';
 
 import { HeaderActions } from './HeaderActions';
+import { HeaderLink } from './HeaderLink';
 import { HeaderTop } from './HeaderTop';
 import { cn } from '@/lib/utils';
 
@@ -39,22 +42,35 @@ export function Header() {
 		>
 			<HeaderTop />
 			<div>
-				<div className='layout-container flex gap-6 lg:clamp-[gap,3,6] justify-between items-center py-2'>
+				<div className='layout-container flex gap-2 lg:clamp-[gap,3,6] justify-between items-center py-2'>
 					<Link
 						href={'/'}
 						className='flex items-center gap-2'
 					>
 						<Logo />
-						<div className={cn('flex flex-col items-start font-medium', robotoCondensed.className)}>
-							<span className='uppercase tracking-tight lg:tracking-tighter clamp-[text,0.75rem,sm,@xs,@sm] lg:clamp-[text,sm,base,@lg,@80rem] leading-tight'>
+						<div
+							className={cn(
+								'hidden min-[400px]:flex flex-col items-start font-medium',
+								robotoCondensed.className
+							)}
+						>
+							<span className='uppercase tracking-tight lg:tracking-tighter clamp-[text,0.55rem,xs,@xs,@sm] lg:clamp-[text,sm,base,@lg,@80rem] leading-tight'>
 								первая кровельная компания
 							</span>
-							<span className='uppercase text-dark-gray clamp-[text,0.55rem,xs,@xs,@sm] lg:clamp-[text,xs,0.8rem,@lg,@80rem] tracking-tight leading-tight'>
+							<span className='uppercase text-dark-gray clamp-[text,0.45rem,0.55rem,@xs,@sm] lg:clamp-[text,xs,0.8rem,@lg,@80rem] tracking-tight leading-tight'>
 								высокое качество без посредников
 							</span>
 						</div>
 					</Link>
-					<Menu />
+					<div className='flex items-center gap-2 sm:gap-4'>
+						<HeaderLink
+							href={`tel:${SITE_CONFIG.mobilePhone}`}
+							className='block lg:hidden font-semibold text-sm sm:text-base text-nowrap'
+						>
+							{SITE_CONFIG.mobilePhone}
+						</HeaderLink>
+						<Menu />
+					</div>
 					<div className='hidden lg:block'>
 						<HeaderActions />
 					</div>
