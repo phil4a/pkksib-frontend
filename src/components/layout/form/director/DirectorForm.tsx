@@ -56,7 +56,7 @@ export function DirectorForm({ className }: DirectorFormProps) {
 					</div>
 
 					<div className='relative z-10 flex items-center gap-4 mt-auto'>
-						<div className='relative w-20 h-20 rounded-full bg-primary flex items-center justify-center border-2 border-slate-600 shrink-0'>
+						<div className='relative w-30 h-30 rounded-full bg-primary flex items-center justify-center border-2 border-slate-600 shrink-0'>
 							<Image
 								src={YuriyTitkov}
 								fill
@@ -65,8 +65,8 @@ export function DirectorForm({ className }: DirectorFormProps) {
 							/>
 						</div>
 						<div>
-							<div className='font-bold text-lg'>Юрий Титков</div>
-							<div className='text-slate-400 text-sm'>Генеральный директор</div>
+							<div className='font-bold text-xl'>Юрий Титков</div>
+							<div className='text-slate-400'>Генеральный директор</div>
 						</div>
 					</div>
 				</div>
