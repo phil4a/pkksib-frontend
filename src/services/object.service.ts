@@ -73,7 +73,7 @@ class ObjectService {
 	async getUniqueLocations(): Promise<IObjectLocation[]> {
 		const unique = new Map<number, IObjectLocation>();
 		let page = 1;
-		const pageSize = 200;
+		const pageSize = 100;
 
 		while (true) {
 			const q = qs.stringify(
@@ -88,8 +88,12 @@ class ObjectService {
 			res.data.data.forEach(obj => {
 				if (obj.location) unique.set(obj.location.id, obj.location);
 			});
-			const pageCount = res.data.meta?.pagination?.pageCount ?? 1;
-			if (page >= pageCount) break;
+			const meta = res.data.meta?.pagination;
+			if (!meta) break;
+
+			// Сравниваем с общим количеством или проверяем текущую страницу
+			const pageCount = meta.pageCount ?? Math.ceil((meta.total ?? 0) / pageSize);
+			if (page >= pageCount || res.data.data.length === 0) break;
 			page += 1;
 		}
 
@@ -131,8 +135,8 @@ class ObjectService {
 
 	async getObjectMarkers(): Promise<IObjectMarker[]> {
 		// Strapi по умолчанию отдает только первую страницу (обычно 25 записей),
-		// поэтому собираем все страницы.
-		const pageSize = 200;
+		// поэтому собираем все страницы (лимит на проде обычно 100).
+		const pageSize = 100;
 		let page = 1;
 		let all = [] as IObject[];
 
@@ -149,8 +153,11 @@ class ObjectService {
 
 			const response = await axiosClassic.get<IObjectResponse>(`${this._objects}?${objectsQuery}`);
 			all = all.concat(response.data.data);
-			const pageCount = response.data.meta?.pagination?.pageCount ?? 1;
-			if (page >= pageCount) break;
+			const meta = response.data.meta?.pagination;
+			if (!meta) break;
+
+			const pageCount = meta.pageCount ?? Math.ceil((meta.total ?? 0) / pageSize);
+			if (page >= pageCount || response.data.data.length === 0) break;
 			page += 1;
 		}
 
