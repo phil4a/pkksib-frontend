@@ -12,7 +12,7 @@ import { CustomMarker } from '@/components/layout/content/home-page/objects-map/
 
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 
-import { calculateMarkersCenter, calculateOptimalZoom, defaultCenter } from '@/utils/map';
+import { defaultCenter, fitMapToMarkers } from '@/utils/map';
 
 import { objectService } from '@/services/object.service';
 import type { IObjectMarker } from '@/types/object.types';
@@ -159,6 +159,8 @@ export default function MapComponent() {
 					}
 				});
 			}
+
+			fitMapToMarkers(mapRef.current!, validMarkers);
 		},
 		[createCustomMarkerIcon]
 	);
@@ -169,14 +171,6 @@ export default function MapComponent() {
 				const markersData = await objectService.getObjectMarkers();
 
 				setMarkers(markersData);
-
-				// Автоматически центрируем карту и устанавливаем зум
-				if (markersData.length > 0) {
-					const center = calculateMarkersCenter(markersData);
-					const zoom = calculateOptimalZoom(markersData);
-					setMapCenter(center);
-					setMapZoom(zoom);
-				}
 			} catch (error) {
 				console.error('❌ Ошибка при загрузке меток объектов:', error);
 			} finally {
@@ -206,6 +200,12 @@ export default function MapComponent() {
 	const onMapLoad = useCallback(
 		(map: google.maps.Map) => {
 			mapRef.current = map;
+
+			if (markers.length > 0) {
+				setTimeout(() => {
+					fitMapToMarkers(map, markers);
+				}, 0);
+			}
 
 			// Если у нас уже есть маркеры, создаем их
 			if (markers.length > 0 && !isLoadingMarkers) {

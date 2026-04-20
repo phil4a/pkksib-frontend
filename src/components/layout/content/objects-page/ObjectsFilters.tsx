@@ -16,8 +16,6 @@ export function ObjectsFilters({ onApplied }: ObjectsFiltersProps) {
 	const { filters, setFilters, categories, categoriesLoading, locations, locationsLoading } =
 		useObjects();
 
-	console.log(locations);
-
 	const [pendingCategories, setPendingCategories] = useState<string[]>(filters.categorySlugs);
 	const [pendingLocations, setPendingLocations] = useState<string[]>(filters.locations);
 
@@ -60,6 +58,9 @@ export function ObjectsFilters({ onApplied }: ObjectsFiltersProps) {
 	const applyFilters = useCallback(() => {
 		setFilters({ categorySlugs: pendingCategories, locations: pendingLocations });
 		onApplied?.();
+		setTimeout(() => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}, 0);
 	}, [setFilters, pendingCategories, pendingLocations, onApplied]);
 
 	return (

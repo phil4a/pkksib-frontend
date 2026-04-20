@@ -84,7 +84,7 @@ export function ObjectsWrapper() {
 
 			{/* Десктопные фильтры */}
 			<div className='relative flex gap-5 items-start'>
-				<div className='hidden md:block md:sticky md:top-[calc(var(--header-height)+20px)] md:self-start flex-1/4'>
+				<div className='hidden md:block md:sticky md:top-[calc(var(--header-height)+60px)] md:self-start flex-1/4'>
 					<div className='md:max-h-[calc(100dvh-var(--header-height))] md:overflow-y-auto'>
 						<ObjectsFilters />
 					</div>
