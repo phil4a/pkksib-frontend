@@ -55,7 +55,7 @@ class ObjectService {
 				services: true,
 				location: true
 			},
-			sort: ['updatedAt:desc'],
+			sort: ['sortOrder:asc'],
 
 			pagination: { page, pageSize },
 			filters
@@ -102,7 +102,7 @@ class ObjectService {
 			{
 				populate: ['photos', 'object_categories', 'services', 'service_categories'],
 				filters,
-				sort: ['createdAt:desc'],
+				sort: ['sortOrder:asc'],
 				pagination: { page: 1, pageSize: limit }
 			},
 			{ encodeValuesOnly: true }
@@ -142,7 +142,7 @@ class ObjectService {
 					populate: { location: true, photos: true },
 					fields: ['id', 'slug', 'title', 'area', 'time', 'short_description'],
 					pagination: { page, pageSize },
-					sort: ['updatedAt:desc']
+					sort: ['sortOrder:asc']
 				},
 				{ encodeValuesOnly: true }
 			);
@@ -187,7 +187,7 @@ class ObjectService {
 			{
 				populate: ['photos', 'object_categories'],
 				filters,
-				sort: ['createdAt:desc'],
+				sort: ['sortOrder:asc'],
 				pagination: { page: 1, pageSize: limit }
 			},
 			{ encodeValuesOnly: true }

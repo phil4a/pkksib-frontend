@@ -35,6 +35,7 @@ export interface IObject {
 	documentId: string;
 	title: string;
 	slug: string;
+	sortOrder: number;
 	time: string;
 	area: number;
 	short_description: string;
