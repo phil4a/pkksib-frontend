@@ -13,7 +13,7 @@ export function ObjectsWrapper() {
 	return (
 		<section className='mb-25'>
 			{/* Мобильная кнопка фильтров: закреплена под шапкой */}
-			<div className='md:hidden sticky top-[var(--header-height)] z-40 bg-white  py-2'>
+			<div className='md:hidden sticky top-[var(--header-height)] z-40 bg-white py-2'>
 				<button
 					type='button'
 					className='flex gap-2 font-semibold'

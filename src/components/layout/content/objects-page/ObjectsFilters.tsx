@@ -16,6 +16,8 @@ export function ObjectsFilters({ onApplied }: ObjectsFiltersProps) {
 	const { filters, setFilters, categories, categoriesLoading, locations, locationsLoading } =
 		useObjects();
 
+	console.log(locations);
+
 	const [pendingCategories, setPendingCategories] = useState<string[]>(filters.categorySlugs);
 	const [pendingLocations, setPendingLocations] = useState<string[]>(filters.locations);
 
