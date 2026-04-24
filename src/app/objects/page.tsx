@@ -10,6 +10,8 @@ import { OrderForm } from '@/components/layout/form/order/OrderForm';
 import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
 import { ViewportLazy } from '@/ui/viewport/ViewportLazy';
 
+import { getObjectsHeadingTitle } from '@/utils/objects';
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
@@ -21,23 +23,7 @@ export const metadata: Metadata = {
 	}
 };
 
-function getObjectsHeadingTitle(categoriesRaw: string | undefined): string | undefined {
-	const slugs = (categoriesRaw || '')
-		.split(',')
-		.map(s => s.trim())
-		.filter(Boolean);
-
-	if (slugs.length !== 1) return undefined;
-
-	const slug = slugs[0]!.toLowerCase();
-
-	if (slug.includes('administr')) return 'Административные объекты';
-	if (slug.includes('prom')) return 'Промышленные объекты';
-	if (slug.includes('kotted')) return 'Коттеджи';
-	if (slug.includes('pod-klyuch') || slug.includes('pod-kluch')) return 'Объекты: дома под ключ';
-
-	return undefined;
-}
+export const revalidate = 300;
 
 interface ObjectsPageProps {
 	searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -47,12 +33,39 @@ export default async function ObjectsPage({ searchParams }: ObjectsPageProps) {
 	const sp = await searchParams;
 	const categoriesParamRaw = Array.isArray(sp.categories) ? sp.categories.join(',') : sp.categories;
 	const headingTitle = getObjectsHeadingTitle(categoriesParamRaw);
+	const wrapperKey = JSON.stringify(sp);
 
 	return (
 		<div className='layout-container'>
 			<ObjectsHeading title={headingTitle} />
-			<Suspense fallback={<div>Загрузка объектов...</div>}>
-				<ObjectsWrapper />
+			<Suspense
+				fallback={
+					<section className='mb-25'>
+						<div className='relative flex gap-5 items-start'>
+							<div className='hidden md:block md:sticky md:top-[calc(var(--header-height)+60px)] md:self-start flex-1/4'>
+								<div className='space-y-4'>
+									<div className='bg-light-gray h-6 rounded-sm animate-pulse' />
+									<div className='bg-light-gray h-6 rounded-sm animate-pulse' />
+									<div className='bg-light-gray h-6 rounded-sm animate-pulse' />
+									<div className='bg-light-gray h-6 rounded-sm animate-pulse' />
+								</div>
+							</div>
+							<div className='flex-3/4'>
+								<div className='mt-8 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
+									<SkeletonLoader
+										count={9}
+										className='rounded-xl h-[360px]'
+									/>
+								</div>
+							</div>
+						</div>
+					</section>
+				}
+			>
+				<ObjectsWrapper
+					key={wrapperKey}
+					searchParams={sp}
+				/>
 			</Suspense>
 			<div className='-mx-4'>
 				<ViewportLazy

@@ -1,6 +1,7 @@
 import qs from 'qs';
 
 import { API_PATHS } from '@/config/api.config';
+import { API_URL } from '@/constants/constants';
 
 import { axiosClassic } from '@/api/axios';
 
@@ -32,6 +33,46 @@ class ObjectService {
 	constructor() {}
 	private _objects = API_PATHS.OBJECTS;
 	private _objectCategories = API_PATHS.OBJECT_CATEGORIES;
+
+	async getAllServer(params: {
+		page: number;
+		pageSize: number;
+		categorySlugs?: string[];
+		locations?: string[];
+		revalidate?: number;
+	}): Promise<IObjectResponse | null> {
+		if (!API_URL) return null;
+
+		const { page, pageSize, categorySlugs, locations, revalidate = 300 } = params;
+		const filters: ObjectFilters = {};
+
+		if (categorySlugs?.length) {
+			filters.object_categories = { slug: { $in: categorySlugs } };
+		}
+		if (locations?.length) {
+			filters.location = { location: { $in: locations } };
+		}
+
+		const query = qs.stringify(
+			{
+				populate: {
+					photos: true,
+					object_categories: true,
+					services: true,
+					location: true
+				},
+				sort: ['sortOrder:asc'],
+				pagination: { page, pageSize },
+				filters
+			},
+			{ encodeValuesOnly: true }
+		);
+
+		const url = `${API_URL}${this._objects}?${query}`;
+		const res = await fetch(url, { next: { revalidate } });
+		if (!res.ok) return null;
+		return (await res.json()) as IObjectResponse;
+	}
 
 	getAll(params?: {
 		page?: number;

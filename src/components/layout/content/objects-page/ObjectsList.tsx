@@ -1,25 +1,12 @@
-'use client';
-
 import { Object as ObjectCard } from '@/components/layout/content/object/Object';
 
-import { SkeletonLoader } from '@/ui/skeleton/SkeletonLoader';
+import type { IObject } from '@/types/object.types';
 
-import { useObjects } from '@/hooks/objects/useObjects';
+interface ObjectsListProps {
+	objects: IObject[];
+}
 
-export function ObjectsList() {
-	const { objects, objectsLoading } = useObjects();
-
-	if (objectsLoading) {
-		return (
-			<div className='mt-8 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
-				<SkeletonLoader
-					count={3}
-					className='rounded-xl h-[360px]'
-				/>
-			</div>
-		);
-	}
-
+export function ObjectsList({ objects }: ObjectsListProps) {
 	if (!objects.length) {
 		return <div className='mt-8'>Нет объектов по выбранным фильтрам</div>;
 	}

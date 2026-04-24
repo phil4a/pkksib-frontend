@@ -1,25 +1,28 @@
-'use client';
-
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
 
-import { useObjects } from '@/hooks/objects/useObjects';
+interface ObjectsPaginationProps {
+	page: number;
+	pageCount: number;
+	searchParams: Record<string, string | string[] | undefined>;
+}
 
-export function ObjectsPagination() {
-	const { page, pageCount } = useObjects();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-
+export function ObjectsPagination({ page, pageCount, searchParams }: ObjectsPaginationProps) {
 	const buildHref = (p: number) => {
-		const params = new URLSearchParams(searchParams.toString());
+		const params = new URLSearchParams();
+		for (const [key, value] of Object.entries(searchParams)) {
+			if (value === undefined) continue;
+			if (Array.isArray(value)) params.set(key, value.join(','));
+			else params.set(key, value);
+		}
+
 		if (p > 1) params.set('page', String(p));
 		else params.delete('page');
+
 		const query = params.toString();
-		return query ? `${pathname}?${query}` : pathname;
+		return query ? `/objects?${query}` : '/objects';
 	};
 
-	const items = useMemo<(number | 'ellipsis')[]>(() => {
+	const items: Array<number | 'ellipsis'> = (() => {
 		if (pageCount <= 7) {
 			return Array.from({ length: pageCount }, (_, i) => i + 1);
 		}
@@ -30,7 +33,7 @@ export function ObjectsPagination() {
 			return [1, 'ellipsis', pageCount - 3, pageCount - 2, pageCount - 1, pageCount];
 		}
 		return [1, 'ellipsis', page - 1, page, page + 1, 'ellipsis', pageCount];
-	}, [page, pageCount]);
+	})();
 
 	if (pageCount <= 1) return null;
 
@@ -57,6 +60,7 @@ export function ObjectsPagination() {
 						<Link
 							key={p}
 							href={buildHref(p)}
+							prefetch
 							aria-current={isActive ? 'page' : undefined}
 							className={`px-3 py-2 rounded-md border transition ${
 								isActive
