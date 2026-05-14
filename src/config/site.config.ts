@@ -13,6 +13,7 @@ export const SITE_CONFIG = {
 		'https://t.me/Yuriy_Titkov',
 		'https://max.ru/u/f9LHodD0cOJ4CgUsByZua9AN0puBZkv42qVtgk-ixeaMr1bCorYCS-hrRNI'
 	],
+	priceRange: '₽₽',
 	openingHoursSpecification: [
 		{
 			dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

@@ -53,6 +53,7 @@ export default function RootLayout({
 		name: 'Первая Кровельная Компания',
 		url: SITE_URL,
 		description: SITE_CONFIG.description,
+		priceRange: SITE_CONFIG.priceRange,
 		telephone: normalizePhoneToTel(SITE_CONFIG.phoneNumber),
 		email: SITE_CONFIG.email,
 		logo: `${SITE_URL}/logo.svg`,
