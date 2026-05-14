@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import Script from 'next/script';
+
+import { SITE_URL } from '@/constants/constants';
 
 import type { CrumbItem } from '@/types/breadcrumbs';
 
@@ -14,12 +15,19 @@ export function Breadcrumbs({ items, color = 'default', className, showJsonLd = 
 	const jsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
-		itemListElement: items.map((item, idx) => ({
-			'@type': 'ListItem',
-			position: idx + 1,
-			name: item.label,
-			item: item.href || ''
-		}))
+		itemListElement: items.map((item, idx) => {
+			const listItem: Record<string, any> = {
+				'@type': 'ListItem',
+				position: idx + 1,
+				name: item.label
+			};
+
+			if (item.href) {
+				listItem.item = `${SITE_URL}${item.href}`;
+			}
+
+			return listItem;
+		})
 	};
 
 	return (
@@ -56,10 +64,11 @@ export function Breadcrumbs({ items, color = 'default', className, showJsonLd = 
 			</ol>
 
 			{showJsonLd && (
-				<Script
-					id='breadcrumb-jsonld'
+				<script
 					type='application/ld+json'
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(jsonLd)
+					}}
 				/>
 			)}
 		</nav>
