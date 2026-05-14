@@ -10,6 +10,9 @@ import { YandexMetrica } from '@/components/ui/analytics/YandexMetrica';
 import { Providers } from '@/providers/Providers';
 
 import { SITE_URL } from '@/constants/constants';
+import { CONTACT_MARKERS } from '@/constants/contact-markers';
+
+import { SITE_CONFIG } from '@/config/site.config';
 
 import './globals.css';
 
@@ -34,6 +37,55 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const primaryContact = CONTACT_MARKERS[0];
+
+	const normalizePhoneToTel = (value?: string) => {
+		const raw = value?.trim();
+		if (!raw) return undefined;
+		const digits = raw.replace(/\D/g, '');
+		if (!digits) return undefined;
+		return digits.startsWith('7') ? `+${digits}` : `+7${digits}`;
+	};
+
+	const organizationJsonLd = {
+		'@context': 'https://schema.org',
+		'@type': ['Organization', 'LocalBusiness'],
+		name: 'Первая Кровельная Компания',
+		url: SITE_URL,
+		description: SITE_CONFIG.description,
+		telephone: normalizePhoneToTel(SITE_CONFIG.phoneNumber),
+		email: SITE_CONFIG.email,
+		logo: `${SITE_URL}/logo.svg`,
+		image: `${SITE_URL}/logo-square.jpg`,
+		address: primaryContact
+			? {
+					'@type': 'PostalAddress',
+					addressLocality: primaryContact.addressLocality,
+					postalCode: primaryContact.postalCode,
+					streetAddress: primaryContact.streetAddress,
+					addressCountry: 'RU'
+				}
+			: undefined,
+		geo: primaryContact
+			? {
+					'@type': 'GeoCoordinates',
+					latitude: primaryContact.coordinates.lat,
+					longitude: primaryContact.coordinates.lng
+				}
+			: undefined,
+		openingHoursSpecification: SITE_CONFIG.openingHoursSpecification.map(spec => ({
+			'@type': 'OpeningHoursSpecification',
+			...spec
+		})),
+		sameAs: [
+			...SITE_CONFIG.sameAs,
+			`mailto:${SITE_CONFIG.email}`,
+			...(normalizePhoneToTel(SITE_CONFIG.phoneNumber)
+				? [`tel:${normalizePhoneToTel(SITE_CONFIG.phoneNumber)}`]
+				: [])
+		]
+	};
+
 	return (
 		<html
 			lang='ru'
@@ -55,6 +107,10 @@ export default function RootLayout({
 				<link
 					rel='dns-prefetch'
 					href='https://cdn.pkksib.ru'
+				/>
+				<script
+					type='application/ld+json'
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
 				/>
 			</head>
 			<body>

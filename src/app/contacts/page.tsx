@@ -61,7 +61,7 @@ export default function ContactsPage() {
 					addressCountry: 'RU'
 				}
 			: undefined,
-		logo: `${siteUrl}/logo.png`
+		logo: `${siteUrl}/logo-square.jpg`
 	};
 
 	return (
