@@ -12,8 +12,7 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    env:
-      DOKPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_WEBHOOK_URL }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -48,6 +47,15 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Trigger Dokploy deploy
-        if: ${{ env.DOKPLOY_WEBHOOK_URL != '' }}
-        run: curl -fsS -X POST "$DOKPLOY_WEBHOOK_URL" >/dev/null
+      - name: Trigger Dokploy deployment
+        shell: bash
+        env:
+          DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+          DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+          DOKPLOY_APPLICATION_ID: ${{ secrets.DOKPLOY_APPLICATION_ID }}
+        run: |
+          curl -fsSL -X POST "${DOKPLOY_URL}/api/application.deploy" \
+            -H "accept: application/json" \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: ${DOKPLOY_API_KEY}" \
+            -d "{\"applicationId\":\"${DOKPLOY_APPLICATION_ID}\"}"
