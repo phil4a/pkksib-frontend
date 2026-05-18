@@ -45,6 +45,7 @@ jobs:
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
             NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
             NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID }}
+            NEXT_PUBLIC_LIGHT_GALLERY_LICENSE_KEY=${{ secrets.NEXT_PUBLIC_LIGHT_GALLERY_LICENSE_KEY }}
             API_INTERNAL_URL=${{ secrets.API_INTERNAL_URL }}
             NEXT_PUBLIC_YM_ID=${{ secrets.NEXT_PUBLIC_YM_ID }}
           tags: ${{ steps.meta.outputs.tags }}
