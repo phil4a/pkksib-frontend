@@ -6,7 +6,6 @@ import { ObjectGallery } from '@/components/layout/content/object-page/ObjectGal
 import { PageContent } from '@/components/layout/content/object-page/PageContent';
 import { RelatedObjects } from '@/components/layout/content/object-page/RelatedObjects';
 import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
-import { OrderForm } from '@/components/layout/form/order/OrderForm';
 
 import { objectService } from '@/services/object.service';
 import type { TPageSlugProp } from '@/types/page.types';
