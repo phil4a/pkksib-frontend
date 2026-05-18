@@ -16,10 +16,12 @@ const nextConfig: NextConfig = {
 		]
 	},
 	async rewrites() {
+		const apiBase = process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, '');
+		if (!apiBase) return [];
 		return [
 			{
 				source: '/uploads/:path*',
-				destination: `${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, '')}/uploads/:path*`
+				destination: `${apiBase}/uploads/:path*`
 			}
 		];
 	}
