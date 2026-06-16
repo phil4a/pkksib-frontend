@@ -1,5 +1,6 @@
 'use client';
 
+import { Loader2 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Object as ObjectCard } from '@/components/layout/content/object/Object';
@@ -248,7 +249,14 @@ export function ObjectsInfiniteList({
 			/>
 
 			{isLoadingNext && (
-				<div className='col-span-full mt-8 text-center text-gray-600'>Загрузка…</div>
+				<div
+					className='col-span-full mt-8 flex justify-center text-gray-600'
+					role='status'
+					aria-live='polite'
+				>
+					<Loader2 className='h-6 w-6 animate-spin' />
+					<span className='sr-only'>Загрузка</span>
+				</div>
 			)}
 
 			{loadError && (
