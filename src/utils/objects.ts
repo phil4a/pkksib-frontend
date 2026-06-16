@@ -31,6 +31,19 @@ interface ObjectsPageData {
 	pageSize: number;
 }
 
+export interface ObjectsInitialPage {
+	page: number;
+	objects: IObject[];
+}
+
+export interface ObjectsInitialPagesData {
+	initialPages: ObjectsInitialPage[];
+	page: number;
+	pageCount: number;
+	pageSize: number;
+	requestedPage: number;
+}
+
 function toList(param: string | string[] | undefined): string[] {
 	if (!param) return [];
 	if (Array.isArray(param)) return param.join(',').split(',').filter(Boolean);
@@ -65,4 +78,55 @@ export async function getObjectsPageData(
 	const pageCount = res?.meta?.pagination?.pageCount ?? 1;
 
 	return { objects, page, pageCount, pageSize };
+}
+
+export async function getObjectsInitialPagesData(
+	searchParams: ObjectsPageSearchParams,
+	options?: { pageSize?: number; revalidate?: number; maxInitialPages?: number }
+): Promise<ObjectsInitialPagesData> {
+	const pageSize = options?.pageSize ?? 9;
+	const requestedPage = toPositiveInt(searchParams.page, 1);
+	const categorySlugs = toList(searchParams.categories);
+	const locations = toList(searchParams.locations);
+
+	const { objectService } = await import('@/services/object.service');
+
+	const firstRes = await objectService.getAllServer({
+		page: 1,
+		pageSize,
+		categorySlugs,
+		locations,
+		revalidate: options?.revalidate ?? 300
+	});
+
+	const pageCount = firstRes?.meta?.pagination?.pageCount ?? 1;
+	const page = Math.min(requestedPage, pageCount);
+
+	const maxInitialPages = Math.max(1, options?.maxInitialPages ?? 10);
+	const initialMax = Math.min(page, maxInitialPages);
+
+	const initialPages: ObjectsInitialPage[] = [];
+	initialPages.push({ page: 1, objects: firstRes?.data ?? [] });
+
+	if (initialMax >= 2) {
+		const pages = await Promise.all(
+			Array.from({ length: initialMax - 1 }, (_, idx) => {
+				const p = idx + 2;
+				return objectService.getAllServer({
+					page: p,
+					pageSize,
+					categorySlugs,
+					locations,
+					revalidate: options?.revalidate ?? 300
+				});
+			})
+		);
+
+		for (let i = 0; i < pages.length; i += 1) {
+			const p = i + 2;
+			initialPages.push({ page: p, objects: pages[i]?.data ?? [] });
+		}
+	}
+
+	return { initialPages, page, pageCount, pageSize, requestedPage };
 }

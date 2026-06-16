@@ -1,19 +1,32 @@
-import { getObjectsPageData } from '@/utils/objects';
+import { getObjectsInitialPagesData } from '@/utils/objects';
 
 import { ObjectsFilters } from './ObjectsFilters';
-import { ObjectsList } from './ObjectsList';
+import { ObjectsInfiniteList } from './ObjectsInfiniteList';
 import { ObjectsMobileFilters } from './ObjectsMobileFilters';
-import { ObjectsPagination } from './ObjectsPagination';
 
 interface ObjectsWrapperProps {
 	searchParams: Record<string, string | string[] | undefined>;
 }
 
 export async function ObjectsWrapper({ searchParams }: ObjectsWrapperProps) {
-	const { objects, page, pageCount } = await getObjectsPageData(searchParams, {
-		pageSize: 9,
-		revalidate: 300
-	});
+	const { initialPages, pageCount, pageSize, requestedPage } = await getObjectsInitialPagesData(
+		searchParams,
+		{
+			pageSize: 6,
+			revalidate: 300,
+			maxInitialPages: 10
+		}
+	);
+
+	const categoriesRaw = Array.isArray(searchParams.categories)
+		? searchParams.categories.join(',')
+		: searchParams.categories;
+	const locationsRaw = Array.isArray(searchParams.locations)
+		? searchParams.locations.join(',')
+		: searchParams.locations;
+
+	const categorySlugs = (categoriesRaw || '').split(',').filter(Boolean);
+	const locations = (locationsRaw || '').split(',').filter(Boolean);
 
 	return (
 		<section className='mb-25'>
@@ -27,15 +40,15 @@ export async function ObjectsWrapper({ searchParams }: ObjectsWrapperProps) {
 					</div>
 				</div>
 				<div className='flex-3/4'>
-					<ObjectsList objects={objects} />
+					<ObjectsInfiniteList
+						initialPages={initialPages}
+						pageCount={pageCount}
+						pageSize={pageSize}
+						requestedPage={requestedPage}
+						categorySlugs={categorySlugs}
+						locations={locations}
+					/>
 				</div>
-			</div>
-			<div>
-				<ObjectsPagination
-					page={page}
-					pageCount={pageCount}
-					searchParams={searchParams}
-				/>
 			</div>
 		</section>
 	);
