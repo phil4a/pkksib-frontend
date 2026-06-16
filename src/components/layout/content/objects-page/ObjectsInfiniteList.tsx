@@ -39,6 +39,8 @@ function scrollToPageAnchor(page: number) {
 	window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
 }
 
+const LOAD_MORE_ROOT_MARGIN_PX = 1500;
+
 export function ObjectsInfiniteList({
 	initialPages,
 	pageCount,
@@ -118,6 +120,19 @@ export function ObjectsInfiniteList({
 		[loadPage, pageCount, upsertPage]
 	);
 
+	const maybeLoadNextIfSentinelIsNearViewport = useCallback(() => {
+		const sentinel = sentinelRef.current;
+		if (!sentinel || isLoadingRef.current) return;
+		if (getMaxLoadedPage(pagesRef.current) >= pageCount) return;
+
+		const rect = sentinel.getBoundingClientRect();
+		const preloadBoundary = window.innerHeight + LOAD_MORE_ROOT_MARGIN_PX;
+
+		if (rect.top <= preloadBoundary) {
+			void loadNext();
+		}
+	}, [loadNext, pageCount]);
+
 	useEffect(() => {
 		const target = targetPageRef.current;
 		if (hasInitialScrollRef.current) return;
@@ -154,12 +169,20 @@ export function ObjectsInfiniteList({
 				if (!first?.isIntersecting) return;
 				void loadNext();
 			},
-			{ rootMargin: '800px 0px' }
+			{ rootMargin: `${LOAD_MORE_ROOT_MARGIN_PX}px 0px` }
 		);
 
 		observer.observe(el);
 		return () => observer.disconnect();
 	}, [loadNext]);
+
+	useEffect(() => {
+		const frameId = window.requestAnimationFrame(() => {
+			maybeLoadNextIfSentinelIsNearViewport();
+		});
+
+		return () => window.cancelAnimationFrame(frameId);
+	}, [pages, maybeLoadNextIfSentinelIsNearViewport]);
 
 	useEffect(() => {
 		if (pages.length === 0) return;
