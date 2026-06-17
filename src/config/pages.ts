@@ -1,6 +1,7 @@
 class Page {
 	HOME = '/';
 	ABOUT = '/about';
+	FAQ = '/faq';
 	SERVICES = '/services';
 	SERVICE(path: string) {
 		return `${this.SERVICES}/${path}`;
@@ -26,6 +27,7 @@ export interface PageInfo {
 export const PAGE_INFO = {
 	HOME: { href: PAGE.HOME, title: 'Главная' },
 	ABOUT: { href: PAGE.ABOUT, title: 'О нас' },
+	FAQ: { href: PAGE.FAQ, title: 'Помощь' },
 	SERVICES: { href: PAGE.SERVICES, title: 'Услуги' },
 	OBJECTS: { href: PAGE.OBJECTS, title: 'Объекты' },
 	ARTICLES: { href: PAGE.ARTICLES, title: 'Полезное' },

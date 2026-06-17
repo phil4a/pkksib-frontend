@@ -11,12 +11,19 @@ interface Props {
 	showJsonLd?: boolean;
 }
 
+interface BreadcrumbListItem {
+	'@type': 'ListItem';
+	position: number;
+	name: string;
+	item?: string;
+}
+
 export function Breadcrumbs({ items, color = 'default', className, showJsonLd = true }: Props) {
 	const jsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
 		itemListElement: items.map((item, idx) => {
-			const listItem: Record<string, any> = {
+			const listItem: BreadcrumbListItem = {
 				'@type': 'ListItem',
 				position: idx + 1,
 				name: item.label

@@ -41,6 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const priorityMap: Partial<Record<keyof typeof PAGE_INFO, number>> = {
 		HOME: 1,
 		ABOUT: 0.8,
+		FAQ: 0.7,
 		CONTACTS: 0.6,
 		OBJECTS: 0.8,
 		SERVICES: 0.8,

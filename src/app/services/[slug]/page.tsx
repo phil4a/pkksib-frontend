@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { FaqBlock } from '@/components/layout/content/faq/FaqBlock';
+import { FaqSchema } from '@/components/layout/content/faq/FaqSchema';
 import { ServiceHeading } from '@/components/layout/content/service/ServiceHeading';
 import { ServiceHero } from '@/components/layout/content/service/ServiceHero';
 import { ServiceObjects } from '@/components/layout/content/service/ServiceObjects';
@@ -11,6 +13,7 @@ import { ServicesText } from '@/components/layout/content/services/ServicesText'
 import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
 import { EstimateForm } from '@/components/layout/form/estimate/EstimateForm';
 
+import { getFaqItemsForSlugs } from '@/data/faq';
 import { serviceService } from '@/services/service.service';
 import type { TPageSlugProp } from '@/types/page.types';
 import type { IService, IServiceCategory } from '@/types/service.types';
@@ -79,13 +82,26 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 	if (category) {
 		const servicesRes = await serviceService.getServicesByCategorySlug?.(slug);
 		const services = servicesRes?.data?.data ?? [];
+		const faqItems = getFaqItemsForSlugs([slug]);
 
 		return (
 			<>
+				<FaqSchema
+					items={faqItems}
+					id={`faq-schema-${slug}`}
+				/>
 				<Heading title={category.title} />
 				<ServicesList items={services} />
 				{category.description && <ServicesText text={category.description} />}
+				{faqItems.length > 0 ? (
+					<FaqBlock
+						title='Частые вопросы'
+						description='Подобрали ответы по этой группе услуг, чтобы быстрее сориентироваться по материалам, стоимости, срокам и условиям работы.'
+						items={faqItems}
+					/>
+				) : null}
 				<ServiceRelated category={category} />
+
 				<div className='bg-light-gray'>
 					<div className='layout-container py-20'>
 						<DirectorForm />
@@ -101,12 +117,25 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 	const service = srvRes?.data?.data?.[0];
 
 	if (service) {
+		const faqItems = getFaqItemsForSlugs([service.slug, service.service_category?.slug]);
+
 		return (
 			<>
+				<FaqSchema
+					items={faqItems}
+					id={`faq-schema-${slug}`}
+				/>
 				<ServiceHeading service={service} />
 				<ServiceHero service={service} />
 				{service.description && <ServicesText text={service.description} />}
 				{!!service.objects?.length && <ServiceObjects objects={service.objects} />}
+				{faqItems.length > 0 ? (
+					<FaqBlock
+						title='Частые вопросы по услуге'
+						description='Собрали ответы на вопросы, которые чаще всего возникают перед заказом и началом работ по этой услуге.'
+						items={faqItems}
+					/>
+				) : null}
 				<EstimateForm />
 			</>
 		);

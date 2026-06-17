@@ -21,6 +21,7 @@ export async function Footer() {
 	}
 
 	const footerServices: IService[] = await getFooterServicesCached();
+	const footerNavigation = [...MAIN_MENU, { label: 'Помощь', href: PAGE.FAQ }];
 
 	return (
 		<div className='bg-primary text-white'>
@@ -29,7 +30,7 @@ export async function Footer() {
 					<div className='flex-2/12'>
 						<p className='font-semibold mb-4'>Навигация</p>
 						<nav className='flex flex-col gap-3'>
-							{MAIN_MENU.map(menuItem => (
+							{footerNavigation.map(menuItem => (
 								<Link
 									key={menuItem.label}
 									href={menuItem.href}
