@@ -7,6 +7,8 @@ import { formatUnit } from '@/constants/units';
 
 import { PAGE } from '@/config/pages';
 
+import { getFirstSentence } from '@/utils/text';
+
 import type { IService, IServiceCategory } from '@/types/service.types';
 
 interface Props {
@@ -34,9 +36,11 @@ export function ServiceCard({ item }: Props) {
 					</div>
 				)}
 			</div>
-			<div className='p-3 flex gap-4 flex-col h-full w-full'>
-				<p className='text-lg lg:text-[22px] font-semibold'>{item.title}</p>
-				<p className='text-dark-gray line-clamp-2 '>{item.shortDescription}</p>
+			<div className='p-3 flex gap-3 flex-col h-full w-full'>
+				<p className='text-lg lg:text-[22px] font-semibold leading-tight'>{item.title}</p>
+				<p className='text-dark-gray text-base leading-relaxed'>
+					{getFirstSentence(item.shortDescription)}
+				</p>
 				<div className='flex justify-between items-center gap-4 mt-auto'>
 					{item.price && (
 						<p className='text-lg lg:text-[22px] font-semibold'>
