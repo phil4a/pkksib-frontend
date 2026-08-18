@@ -1,9 +1,10 @@
 import Image from 'next/image';
 
-import { Button } from '@/ui/button/Button';
 import { Title } from '@/ui/title/Title';
 
 import { formatUnit } from '@/constants/units';
+
+import { QuizCalculator } from '@/components/layout/quiz/QuizCalculator';
 
 import type { IService } from '@/types/service.types';
 
@@ -43,13 +44,18 @@ export function ServiceHero({ service }: Props) {
 					{service.shortDescription && (
 						<p className='block text-dark-gray pt-6 pb-3'>{service.shortDescription}</p>
 					)}
-					<Button
-						type='accent'
-						className='mt-6'
-						data-open-consult
-					>
-						Рассчитать стоимость
-					</Button>
+					<div className='flex flex-wrap gap-3 mt-6'>
+						{/* <Button
+							type='accent'
+							data-open-consult
+						>
+							Рассчитать стоимость
+						</Button> */}
+						<QuizCalculator
+							category={service.service_category}
+							preselectedServiceId={service.id}
+						/>
+					</div>
 				</div>
 			</div>
 		</section>

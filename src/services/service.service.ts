@@ -23,7 +23,13 @@ class ServiceService {
 		const serviceQuery = qs.stringify({
 			populate: {
 				image: true,
-				service_category: true,
+				service_category: {
+					populate: {
+						services: {
+							fields: ['id', 'slug', 'title', 'price', 'units', 'sortOrder']
+						}
+					}
+				},
 				objects: {
 					populate: ['photos']
 				},

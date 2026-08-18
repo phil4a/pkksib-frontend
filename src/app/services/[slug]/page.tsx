@@ -12,6 +12,7 @@ import { ServicesList } from '@/components/layout/content/services/ServicesList'
 import { ServicesText } from '@/components/layout/content/services/ServicesText';
 import { DirectorForm } from '@/components/layout/form/director/DirectorForm';
 import { EstimateForm } from '@/components/layout/form/estimate/EstimateForm';
+import { QuizCalculator } from '@/components/layout/quiz/QuizCalculator';
 
 import { getFaqItemsForSlugs } from '@/data/faq';
 import { serviceService } from '@/services/service.service';
@@ -93,11 +94,15 @@ export default async function ServiceOrCategoryPage({ params }: TPageSlugProp) {
 				<Heading title={category.title} />
 				<ServicesList items={services} />
 				{category.description && <ServicesText text={category.description} />}
+				{/* <div className='layout-container mb-12 md:mb-20'>
+					<QuizCalculator category={category} />
+				</div> */}
 				{faqItems.length > 0 ? (
 					<FaqBlock
 						title='Частые вопросы'
 						description='Подобрали ответы по этой группе услуг, чтобы быстрее сориентироваться по материалам, стоимости, срокам и условиям работы.'
 						items={faqItems}
+						className='bg-white'
 					/>
 				) : null}
 				<ServiceRelated category={category} />

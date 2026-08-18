@@ -48,7 +48,9 @@ export interface IServiceCategory {
 
 export enum unitsEnum {
 	SQUARE_METERS = 'м2',
-	QUBIC_METERS = 'м3'
+	QUBIC_METERS = 'м3',
+	LINEAR_METERS = 'мп',
+	PIECES = 'шт'
 }
 
 export interface IServiceCategoryResponse {

@@ -11,7 +11,7 @@ interface Props {
 export function ServiceObjects({ objects }: Props) {
 	return (
 		<section>
-			<div className='layout-container pt-16 md:pt-20'>
+			<div className='layout-container py-16 md:pt-20'>
 				<Title
 					type='h2'
 					className='mb-6 md:mb-8'

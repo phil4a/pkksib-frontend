@@ -2,7 +2,9 @@ import { unitsEnum } from '@/types/service.types';
 
 export const UNIT_LABELS: Record<unitsEnum, string> = {
 	[unitsEnum.SQUARE_METERS]: 'м²',
-	[unitsEnum.QUBIC_METERS]: 'м³'
+	[unitsEnum.QUBIC_METERS]: 'м³',
+	[unitsEnum.LINEAR_METERS]: 'мп',
+	[unitsEnum.PIECES]: 'шт'
 };
 
 export function formatUnit(unit?: unitsEnum | null): string {
