@@ -16,6 +16,7 @@ export interface IArticle {
 	slug: string;
 	short_description: string;
 	full_description: string;
+	publish_date?: string | null;
 	createdAt: string;
 	updatedAt: string;
 	publishedAt: string;

@@ -46,7 +46,9 @@ export default async function ArticlePage({ params }: TPageSlugProp) {
 	return (
 		<div className='layout-container overflow-hidden'>
 			<ArticlesHeading title={article?.title} />
-			<p className='my-6 text-dark-gray'>{formatDateToRu(article?.createdAt)}</p>
+			<p className='my-6 text-dark-gray'>
+				{formatDateToRu(article?.publish_date ?? article?.createdAt)}
+			</p>
 			<div className='relative w-full h-120 rounded-xl overflow-hidden'>
 				<Image
 					src={article?.image?.url || ''}

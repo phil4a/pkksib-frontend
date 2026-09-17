@@ -15,7 +15,7 @@ class ArticlesService {
 				image: true,
 				tags: true
 			},
-			sort: ['createdAt:desc'],
+			sort: ['publish_date:desc'],
 			...(tagId
 				? {
 						filters: {
