@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
 				hostname: 'cdn.pkksib.ru',
 				port: '',
 				pathname: '/**'
+			},
+			{
+				protocol: 'https',
+				hostname: 'pkksib.s3.twcstorage.ru',
+				port: '',
+				pathname: '/**'
 			}
 		]
 	},

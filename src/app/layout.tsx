@@ -103,11 +103,11 @@ export default function RootLayout({
 				/>
 				<link
 					rel='preconnect'
-					href='https://cdn.pkksib.ru'
+					href='https://pkksib.s3.twcstorage.ru'
 				/>
 				<link
 					rel='dns-prefetch'
-					href='https://cdn.pkksib.ru'
+					href='https://pkksib.s3.twcstorage.ru'
 				/>
 				<script
 					type='application/ld+json'
