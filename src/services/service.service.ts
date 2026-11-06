@@ -4,6 +4,7 @@ import { API_PATHS } from '@/config/api.config';
 
 import { axiosClassic } from '@/api/axios';
 
+import { HAS_PHOTOS_FILTER } from '@/services/object.service';
 import type { IServiceCategoryResponse, IServiceResponse } from '@/types/service.types';
 
 class ServiceService {
@@ -31,7 +32,8 @@ class ServiceService {
 					}
 				},
 				objects: {
-					populate: ['photos']
+					populate: ['photos'],
+					filters: HAS_PHOTOS_FILTER
 				},
 				seo: true
 			},

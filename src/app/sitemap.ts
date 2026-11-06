@@ -8,9 +8,11 @@ import { PAGE_INFO } from '@/config/pages';
 
 import { axiosClassic } from '@/api/axios';
 
+import { HAS_PHOTOS_FILTER } from '@/services/object.service';
+
 type SlugItem = { slug: string; updatedAt?: string };
 
-async function collectSlugs(path: string): Promise<SlugItem[]> {
+async function collectSlugs(path: string, filters?: Record<string, unknown>): Promise<SlugItem[]> {
 	const pageSize = 200;
 	let page = 1;
 	let out: SlugItem[] = [];
@@ -18,6 +20,7 @@ async function collectSlugs(path: string): Promise<SlugItem[]> {
 		const query = qs.stringify(
 			{
 				fields: ['slug', 'updatedAt'],
+				...(filters ? { filters } : {}),
 				pagination: { page, pageSize },
 				sort: ['updatedAt:desc']
 			},
@@ -58,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 				collectSlugs(API_PATHS.ARTICLES),
 				collectSlugs(API_PATHS.SERVICES),
 				collectSlugs(API_PATHS.SERVICE_CATEGORIES),
-				collectSlugs(API_PATHS.OBJECTS)
+				collectSlugs(API_PATHS.OBJECTS, HAS_PHOTOS_FILTER)
 			])
 		: [[], [], [], []];
 

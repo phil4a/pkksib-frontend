@@ -1,7 +1,8 @@
 import qs from 'qs';
 
-import { API_PATHS } from '@/config/api.config';
 import { API_URL } from '@/constants/constants';
+
+import { API_PATHS } from '@/config/api.config';
 
 import { axiosClassic } from '@/api/axios';
 
@@ -27,7 +28,12 @@ interface ObjectFilters {
 	location?: { location: NameFilter };
 	slug?: { $eq?: string; $ne?: string };
 	service_categories?: { slug: { $eq: string } };
+	photos?: { id: { $notNull: boolean } };
 }
+
+// Objects without a single photo are hidden from the site (lost media after the hosting breach).
+// They reappear automatically once photos are added in Strapi.
+export const HAS_PHOTOS_FILTER = { photos: { id: { $notNull: true } } };
 
 class ObjectService {
 	constructor() {}
@@ -44,7 +50,7 @@ class ObjectService {
 		if (!API_URL) return null;
 
 		const { page, pageSize, categorySlugs, locations, revalidate = 300 } = params;
-		const filters: ObjectFilters = {};
+		const filters: ObjectFilters = { ...HAS_PHOTOS_FILTER };
 
 		if (categorySlugs?.length) {
 			filters.object_categories = { slug: { $in: categorySlugs } };
@@ -81,7 +87,7 @@ class ObjectService {
 		locations?: string[];
 	}) {
 		const { page = 1, pageSize = 10, categorySlugs, locations } = params || {};
-		const filters: ObjectFilters = {};
+		const filters: ObjectFilters = { ...HAS_PHOTOS_FILTER };
 		if (categorySlugs?.length) {
 			filters.object_categories = { slug: { $in: categorySlugs } };
 		}
@@ -121,6 +127,7 @@ class ObjectService {
 				{
 					populate: { location: true },
 					fields: ['id'],
+					filters: HAS_PHOTOS_FILTER,
 					pagination: { page, pageSize }
 				},
 				{ encodeValuesOnly: true }
@@ -142,7 +149,10 @@ class ObjectService {
 	}
 
 	async getByServiceCategorySlug(slug: string, limit: number = 10) {
-		const filters: ObjectFilters = { service_categories: { slug: { $eq: slug } } };
+		const filters: ObjectFilters = {
+			...HAS_PHOTOS_FILTER,
+			service_categories: { slug: { $eq: slug } }
+		};
 		const query = qs.stringify(
 			{
 				populate: ['photos', 'object_categories', 'services', 'service_categories'],
@@ -157,7 +167,7 @@ class ObjectService {
 	}
 
 	async getBySlug(slug: string) {
-		const filters: ObjectFilters = { slug: { $eq: slug } };
+		const filters: ObjectFilters = { ...HAS_PHOTOS_FILTER, slug: { $eq: slug } };
 		const objectQuery = qs.stringify({
 			populate: {
 				photos: true,
@@ -186,6 +196,7 @@ class ObjectService {
 				{
 					populate: { location: true, photos: true },
 					fields: ['id', 'slug', 'title', 'area', 'time', 'short_description'],
+					filters: HAS_PHOTOS_FILTER,
 					pagination: { page, pageSize },
 					sort: ['sortOrder:asc']
 				},
@@ -225,7 +236,7 @@ class ObjectService {
 	async getRelated(params: { categorySlug?: string; excludeSlug: string; limit?: number }) {
 		const { categorySlug, excludeSlug, limit = 6 } = params;
 
-		const filters: ObjectFilters = {};
+		const filters: ObjectFilters = { ...HAS_PHOTOS_FILTER };
 		if (categorySlug) {
 			filters.object_categories = { slug: { $eq: categorySlug } };
 		}
