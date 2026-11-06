@@ -13,7 +13,7 @@ import { HAS_PHOTOS_FILTER } from '@/services/object.service';
 type SlugItem = { slug: string; updatedAt?: string };
 
 async function collectSlugs(path: string, filters?: Record<string, unknown>): Promise<SlugItem[]> {
-	const pageSize = 200;
+	const pageSize = 100; // Strapi caps pageSize at 100; a bigger value shifts page offsets
 	let page = 1;
 	let out: SlugItem[] = [];
 	while (true) {
